@@ -1,3 +1,9 @@
+<script>
+	import { Page, Navbar, Block, List, ListItem } from 'framework7-svelte'
+
+	export let user
+</script>
+
 <Page>
 	<Navbar title={`${user.firstName} ${user.lastName}`} backLink="Back" />
 	<Block strong>
@@ -14,8 +20,3 @@
 		{/each}
 	</List>
 </Page>
-<script>
-	import { Page, Navbar, Block, List, ListItem } from 'framework7-svelte'
-
-	export let user
-</script>

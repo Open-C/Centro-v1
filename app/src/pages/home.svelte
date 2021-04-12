@@ -1,3 +1,7 @@
+<script>
+	import { Page, Navbar, NavLeft, NavTitle, NavTitleLarge, NavRight, Link, Toolbar, Block, BlockTitle, List, ListItem, Row, Col, Button } from 'framework7-svelte'
+</script>
+
 <Page name="home">
 	<!-- Top Navbar -->
 	<Navbar large sliding={false}>
@@ -63,22 +67,3 @@
 		/>
 	</List>
 </Page>
-<script>
-	import {
-		Page,
-		Navbar,
-		NavLeft,
-		NavTitle,
-		NavTitleLarge,
-		NavRight,
-		Link,
-		Toolbar,
-		Block,
-		BlockTitle,
-		List,
-		ListItem,
-		Row,
-		Col,
-		Button
-	} from 'framework7-svelte'
-</script>

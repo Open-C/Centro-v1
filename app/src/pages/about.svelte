@@ -1,3 +1,7 @@
+<script>
+	import { Page, Navbar, Block, BlockTitle } from 'framework7-svelte'
+</script>
+
 <Page>
 	<Navbar title="About" backLink="Back" />
 	<BlockTitle>About My App</BlockTitle>
@@ -11,6 +15,3 @@
 		<p>Blanditiis, cumque quo adipisci. Molestiae, dolores dolorum quos doloremque ipsa ullam eligendi commodi deserunt doloribus inventore magni? Ea mollitia veniam nostrum nihil, iusto doloribus a at! Ea molestiae ullam delectus!</p>
 	</Block>
 </Page>
-<script>
-	import { Page, Navbar, Block, BlockTitle } from 'framework7-svelte'
-</script>
