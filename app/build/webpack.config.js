@@ -57,88 +57,88 @@ module.exports = {
 			{
 				test: /\.(mjs|js|jsx)$/,
 				include: [
-						resolvePath('src'),
-						resolvePath('node_modules/svelte'),
+					resolvePath('src'),
+					resolvePath('node_modules/svelte'),
 				],
 				use: [
-						{
-							loader: require.resolve('babel-loader'),
+					{
+						loader: require.resolve('babel-loader'),
 
-						},
+					},
 				]
 			},
 
 			{
 				test: /\.svelte$/,
 				use: {
-						loader: 'svelte-loader',
-						options: {
-							emitCss: true,
-						},
+					loader: 'svelte-loader',
+					options: {
+						emitCss: true,
+					},
 				},
 			},
 
 			{
 				test: /\.css$/,
 				use: [
-						(env === 'development' ? 'style-loader' : {
-							loader: MiniCssExtractPlugin.loader,
-							options: {
-								publicPath: '../'
-							}
-						}),
-						'css-loader',
-						'postcss-loader',
+					(env === 'development' ? 'style-loader' : {
+						loader: MiniCssExtractPlugin.loader,
+						options: {
+							publicPath: '../'
+						}
+					}),
+					'css-loader',
+					'postcss-loader',
 				],
 			},
 			{
 				test: /\.styl(us)?$/,
 				use: [
-						(env === 'development' ? 'style-loader' : {
-							loader: MiniCssExtractPlugin.loader,
-							options: {
-								publicPath: '../'
-							}
-						}),
-						'css-loader',
-						'postcss-loader',
-						'stylus-loader',
+					(env === 'development' ? 'style-loader' : {
+						loader: MiniCssExtractPlugin.loader,
+						options: {
+							publicPath: '../'
+						}
+					}),
+					'css-loader',
+					'postcss-loader',
+					'stylus-loader',
 				],
 			},
 			{
 				test: /\.less$/,
 				use: [
-						(env === 'development' ? 'style-loader' : {
-							loader: MiniCssExtractPlugin.loader,
-							options: {
-								publicPath: '../'
-							}
-						}),
-						'css-loader',
-						'postcss-loader',
-						'less-loader',
+					(env === 'development' ? 'style-loader' : {
+						loader: MiniCssExtractPlugin.loader,
+						options: {
+							publicPath: '../'
+						}
+					}),
+					'css-loader',
+					'postcss-loader',
+					'less-loader',
 				],
 			},
 			{
 				test: /\.(sa|sc)ss$/,
 				use: [
-						(env === 'development' ? 'style-loader' : {
-							loader: MiniCssExtractPlugin.loader,
-							options: {
-								publicPath: '../'
-							}
-						}),
-						'css-loader',
-						'postcss-loader',
-						'sass-loader',
+					(env === 'development' ? 'style-loader' : {
+						loader: MiniCssExtractPlugin.loader,
+						options: {
+							publicPath: '../'
+						}
+					}),
+					'css-loader',
+					'postcss-loader',
+					'sass-loader',
 				],
 			},
 			{
 				test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
 				loader: 'url-loader',
 				options: {
-						limit: 10000,
-						name: 'images/[name].[ext]',
+					limit: 10000,
+					name: 'images/[name].[ext]',
 
 				},
 				type: 'javascript/auto'
@@ -147,8 +147,8 @@ module.exports = {
 				test: /\.(mp4|webm|ogg|mp3|wav|flac|aac|m4a)(\?.*)?$/,
 				loader: 'url-loader',
 				options: {
-						limit: 10000,
-						name: 'media/[name].[ext]',
+					limit: 10000,
+					name: 'media/[name].[ext]',
 
 				},
 				type: 'javascript/auto'
@@ -157,8 +157,8 @@ module.exports = {
 				test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
 				loader: 'url-loader',
 				options: {
-						limit: 10000,
-						name: 'fonts/[name].[ext]',
+					limit: 10000,
+					name: 'fonts/[name].[ext]',
 
 				},
 				type: 'javascript/auto'
