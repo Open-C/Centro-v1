@@ -1,14 +1,14 @@
 
-import HomePage from '../pages/home.svelte';
-import AboutPage from '../pages/about.svelte';
-import FormPage from '../pages/form.svelte';
-import CatalogPage from '../pages/catalog.svelte';
-import ProductPage from '../pages/product.svelte';
-import SettingsPage from '../pages/settings.svelte';
+import HomePage from '../pages/home.svelte'
+import AboutPage from '../pages/about.svelte'
+import FormPage from '../pages/form.svelte'
+import CatalogPage from '../pages/catalog.svelte'
+import ProductPage from '../pages/product.svelte'
+import SettingsPage from '../pages/settings.svelte'
 
-import DynamicRoutePage from '../pages/dynamic-route.svelte';
-import RequestAndLoad from '../pages/request-and-load.svelte';
-import NotFoundPage from '../pages/404.svelte';
+import DynamicRoutePage from '../pages/dynamic-route.svelte'
+import RequestAndLoad from '../pages/request-and-load.svelte'
+import NotFoundPage from '../pages/404.svelte'
 
 var routes = [
 	{
@@ -44,13 +44,13 @@ var routes = [
 		path: '/request-and-load/user/:userId/',
 		async: function ({ router, to, resolve }) {
 			// App instance
-			var app = router.app;
+			var app = router.app
 
 			// Show Preloader
-			app.preloader.show();
+			app.preloader.show()
 
 			// User ID from request
-			var userId = to.params.userId;
+			var userId = to.params.userId
 
 			// Simulate Ajax Request
 			setTimeout(function () {
@@ -69,9 +69,9 @@ var routes = [
 								url: 'http://forum.framework7.io',
 							},
 						]
-				};
+				}
 				// Hide Preloader
-				app.preloader.hide();
+				app.preloader.hide()
 
 				// Resolve route to load page
 				resolve(
@@ -83,14 +83,14 @@ var routes = [
 								user: user,
 							}
 						}
-				);
-			}, 1000);
+				)
+			}, 1000)
 		},
 	},
 	{
 		path: '(.*)',
 		component: NotFoundPage,
 	},
-];
+]
 
-export default routes;
+export default routes

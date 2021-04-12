@@ -80,5 +80,5 @@
 		Row,
 		Col,
 		Button
-	} from 'framework7-svelte';
+	} from 'framework7-svelte'
 </script>

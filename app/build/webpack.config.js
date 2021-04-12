@@ -1,20 +1,20 @@
-const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
-const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
+const WorkboxPlugin = require('workbox-webpack-plugin')
+const path = require('path')
 
 function resolvePath(dir) {
-	return path.join(__dirname, '..', dir);
+	return path.join(__dirname, '..', dir)
 }
 
-const env = process.env.NODE_ENV || 'development';
-const target = process.env.TARGET || 'web';
+const env = process.env.NODE_ENV || 'development'
+const target = process.env.TARGET || 'web'
 
 
 
@@ -197,14 +197,14 @@ module.exports = {
 		new CopyWebpackPlugin({
 			patterns: [
 				{
-						noErrorOnMissing: true,
-						from: resolvePath('src/static'),
-						to: resolvePath('www/static'),
+					noErrorOnMissing: true,
+					from: resolvePath('src/static'),
+					to: resolvePath('www/static'),
 				},
 				{
-						noErrorOnMissing: true,
-						from: resolvePath('src/manifest.json'),
-						to: resolvePath('www/manifest.json'),
+					noErrorOnMissing: true,
+					from: resolvePath('src/manifest.json'),
+					to: resolvePath('www/manifest.json'),
 				},
 			],
 		}),
@@ -213,4 +213,4 @@ module.exports = {
 			swSrc: resolvePath('src/service-worker.js'),
 		}),
 	],
-};
+}

@@ -88,8 +88,8 @@
 	</LoginScreen>
 </App>
 <script>
-	import { onMount } from 'svelte';
-	import { getDevice }  from 'framework7/lite-bundle';
+	import { onMount } from 'svelte'
+	import { getDevice }  from 'framework7/lite-bundle'
 	import {
 		f7,
 		f7ready,
@@ -112,13 +112,13 @@
 		ListInput,
 		ListButton,
 		BlockFooter
-	} from 'framework7-svelte';
+	} from 'framework7-svelte'
 
-	import capacitorApp from '../js/capacitor-app';
-	import routes from '../js/routes';
-	import store from '../js/store';
+	import capacitorApp from '../js/capacitor-app'
+	import routes from '../js/routes'
+	import store from '../js/store'
 
-	const device = getDevice();
+	const device = getDevice()
 	// Framework7 Parameters
 	let f7params = {
 		name: 'Centro', // App name
@@ -144,24 +144,24 @@
 			iosOverlaysWebView: true,
 			androidOverlaysWebView: false,
 		},
-	};
+	}
 	// Login screen demo data
-	let username = '';
-	let password = '';
+	let username = ''
+	let password = ''
 
 	function alertLoginData() {
 		f7.dialog.alert('Username: ' + username + '<br>Password: ' + password, () => {
-			f7.loginScreen.close();
-		});
+			f7.loginScreen.close()
+		})
 	}
 	onMount(() => {
 		f7ready(() => {
 
 			// Init capacitor APIs (see capacitor-app.js)
 			if (f7.device.capacitor) {
-				capacitorApp.init(f7);
+				capacitorApp.init(f7)
 			}
 			// Call F7 APIs here
-		});
+		})
 	})
 </script>
