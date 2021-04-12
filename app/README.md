@@ -6,39 +6,39 @@ Framework7 app created with following options:
 
 ```
 {
-  "cwd": "/home/dy/Developer/centro-wallet-framework7-svelte",
-  "type": [
-    "web",
-    "pwa",
-    "capacitor"
-  ],
-  "name": "Centro",
-  "framework": "svelte",
-  "template": "tabs",
-  "bundler": "webpack",
-  "cssPreProcessor": false,
-  "theming": {
-    "customColor": true,
-    "color": "#008eff",
-    "darkTheme": true,
-    "iconFonts": true,
-    "fillBars": false
-  },
-  "customBuild": false,
-  "webpack": {
-    "developmentSourceMap": true,
-    "productionSourceMap": true,
-    "hashAssets": false,
-    "preserveAssetsPaths": false,
-    "inlineAssets": true
-  },
-  "pkg": "app.centro",
-  "capacitor": {
-    "platforms": [
-      "ios",
-      "android"
-    ]
-  }
+	"cwd": "/home/dy/Developer/centro-wallet-framework7-svelte",
+	"type": [
+		"web",
+		"pwa",
+		"capacitor"
+	],
+	"name": "Centro",
+	"framework": "svelte",
+	"template": "tabs",
+	"bundler": "webpack",
+	"cssPreProcessor": false,
+	"theming": {
+		"customColor": true,
+		"color": "#008eff",
+		"darkTheme": true,
+		"iconFonts": true,
+		"fillBars": false
+	},
+	"customBuild": false,
+	"webpack": {
+		"developmentSourceMap": true,
+		"productionSourceMap": true,
+		"hashAssets": false,
+		"preserveAssetsPaths": false,
+		"inlineAssets": true
+	},
+	"pkg": "app.centro",
+	"capacitor": {
+		"platforms": [
+			"ios",
+			"android"
+		]
+	}
 }
 ```
 
