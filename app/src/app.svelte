@@ -3,15 +3,15 @@
 	import { getDevice }  from 'framework7/lite-bundle'
 	import { f7, f7ready, App, Panel, Views, View, Popup, Page, Navbar, Toolbar, NavRight, Link, Block, BlockTitle, LoginScreen, LoginScreenTitle, List, ListItem, ListInput, ListButton, BlockFooter } from 'framework7-svelte'
 
-	import capacitorApp from '../js/capacitor-app'
-	import routes from '../js/routes'
-	import store from '../js/store'
+	import capacitorApp from './capacitor-app'
+	import routes from './routes'
+	import store from './data/store'
 
 	const device = getDevice()
 	// Framework7 Parameters
 	let f7params = {
 		name: 'Centro', // App name
-		theme: 'auto', // Automatic theme detection
+		theme: 'ios', // 'auto', // Automatic theme detection
 
 
 		id: 'app.centro', // App bundle ID
@@ -83,19 +83,19 @@
 	<Views tabs class="safe-areas">
 		<!-- Tabbar for switching views-tabs -->
 		<Toolbar tabbar labels bottom>
-			<Link tabLink="#view-home" tabLinkActive iconIos="f7:house_fill" iconAurora="f7:house_fill" iconMd="material:home" text="Home" />
-			<Link tabLink="#view-catalog" iconIos="f7:square_list_fill" iconAurora="f7:square_list_fill" iconMd="material:view_list" text="Catalog" />
+			<Link tabLink="#view-assets" iconIos="f7:money_dollar_circle" iconAurora="f7:money_dollar_circle" iconMd="f7:money_dollar_circle" text="Assets" />
+			<Link tabLink="#view-apps" tabLinkActive iconIos="f7:house_fill" iconAurora="f7:house_fill" iconMd="material:home" text="Apps" />
 			<Link tabLink="#view-settings" iconIos="f7:gear" iconAurora="f7:gear" iconMd="material:settings" text="Settings" />
 		</Toolbar>
 
-		<!-- Your main view/tab, should have "view-main" class. It also has "tabActive" prop -->
-		<View id="view-home" main tab tabActive url="/" />
+		<!-- Assets View -->
+		<View id="view-assets" name="assets" tab url="/assets" />
 
-		<!-- Catalog View -->
-		<View id="view-catalog" name="catalog" tab url="/catalog/" />
+		<!-- Your main view/tab, should have "view-main" class. It also has "tabActive" prop -->
+		<View id="view-apps" main tab tabActive url="/apps" />
 
 		<!-- Settings View -->
-		<View id="view-settings" name="settings" tab url="/settings/" />
+		<View id="view-settings" name="settings" tab url="/settings" />
 
 	</Views>
 

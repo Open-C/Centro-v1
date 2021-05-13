@@ -22,7 +22,7 @@ module.exports = {
 	mode: env,
 	target: env === "development" ? "web" : "browserslist",
 	entry: {
-		app: './src/js/app.js',
+		app: './src/app.js',
 	},
 	output: {
 		path: resolvePath('www'),
