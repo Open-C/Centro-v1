@@ -5,7 +5,6 @@
 
 	import capacitorApp from './capacitor-app'
 	import routes from './routes'
-	import store from './data/store'
 
 	const device = getDevice()
 	// Framework7 Parameters
@@ -16,7 +15,7 @@
 
 		id: 'app.centro', // App bundle ID
 		// App store
-		store: store,
+		// store: store,
 		// App routes
 		routes: routes,
 		// Register service worker
@@ -34,6 +33,8 @@
 			androidOverlaysWebView: false,
 		},
 	}
+
+
 	// Login screen demo data
 	let username = ''
 	let password = ''

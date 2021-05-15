@@ -48,7 +48,7 @@
 
 
 	import { Page, Navbar, NavLeft, NavTitle, NavTitleLarge, NavRight, Link, Toolbar, Block, BlockTitle, List, ListItem, Row, Col, Button, AccordionContent, Card } from 'framework7-svelte'
-	import RequestSend from '../components/RequestSend.svelte'
+	import TokenRequestOrSend from '../components/TokenRequestOrSend.svelte'
 </script>
 
 <Page name="assets">
@@ -71,7 +71,7 @@
 					<img slot="media" src={token.image} height="40" />
 					<AccordionContent>
 						<Block>
-							<RequestSend {token} />
+							<TokenRequestOrSend {token} />
 						</Block>
 					</AccordionContent>
 				</ListItem>

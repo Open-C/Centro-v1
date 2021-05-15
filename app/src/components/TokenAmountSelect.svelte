@@ -53,11 +53,11 @@
 	<span>{token.symbol}</span>
 </div>
 <Row>
-	<Button small fill onClick={() => amount = 0.10 * maxAmount}>10%</Button>
-	<Button small fill onClick={() => amount = 0.25 * maxAmount}>25%</Button>
-	<Button small fill onClick={() => amount = 0.50 * maxAmount}>50%</Button>
-	<Button small fill onClick={() => amount = 0.75 * maxAmount}>75%</Button>
-	<Button small fill onClick={() => amount = 1.00 * maxAmount}>max</Button>
+	<Button small fill color="gray" onClick={() => amount = 0.10 * maxAmount}>10%</Button>
+	<Button small fill color="gray" onClick={() => amount = 0.25 * maxAmount}>25%</Button>
+	<Button small fill color="gray" onClick={() => amount = 0.50 * maxAmount}>50%</Button>
+	<Button small fill color="gray" onClick={() => amount = 0.75 * maxAmount}>75%</Button>
+	<Button small fill color="gray" onClick={() => amount = 1.00 * maxAmount}>max</Button>
 </Row>
 <Range
 	value={amount} onRangeChange={_ => amount = _}

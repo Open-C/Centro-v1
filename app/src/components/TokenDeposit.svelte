@@ -8,7 +8,7 @@
 	let address = useStore(walletStore, 'address', _ => address = _)
 
 
-	const transactionAction = 'Send'
+	const transactionAction = 'Deposit'
 	const fromAddress = address
 	let toAddress = ''
 	let amount = maxAmount
@@ -40,13 +40,11 @@
 </Button>
 
 
-<!-- {#if transactionStarted} -->
-	<TransactionFlow
-		bind:isOpen={transactionStarted}
-		{transactionAction}
-		{token}
-		{fromAddress}
-		{toAddress}
-		{amount}
-	/>
-<!-- {/if} -->
+<TransactionFlow
+	bind:isOpen={transactionStarted}
+	{transactionAction}
+	{token}
+	{fromAddress}
+	{toAddress}
+	{amount}
+/>

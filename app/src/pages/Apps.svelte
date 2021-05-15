@@ -39,7 +39,7 @@
 		image: require('../static/images/blockexplorer-thumbnail.png').default,
 		name: ['block', 'explorer'],
 		description: 'view transactions\nand balances',
-		navigationLink: '/apps/explorer',
+		navigationLink: '/explorer',
 		theme: {
 			backgroundColor: 'hsl(0, 18%, 91%)',
 			color: 'hsl(0, 0%, 44%)'

@@ -24,7 +24,7 @@ export default [
 		component: require('./pages/apps/Ubeswap.svelte').default,
 	},
 	{
-		path: '/apps/explorer',
+		path: '/explorer',
 		component: require('./pages/apps/BlockExplorer.svelte').default,
 	},
 	{
