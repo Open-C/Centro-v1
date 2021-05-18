@@ -17,6 +17,12 @@
 	// 		amount = parsedAmount
 	// }
 
+	function onBlur(){
+		const parsedAmount = Math.min(parseFloat(amount), maxAmount ?? Infinity)
+		if(Number.isFinite(parsedAmount))
+			amount = parsedAmount
+	}
+
 	// $: if(!isFocused)
 	// 	textInputValue = String(amount)
 
@@ -41,6 +47,7 @@
 		placeholder="0"
 		clearButton
 		autofocus
+		{onBlur}
 	/>
 	<!-- <Input
 		type="number"
