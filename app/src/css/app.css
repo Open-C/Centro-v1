@@ -41,6 +41,11 @@ iframe {
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+.range-slider-horizontal .range-bar, .range-slider-horizontal .range-scale {
+	width: initial;
+	left: calc(0.5 * var(--f7-range-knob-size));
+    right: calc(0.5 * var(--f7-range-knob-size));
+}
 
 :root {
 	--f7-input-padding-left: 1em;
@@ -53,6 +58,14 @@ iframe {
 	border-radius: 0.33em;
 	display: flex;
 	flex: 1;
+
+	/* width: 100%; */
+    height: var(--f7-input-height);
+    /* color: var(--f7-input-text-color);
+    font-size: var(--f7-input-font-size);
+    background-color: var(--f7-input-bg-color, transparent);
+    padding-left: var(--f7-input-padding-left);
+    padding-right: var(--f7-input-padding-right); */
 }
 .input-clear-button {
 	right: 1em;
@@ -64,10 +77,14 @@ input {
 .line {
 	display: flex;
 	justify-content: space-between;
-	align-items: baseline;
+	/* align-items: baseline; */
+	align-items: center;
 	gap: var(--f7-grid-gap);
 	width: 100%;
 }
+/* .line > * {
+	align-self: baseline;
+} */
 
 /* .block {
 	display: grid;
@@ -89,4 +106,25 @@ input {
 
 .sheet-modal {
 	position: fixed;
+}
+
+
+
+:not(ul) > li {
+	list-style-type: none;
+}
+
+.list.inline-smart-select {
+	margin: 0;
+	font: inherit;
+}
+.list.inline-smart-select .smart-select .item-content, .list.inline-smart-select .smart-select .item-content > .item-inner {
+	padding: 0;
+}
+.list.inline-smart-select .item-after {
+	color: inherit;
+	max-width: initial;
+    overflow: initial;
+	padding: 0;
+	padding-right: 0.2em;
 }
