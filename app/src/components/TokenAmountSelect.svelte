@@ -27,7 +27,7 @@
 	// 	textInputValue = String(amount)
 
 
-	import { Row, Button, Range, Input } from 'framework7-svelte'
+	import { Row, Button, Range, Input, ListItem, List, Icon } from 'framework7-svelte'
 </script>
 
 <style>
@@ -39,6 +39,7 @@
 
 <div class="line">
 	<h3>{action}</h3>
+
 	<Input
 		type="number"
 		bind:value={amount}
@@ -49,6 +50,7 @@
 		autofocus
 		{onBlur}
 	/>
+
 	<!-- <Input
 		type="number"
 		clearButton
@@ -58,7 +60,53 @@
 		onFocus={() => isFocused = true}
 		onBlur={() => isFocused = false}
 	/> -->
-	<span>{token.symbol}</span>
+	{#if availableTokens}
+		<!-- <select bind:value={token}>
+			{#each availableTokens as token}
+				<option value={token}>{token.symbol}</option>
+			{/each}
+		</select> -->
+
+		<List
+			ul={false}
+			noHairlines
+			noChevron
+			class="inline-smart-select"
+		>
+			<ListItem
+				li={false}
+				smartSelect
+				smartSelectParams={{
+					// openIn: 'sheet',
+					// sheetSwipeToClose: true,
+
+					openIn: 'popup',
+					searchbar: true,
+					searchbarPlaceholder: 'Search Tokens',
+
+					// openIn: 'popover',
+
+					closeOnSelect: true
+				}}
+				after="Non"
+			>
+				<!-- <svelte:fragment slot="after">
+					<Icon f7="chevron_down" />
+				</svelte:fragment> -->
+
+				<!-- <span>{token.symbol}</span> -->
+				<Icon size="0.85em" f7="chevron_down" />
+
+				<select value={token.symbol} on:change={e => token = ({symbol: e.target.value})}>
+					{#each availableTokens as token}
+						<option value={token.symbol}>{token.symbol}</option>
+					{/each}
+				</select>
+			</ListItem>
+		</List>
+	{:else}
+		<span>{token.symbol}</span>
+	{/if}
 </div>
 
 {#if showSlider}
