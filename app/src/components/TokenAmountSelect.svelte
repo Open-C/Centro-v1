@@ -1,7 +1,7 @@
 <script>
 	export let action = 'Send'
 	export let availableTokens = undefined
-	export let token
+	export let token = availableTokens?.[0] ?? {}
 	export let maxAmount
 	export let amount
 
