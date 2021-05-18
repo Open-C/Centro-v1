@@ -76,8 +76,9 @@
 		max={maxAmount}
 		color={token.color}
 		style="--f7-range-knob-background-image: url('{token.image}')"
-		scaleSteps={5}
-		scaleSubSteps={20}
-		formatScaleLabel={value => value === 100 ? 'max' : value}
+		scale={true}
+		scaleSteps={4}
+		scaleSubSteps={2}
+		formatScaleLabel={value => value === maxAmount ? 'max' : value.toFixed(1)}
 	/>
 {/if}
