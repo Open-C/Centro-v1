@@ -10,7 +10,6 @@
 
 	const transactionAction = 'Withdraw'
 	const fromAddress = address
-	let toAddress = ''
 	let amount = maxAmount
 
 
@@ -19,7 +18,6 @@
 	
 	import { Button } from 'framework7-svelte'
 	import TokenAmountSelect from './TokenAmountSelect.svelte'
-	import RecipientSelect from './RecipientSelect.svelte'
 	import TransactionFlow from './TransactionFlow.svelte'
 </script>
 
@@ -30,12 +28,10 @@
 	{maxAmount}
 	bind:amount
 />
-<RecipientSelect
-	bind:address={toAddress}
-/>
+<hr>
 <Button fill
 	onClick={() => transactionStarted = true}
-	disabled={!(amount && toAddress)}>
+	disabled={!(amount)}>
 	{transactionAction}
 </Button>
 
@@ -45,6 +41,5 @@
 	{transactionAction}
 	{token}
 	{fromAddress}
-	{toAddress}
 	{amount}
 />

@@ -70,9 +70,7 @@
 				>
 					<img slot="media" src={token.image} height="40" />
 					<AccordionContent>
-						<Block>
-							<TokenRequestOrSend {token} />
-						</Block>
+						<TokenRequestOrSend {token} />
 					</AccordionContent>
 				</ListItem>
 			{/each}

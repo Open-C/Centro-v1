@@ -5,6 +5,7 @@
 	import QRCodeScanner from './QRCodeScanner.svelte'
 
 
+	export let preposition = 'To'
 	export let address
 
 
@@ -31,7 +32,7 @@
 </script>
 
 <div class="line">
-	<h3>To</h3>
+	<h3>{preposition}</h3>
 	<Input
 		type="tel"
 		placeholder="Address or Phone Number"

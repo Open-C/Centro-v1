@@ -10,7 +10,6 @@
 
 	const transactionAction = 'Deposit'
 	const fromAddress = address
-	let toAddress = ''
 	let amount = maxAmount
 
 
@@ -30,12 +29,10 @@
 	{maxAmount}
 	bind:amount
 />
-<RecipientSelect
-	bind:address={toAddress}
-/>
+<hr>
 <Button fill
 	onClick={() => transactionStarted = true}
-	disabled={!(amount && toAddress)}>
+	disabled={!(amount)}>
 	{transactionAction}
 </Button>
 
@@ -45,6 +42,5 @@
 	{transactionAction}
 	{token}
 	{fromAddress}
-	{toAddress}
 	{amount}
 />

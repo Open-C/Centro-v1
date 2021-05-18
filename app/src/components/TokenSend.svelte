@@ -30,9 +30,11 @@
 	{maxAmount}
 	bind:amount
 />
+<hr>
 <RecipientSelect
 	bind:address={toAddress}
 />
+<hr>
 <Button fill
 	onClick={() => transactionStarted = true}
 	disabled={!(amount && toAddress)}>

@@ -58,14 +58,12 @@
 				>
 					<img slot="media" src={token.image} height="40" />
 					<AccordionContent>
-						<Block>
-							<TokenDepositOrWithdraw
-								depositToken={{...token, symbol: mapping[token.symbol]}}
-								maxDepositAmount={tokenBalances[mapping[token.symbol]].amount}
-								withdrawToken={token}
-								maxWithdrawAmount={tokenBalances[token.symbol].amount}
-							/>
-						</Block>
+						<TokenDepositOrWithdraw
+							depositToken={{...token, symbol: mapping[token.symbol]}}
+							maxDepositAmount={tokenBalances[mapping[token.symbol]].amount}
+							withdrawToken={token}
+							maxWithdrawAmount={tokenBalances[token.symbol].amount}
+						/>
 					</AccordionContent>
 				</ListItem>
 			{/each}
