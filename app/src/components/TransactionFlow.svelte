@@ -1,6 +1,6 @@
 <script>
 	export let transactionAction
-	export let token
+	export let token = {}
 	export let fromAddress
 	export let toAddress
 	export let amount
