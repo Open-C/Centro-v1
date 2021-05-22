@@ -32,6 +32,10 @@ export default [
 		component: require('./pages/apps/Pollen.svelte').default,
 	},
 	{
+		path: '/apps/pollen/:circleID',
+		component: require('./pages/apps/pollen/Circle.svelte').default,
+	},
+	{
 		path: '/apps/carbonoffset',
 		component: require('./pages/apps/CarbonOffset.svelte').default,
 	},
