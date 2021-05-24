@@ -1,7 +1,46 @@
 pragma solidity >0.5.0;
 import "../WalletFactory.sol";
 
-contract UbeConnector is WalletFactory {
+abstract contract UbePair{
+    address public token0;
+    address public token1;
+    function getReserves() public view virtual returns (uint112 _reserve0, uint112 _reserve1, uint32 _blockTimestampLast);
+}
+
+/// @notice all code in the UbeSwapUtils contract taken from the UniswapV2Library code
+contract UbeSwapUtils {
+
+    /// @dev copied from UniswapV2Library code.
+	function ubeGetAmountOut(
+		uint amountIn,
+		uint reserveIn,
+		uint reserveOut) internal pure returns (uint amountOut) {
+		require(amountIn > 0, 'GetAmount: INSUFFICIENT_INPUT_AMOUNT');
+		require(reserveIn > 0 && reserveOut > 0, 'GetAmount: INSUFFICIENT_LIQUIDITY');
+		uint amountInWithFee = amountIn.mul(997);
+		uint numerator = amountInWithFee.mul(reserveOut);
+		uint denominator = reserveIn.mul(1000).add(amountInWithFee);
+		amountOut = numerator / denominator;
+	}
+    // returns sorted token addresses, used to handle return values from pairs sorted in this order
+    function sortTokens(address tokenA, address tokenB) internal pure returns (address token0, address token1) {
+        require(tokenA != tokenB, 'UniswapV2Library: IDENTICAL_ADDRESSES');
+        (token0, token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA);
+        require(token0 != address(0), 'UniswapV2Library: ZERO_ADDRESS');
+    }
+    // calculates the CREATE2 address for a pair without making any external calls
+    function pairFor(address factory, address tokenA, address tokenB) internal pure returns (address pair) {
+        (address token0, address token1) = sortTokens(tokenA, tokenB);
+        pair = address(uint(keccak256(abi.encodePacked(
+                hex'ff',
+                factory,
+                keccak256(abi.encodePacked(token0, token1)),
+                hex'b3b8ff62960acea3a88039ebcf80699f15786f1b17cebd82802f7375827a339c' // init code hash from UniswapV2Factory.pairCodeHash()
+            ))));
+    }
+}
+
+contract UbeConnector is WalletFactory, UbeSwapUtils {
     
     event AddedLiquidity(address wallet, address tok1, address tok2, uint256 amt1, uint256 amt2);
     event RemovedLiquidity(address wallet, address tok1, address tok2, uint256 liquidity);
@@ -37,7 +76,7 @@ contract UbeConnector is WalletFactory {
     // @param _tok1 the first token
     // @param _tok2 the second token
     function _getTokenPair(address _tok1, address _tok2) internal returns (address) {
-        return UniswapV2Library(_getUbeLibrary).pairFor(_getUbeFactory(), _tok1, _tok2);
+        return pairFor(_getUbeFactory(), _tok1, _tok2);
     }
     
     // @notice Performs a swap between two tokens through Ubeswap 
@@ -133,16 +172,4 @@ contract UbeConnector is WalletFactory {
         return wallet.callContract(ubeRouter, data);
     }
     
-    /// @dev copied from UniswapV2Library code.
-	function ubeGetAmountOut(
-		uint amountIn,
-		uint reserveIn,
-		uint reserveOut) internal pure returns (uint amountOut) {
-		require(amountIn > 0, 'GetAmount: INSUFFICIENT_INPUT_AMOUNT');
-		require(reserveIn > 0 && reserveOut > 0, 'GetAmount: INSUFFICIENT_LIQUIDITY');
-		uint amountInWithFee = amountIn.mul(997);
-		uint numerator = amountInWithFee.mul(reserveOut);
-		uint denominator = reserveIn.mul(1000).add(amountInWithFee);
-		amountOut = numerator / denominator;
-	}
 }

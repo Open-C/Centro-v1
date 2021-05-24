@@ -10,7 +10,6 @@ import "./Types.sol";
 //import "../connectors/MoolaC.sol";
 import "../interfaces/IERC20Token.sol";
 import "../ContractCaller.sol";
-import "../interfaces/ILendingPool.sol";
 import "../interfaces/ILendingPoolAddressProvider.sol";
 
 contract CentroWallet is ContractCaller {
