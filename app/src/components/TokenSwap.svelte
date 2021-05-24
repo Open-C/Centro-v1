@@ -22,7 +22,7 @@
 	let transactionStarted = false
 
 	
-	import { Button } from 'framework7-svelte'
+	import { Accordion, AccordionContent, AccordionItem, AccordionToggle, Block, Button, Icon, List, ListItem, Row, Segmented } from 'framework7-svelte'
 	import TokenAmountSelect from './TokenAmountSelect.svelte'
 	import TransactionFlow from './TransactionFlow.svelte'
 </script>
