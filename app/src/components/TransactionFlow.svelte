@@ -1,7 +1,22 @@
 <script>
+	import { getContext } from 'svelte'
+	let f7router = getContext('f7router')
+
+
+	import { currentWalletMachine } from '../data/wallets'
+	let wallet = {}
+	$: wallet = $currentWalletMachine.context || {}
+
+	$: console.log('wallet', wallet)
+
+	// import { useStore } from 'framework7-svelte'
+	// import { walletStore } from '../data/wallet'
+	// let address = useStore(walletStore, 'address', _ => address = _)
+
+
 	export let transactionAction
 	export let token = {}
-	export let fromAddress
+	export let fromAddress = wallet.address
 	export let toAddress
 	export let amount
 
@@ -15,12 +30,8 @@
 	let status = useStore(transactionStore, 'status', _ => status = _)
 	let transactionID = useStore(transactionStore, 'transactionID', _ => transactionID = _)
 
-	import { walletStore } from '../data/wallet'
-	let provider = useStore(walletStore, 'provider', _ => provider = _)
-
-
-	import { getContext } from 'svelte'
-	let f7router = getContext('f7router')
+	// import { walletStore } from '../data/wallet'
+	// let provider = useStore(walletStore, 'provider', _ => provider = _)
 	
 	
 	import { Button, Sheet, Block, Row, Icon, Link, Preloader, Toolbar } from 'framework7-svelte'
@@ -66,13 +77,13 @@
 			{:else if status === 'signing'}
 				<p>
 					<Preloader />
-					<strong>Signing transaction with {provider}...</strong>
+					<strong>Signing transaction with {wallet.walletProviderName}...</strong>
 				</p>
 			{:else if status === 'rejected'}
 				<h3>There was a problem signing the transaction.</h3>
 				<!-- <samp>{error}</samp> -->
-				<Button large onPress={() => transactionStore.dispatch('retry')}>Retry</Button>
-				<Button onPress={() => transactionStore.dispatch('cancel')} sheetClose>Cancel</Button>
+				<Button large onClick={() => transactionStore.dispatch('retry')}>Retry</Button>
+				<Button onClick={() => transactionStore.dispatch('cancel')} sheetClose>Cancel</Button>
 			{:else if status === 'pending'}
 				<p>
 					<Preloader />
@@ -89,5 +100,5 @@
 		</Block>
 	</div>
 
-	<!-- <div>wheeee</div> -->
+	<!-- <div>Extra CContent</div> -->
 </Sheet>

@@ -3,11 +3,6 @@
 	export let maxAmount
 
 
-	import { Accordion, AccordionContent, AccordionItem, AccordionToggle, Block, Icon, List, ListItem, Row, Segmented, useStore } from 'framework7-svelte'
-	import { walletStore } from '../data/wallet'
-	let address = useStore(walletStore, 'address', _ => address = _)
-
-
 	const transactionAction = 'Swap'
 	let fromToken = availableTokens[0]
 	let fromAmount = maxAmount

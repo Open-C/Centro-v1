@@ -3,7 +3,8 @@
 	$: currentWalletMachine = walletMachines[0]
 
 	$: ({
-		address
+		address,
+		subAccount = 'Account 1'
 	} = $currentWalletMachine.context)
 
 
@@ -16,7 +17,9 @@
 		<Icon slot="media" f7="person_crop_circle" />
 
 		{#if $currentWalletMachine.matches('connected')}
-			<Address {address} />
+			<Address {address} truncated />
+			›
+			<strong>{subAccount}</strong>
 		{:else}
 			Connect Wallet
 		{/if}

@@ -36,10 +36,10 @@
 </Button>
 
 
-<TransactionFlow
+<!-- <TransactionFlow
 	bind:isOpen={transactionStarted}
 	{transactionAction}
 	{token}
 	{fromAddress}
 	{amount}
-/>
+/> -->

@@ -3,13 +3,7 @@
 	export let maxAmount
 
 
-	import { useStore } from 'framework7-svelte'
-	import { walletStore } from '../data/wallet'
-	let address = useStore(walletStore, 'address', _ => address = _)
-
-
 	const transactionAction = 'Send'
-	const fromAddress = address
 	let toAddress = ''
 	let amount = maxAmount
 
@@ -47,7 +41,6 @@
 		bind:isOpen={transactionStarted}
 		{transactionAction}
 		{token}
-		{fromAddress}
 		{toAddress}
 		{amount}
 	/>
