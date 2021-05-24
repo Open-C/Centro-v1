@@ -9,12 +9,16 @@
 
 
 	import { Page, Navbar, Block } from 'framework7-svelte'
+	import CurrentWallet from '../../components/CurrentWallet.svelte'
 	import TokenRequest from '../../components/TokenRequest.svelte'
 	import TokenSend from '../../components/TokenSend.svelte'
 </script>
 
 <Page>
 	<Navbar title="Pay" backLink="Apps">
+		<svelte:fragment slot="right">
+			<CurrentWallet />
+		</svelte:fragment>
 	</Navbar>
 
 	<Block inset strong>

@@ -32,6 +32,7 @@
 
 
 	import { Page, Navbar, Block, BlockTitle, List, ListItem, AccordionContent, NavTitle } from 'framework7-svelte'
+	import CurrentWallet from '../../components/CurrentWallet.svelte'
 	import TokenDepositOrWithdraw from '../../components/TokenDepositOrWithdraw.svelte'
 	
 	
@@ -42,8 +43,14 @@
 </script>
 
 <Page>
-	<Navbar backLink="Apps">
-		<NavTitle><img src={require('../../static/images/moola-logo.png').default} alt="MoolaMarket" height={30} /></NavTitle>
+	<Navbar sliding={false} backLink="Apps">
+		<NavTitle slot="title" sliding>
+			<img src={require('../../static/images/moola-logo.png').default} alt="MoolaMarket" height={30} />
+		</NavTitle>
+
+		<svelte:fragment slot="right">
+			<CurrentWallet />
+		</svelte:fragment>
 	</Navbar>
 
 	{#each sections as {title, data: tokens}}

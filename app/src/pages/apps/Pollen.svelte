@@ -172,10 +172,14 @@
 
 
 	import { Page, Navbar, Block, Progressbar, ListItem, BlockTitle, List, Segmented, Button, Icon } from 'framework7-svelte'
+	import CurrentWallet from '../../components/CurrentWallet.svelte'
 </script>
 
 <Page>
 	<Navbar title="Pollen" backLink="Apps">
+		<svelte:fragment slot="right">
+			<CurrentWallet />
+		</svelte:fragment>
 	</Navbar>
 
 	<!-- <h1>Circle Balances: {972.65}</h1>

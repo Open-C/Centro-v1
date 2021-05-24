@@ -48,6 +48,7 @@
 
 
 	import { Page, Navbar, NavLeft, NavTitle, NavTitleLarge, NavRight, Link, Toolbar, Block, BlockTitle, List, ListItem, Row, Col, Button, AccordionContent, Card } from 'framework7-svelte'
+	import CurrentWallet from '../components/CurrentWallet.svelte'
 	import TokenRequestOrSend from '../components/TokenRequestOrSend.svelte'
 </script>
 
@@ -56,6 +57,10 @@
 	<Navbar large sliding={false}>
 		<NavTitle sliding>Assets</NavTitle>
 		<NavTitleLarge>Assets</NavTitleLarge>
+
+		<svelte:fragment slot="right">
+			<CurrentWallet />
+		</svelte:fragment>
 	</Navbar>
 
 	{#each sections as {title, data: tokens}}
