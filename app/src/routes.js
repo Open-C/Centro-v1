@@ -52,6 +52,10 @@ export default [
 		component: require('./pages/Settings.svelte').default,
 	},
 	{
+		path: '/settings/wallets',
+		component: require('./pages/settings/Wallets.svelte').default,
+	},
+	{
 		path: '(.*)',
 		component: require('./pages/404.svelte').default,
 	},

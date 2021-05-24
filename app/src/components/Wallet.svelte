@@ -1,0 +1,135 @@
+<script>
+	/*
+	export let walletStore
+
+
+	import { useStore } from 'framework7-svelte'
+
+	let status = useStore(walletStore, 'status', _ => status = _)
+
+	// let provider = useStore(walletStore, 'provider', _ => provider = _)
+
+	let walletProviderName = useStore(walletStore, 'walletProviderName', _ => walletProviderName = _)
+	// let signer = useStore(walletStore, 'signer', _ => signer = _)
+
+	let address = useStore(walletStore, 'address', _ => address = _)
+	let phoneNumber = useStore(walletStore, 'phoneNumber', _ => phoneNumber = _)
+
+	let error = useStore(walletStore, 'error', _ => error = _)
+
+
+	const walletProviders = [{
+		name: 'Valora',
+		icon: require('../static/images/valora-logo.png').default
+	}, {
+		name: 'MetaMask',
+		icon: require('../static/images/metamask-logo.svg').default
+	}]
+
+	$: walletProvider = walletProviders.find(({name}) => name === walletProviderName)
+	*/
+
+
+	export let walletMachine
+
+
+	$: ({
+		provider,
+
+		walletProviderName,
+		signer,
+
+		address,
+		phoneNumber,
+
+		error
+	} = $walletMachine.context)
+
+
+	const walletProviders = [{
+		name: 'Valora',
+		icon: require('../static/images/valora-logo.png').default
+	}, {
+		name: 'MetaMask',
+		icon: require('../static/images/metamask-logo.svg').default
+	}]
+
+	$: walletProvider = walletProviders.find(({name}) => name === walletProviderName)
+
+
+	import { Block, Button, Preloader, Row } from 'framework7-svelte'
+	import Address from './Address.svelte'
+</script>
+
+
+<Block strong inset>
+	{#if $walletMachine.matches('disconnected')}
+		<h3>No wallet connected.</h3>
+		{#each walletProviders as {name, icon}}
+			<Button large fill {icon} onClick={() => walletMachine.send('CONNECT', {walletProviderName: name})}>
+				<img src={icon} alt="{name} Icon" height={20} />
+				Connect {name}
+			</Button>
+		{/each}
+		<Button fill>Create New Centro Wallet</Button>
+		<Button fill>Import Account Key</Button>
+	{:else if $walletMachine.matches('connecting')}
+		<Row>
+			<Preloader />
+			<h3>Connecting to {walletProviderName}...</h3>
+		</Row>
+		<Row>
+			<Button fill onClick={() => walletMachine.send('CANCEL')}>Cancel</Button>
+		</Row>
+	{:else if $walletMachine.matches('connectFailed')}
+		<h3>We had trouble connecting to your wallet.</h3>
+		<p>{error}</p>
+		<Row>
+			<Button fill onClick={() => walletMachine.send('RETRY')}>Retry</Button>
+			<Button fill onClick={() => walletMachine.send('CANCEL')}>Cancel</Button>
+		</Row>
+	{:else if $walletMachine.matches('connected')}
+		<Row>
+			<img src={walletProvider.icon} alt="{walletProvider.name} Icon" width={30} height={30} />
+			<h2>{walletProvider.name}</h2>
+		</Row>
+		<p><Address address={address} /></p>
+		<p>Phone: {phoneNumber}</p>
+	{/if}
+</Block>
+
+<!-- <Block strong inset>
+	{#if status === 'disconnected'}
+		<h3>No wallet connected.</h3>
+		{#each walletProviders as {name, icon}}
+			<Button fill {icon} onClick={() => walletStore.dispatch('connect', name)}>
+				<img src={icon} alt="{name} Icon" height={20} />
+				Connect {name}
+			</Button>
+		{/each}
+		<Button fill>Create New Centro Wallet</Button>
+		<Button fill>Import Account Key</Button>
+	{:else if status === 'connecting'}
+		<Row>
+			<Preloader />
+			<h3>Connecting to {walletProvider.name}...</h3>
+		</Row>
+		<Row>
+			<Button fill onClick={() => walletStore.dispatch('cancel')}>Cancel</Button>
+		</Row>
+	{:else if status === 'connectFailed'}
+		<h3>We had trouble connecting to your wallet.</h3>
+		<p>{error}</p>
+		<Row>
+			<Button fill onClick={() => walletStore.dispatch('retry')}>Retry</Button>
+			<Button fill onClick={() => walletStore.dispatch('cancel')}>Cancel</Button>
+		</Row>
+	{:else if status === 'connected'}
+		<Row>
+			<img src={walletProvider.icon} alt="{walletProvider.name} Icon" width={30} height={30} />
+			<h2>{walletProvider.name}</h2>
+		</Row>
+		<p><Address address={address} /></p>
+		<p>Phone: {phoneNumber}</p>
+	{/if}
+</Block> -->
