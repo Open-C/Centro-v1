@@ -4,9 +4,9 @@
 
 
 	const transactionAction = 'Swap'
-	let fromToken = availableTokens[0]
+	export let fromToken = availableTokens[0]
 	let fromAmount = maxAmount
-	let toToken = availableTokens[1]
+	export let toToken = availableTokens[1]
 	let toAmount
 
 
