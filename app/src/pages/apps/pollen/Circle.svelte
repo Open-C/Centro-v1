@@ -5,7 +5,9 @@
 
 	let pollenID
 	import { onMount } from 'svelte'
-	onMount(() => ({pollenID} = f7route.params))
+	onMount(() => {
+		pollenID = f7route.params.pollenID
+	})
 
 
 	import { Navbar, Page } from 'framework7-svelte'
@@ -14,4 +16,6 @@
 <Page>
 	<Navbar	title="Pollen Circle" backLink="Pollen">
 	</Navbar>
+
+	<h1>#{pollenID}</h1>
 </Page>
