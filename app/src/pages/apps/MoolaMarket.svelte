@@ -1,4 +1,9 @@
 <script>
+	import { setContext } from 'svelte'
+	export let f7router
+	setContext('f7router', f7router)
+
+
 	const sections = [
 		{
 			title: 'Deposited Assets',
@@ -6,17 +11,23 @@
 				{
 					name: 'Celo Gold',
 					symbol: 'mCELO',
-					image: require('../../static/images/celo-icon.png').default
+					image: require('../../static/images/celo-icon.png').default,
+					depositAPY: 0.0001,
+					borrowAPR: 0.0114
 				},
 				{
 					name: 'Celo Dollar',
 					symbol: 'mcUSD',
-					image: require('../../static/images/cusd-icon.png').default
+					image: require('../../static/images/cusd-icon.png').default,
+					depositAPY: 0.0057,
+					borrowAPR: 0.0057
 				},
 				{
 					name: 'Celo Euro',
 					symbol: 'mcEUR',
-					image: require('../../static/images/ceur-icon.png').default
+					image: require('../../static/images/ceur-icon.png').default,
+					depositAPY: 0.0033,
+					borrowAPR: 0.0258
 				}
 			]
 		}
@@ -35,11 +46,7 @@
 	import CurrentWallet from '../../components/CurrentWallet.svelte'
 	import TokenDepositOrWithdraw from '../../components/TokenDepositOrWithdraw.svelte'
 	
-	
-	
-	import { setContext } from 'svelte'
-	export let f7router
-	setContext('f7router', f7router)
+	import { formatPercent } from '../../utils/formatPercent'
 </script>
 
 <Page>
@@ -60,10 +67,63 @@
 			{#each tokens as token}
 				<ListItem accordionItem
 					title={token.name}
+					footer="{tokenBalances[token.symbol].amount} {token.symbol}"
+				>
+					<img slot="media" src={token.image} height="40" />
+
+					<svelte:fragment slot="after">
+						APY:&nbsp;<strong>{formatPercent(token.depositAPY)}</strong>
+					</svelte:fragment>
+
+					<AccordionContent>
+						<TokenDepositOrWithdraw
+							depositToken={{...token, symbol: mapping[token.symbol]}}
+							maxDepositAmount={tokenBalances[mapping[token.symbol]].amount}
+							withdrawToken={token}
+							maxWithdrawAmount={tokenBalances[token.symbol].amount}
+						/>
+					</AccordionContent>
+				</ListItem>
+			{/each}
+		</List>
+
+		<List accordionList inset>
+			{#each tokens as token}
+				<ListItem accordionItem
+					title={token.name}
 					footer={token.symbol}
 					after={tokenBalances[token.symbol].amount}
 				>
 					<img slot="media" src={token.image} height="40" />
+
+					<svelte:fragment slot="header">
+						APY:&nbsp;<strong>{formatPercent(token.depositAPY)}</strong>
+					</svelte:fragment>
+
+					<AccordionContent>
+						<TokenDepositOrWithdraw
+							depositToken={{...token, symbol: mapping[token.symbol]}}
+							maxDepositAmount={tokenBalances[mapping[token.symbol]].amount}
+							withdrawToken={token}
+							maxWithdrawAmount={tokenBalances[token.symbol].amount}
+						/>
+					</AccordionContent>
+				</ListItem>
+			{/each}
+		</List>
+
+		<List accordionList inset>
+			{#each tokens as token}
+				<ListItem accordionItem
+					title={token.name}
+					after="{tokenBalances[token.symbol].amount} {token.symbol}"
+				>
+					<img slot="media" src={token.image} height="40" />
+
+					<svelte:fragment slot="footer">
+						APY:&nbsp;<strong>{formatPercent(token.depositAPY)}</strong>
+					</svelte:fragment>
+
 					<AccordionContent>
 						<TokenDepositOrWithdraw
 							depositToken={{...token, symbol: mapping[token.symbol]}}
