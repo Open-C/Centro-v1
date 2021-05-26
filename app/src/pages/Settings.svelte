@@ -3,7 +3,8 @@
 	let requirePIN
 
 
-	import { Page, Navbar, NavTitle, NavTitleLarge, List, ListItem, Toggle, Segmented, Button, Icon } from 'framework7-svelte'
+	import { Page, Navbar, NavTitle, NavTitleLarge, List, ListItem, Toggle, Icon } from 'framework7-svelte'
+	import SegmentedSelect from '../components/SegmentedSelect.svelte'
 </script>
 
 <Page name="settings">
@@ -43,11 +44,10 @@
 					<Icon f7={{'auto': 'circle_lefthalf_fill', 'light': 'sun_max', 'dark': 'moon'}[theme]} />
 				{/key}
 			</svelte:fragment>
-			<Segmented strong>
-				<Button small active={theme === 'auto'} onClick={() => theme = 'auto'}>Auto</Button>
-				<Button small active={theme === 'light'} onClick={() => theme = 'light'}>Light</Button>
-				<Button small active={theme === 'dark'} onClick={() => theme = 'dark'}>Dark</Button>
-			</Segmented>
+			<SegmentedSelect small
+				bind:value={theme}
+				options={{'auto': 'Auto', 'light': 'Light', 'dark': 'Dark'}}
+			/>
 		</ListItem>
 	</List>
 
