@@ -40,15 +40,15 @@ contract UbeSwapUtils {
     }
 }
 
-contract UbeConnector is WalletFactory, UbeSwapUtils {
+contract UbeSwapConnector is WalletFactory, UbeSwapUtils {
     
     event AddedLiquidity(address wallet, address tok1, address tok2, uint256 amt1, uint256 amt2);
     event RemovedLiquidity(address wallet, address tok1, address tok2, uint256 liquidity);
     
     string private constant ADD_LIQUIDITY  = "addLiquidity(address,address,uint,uint,uint,uint,address,uint)";
     string private constant REMOVE_LIQUIDITY = "removeLiquidity(address,address,uint,uint,uint,address,uint)";
-    string private constant SWAP_EXACT_TOKENS = "swapExactTokensForTokens(uint,uint,address[],address,uint";
-    
+    string private constant SWAP_EXACT_TOKENS = "swapExactTokensForTokens(uint,uint,address[],address,uint)";
+
     // @dev returns address of UbeRouter contract
     function _getUbeRouter() internal view returns (address) {
         return store.getAddress("UbeswapRouter");
@@ -143,7 +143,7 @@ contract UbeConnector is WalletFactory, UbeSwapUtils {
         if (_amt1 > 0) {
             wallet.approve(_tok1, ubeRouter, _amt1);
         }
-        if (_amt1 > 0) {
+        if (_amt2 > 0) {
             wallet.approve(_tok2, ubeRouter, _amt2);
         }
         bytes memory data = abi.encodeWithSignature(ADD_LIQUIDITY, _tok1, _tok2, _amt1, _amt2, _amt1.sub(5), _amt2, address(wallet), block.timestamp);
@@ -171,5 +171,18 @@ contract UbeConnector is WalletFactory, UbeSwapUtils {
         emit AddedLiquidity(address(wallet), _tok1, _tok2, _liquidity);
         return wallet.callContract(ubeRouter, data);
     }
-    
+}
+
+contract UbeFarmConnector is UbeSwapConnector {
+    private mapping(address => address) farmPools;
+
+    function addPoolAddress(address _tok1, address _tok2, address _farmPool) public onlyAdmin {
+        address lp = pairFor(_getUbeFactory(), _tok1, _tok2);
+        farmPools[lp] = _farmPool;
+    }
+
+    function getPoolAddress(address _tok1, address _tok2) public view {
+        address lp = pairFor(_getUbeFactory(), _tok1, _tok2);
+        return farmPools[lp];
+    }
 }

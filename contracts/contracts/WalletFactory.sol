@@ -5,12 +5,24 @@ contract WalletFactory is Types {
 	mapping(address => uint256[]) public addressToWalletIDs;
 	mapping(uint256 => Wallet) public walletIDToWallet;
 	mapping(address => uint256) currentWallet;
+	mapping(address => bool) admin;
 	uint256 numWallets;
 	Storage store;
+	
 	
 	constructor (address _store) public {
 		store = Storage(_store);
 		numWallets = 0;
+		admin[msg.sender] = true;
+	}
+
+	modifier adminOnly() {
+		require(admin[msg.sender], "User must be an admin");
+		_;
+	}
+
+	function addAdmin(address toAdd) public adminOnly  {
+		admin[toAdd] = true;
 	}
 
 	function newWallet(string calldata name) external returns (bool) {
