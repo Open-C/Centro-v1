@@ -32,7 +32,7 @@ export default [
 		component: require('./pages/apps/Pollen.svelte').default,
 	},
 	{
-		path: '/apps/pollen/:circleID',
+		path: '/apps/pollen/:pollenCircleID',
 		component: require('./pages/apps/pollen/Circle.svelte').default,
 	},
 	{
