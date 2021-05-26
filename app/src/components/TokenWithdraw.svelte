@@ -4,7 +4,6 @@
 
 
 	const transactionAction = 'Withdraw'
-	const fromAddress = address
 	let amount = maxAmount
 
 
