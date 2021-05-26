@@ -16,6 +16,9 @@
 	/* --f7-sheet-bg-color: rgba(0, 0, 0, 0.9); */
 
 	/* --f7-card-bg-color: #ffffff12; */
+
+	--f7-panel-width: 320px;
+	--f7-panel-backdrop-bg-color: rgba(0, 0, 0, 0.5);
 }
 :root .theme-dark {
 	--f7-block-strong-bg-color: #30303099;

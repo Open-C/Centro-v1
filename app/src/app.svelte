@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from 'svelte'
 	import { getDevice }  from 'framework7/lite-bundle'
-	import { f7, f7ready, App, Panel, Views, View, Popup, Page, Navbar, Toolbar, NavRight, Link, Block, BlockTitle, LoginScreen, LoginScreenTitle, List, ListItem, ListInput, ListButton, BlockFooter } from 'framework7-svelte'
+	import { f7, f7ready } from 'framework7-svelte'
 
 	import capacitorApp from './capacitor-app'
 	import routes from './routes'
@@ -54,28 +54,16 @@
 			// Call F7 APIs here
 		})
 	})
+
+
+	import { App, Panel, Views, View, Popup, Page, Navbar, Toolbar, NavRight, Link, Block, BlockTitle, LoginScreen, LoginScreenTitle, List, ListItem, ListInput, ListButton, BlockFooter, Button } from 'framework7-svelte'
+	import Wallets from './pages/settings/Wallets.svelte'
 </script>
 
 <App { ...f7params } themeDark>
-
-	<!-- Left panel with cover effect-->
-	<Panel left cover themeDark>
+	<Panel right effect="cover" swipe id="wallets">
 		<View>
-			<Page>
-				<Navbar title="Left Panel"/>
-				<Block>Left panel content goes here</Block>
-			</Page>
-		</View>
-	</Panel>
-
-
-	<!-- Right panel with reveal effect-->
-	<Panel right reveal themeDark>
-		<View>
-			<Page>
-				<Navbar title="Right Panel"/>
-				<Block>Right panel content goes here</Block>
-			</Page>
+			<Wallets />
 		</View>
 	</Panel>
 
@@ -97,7 +85,6 @@
 
 		<!-- Settings View -->
 		<View id="view-settings" name="settings" tab url="/settings" />
-
 	</Views>
 
 

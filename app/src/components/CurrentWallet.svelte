@@ -8,11 +8,11 @@
 	} = $currentWalletMachine.context)
 
 
-	import { Chip, Icon } from 'framework7-svelte'
+	import { Chip, Icon, Link } from 'framework7-svelte'
 	import Address from './Address.svelte'
 </script>
 
-<a href="/settings/wallets">
+<Link panelOpen="#wallets">
 	<Chip>
 		<Icon slot="media" f7="person_crop_circle" />
 
@@ -24,4 +24,4 @@
 			Connect Wallet
 		{/if}
 	</Chip>
-</a>
+</Link>
