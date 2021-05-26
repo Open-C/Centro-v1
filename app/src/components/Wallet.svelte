@@ -94,7 +94,9 @@
 			<h2>{walletProvider.name}</h2>
 		</Row>
 		<p><Address address={address} /></p>
-		<p>Phone: {phoneNumber}</p>
+		{#if phoneNumber}
+			<p>Phone: {phoneNumber}</p>
+		{/if}
 	{/if}
 </Block>
 
