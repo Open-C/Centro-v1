@@ -127,6 +127,7 @@
 		scale={true}
 		scaleSteps={4}
 		scaleSubSteps={2}
-		formatScaleLabel={value => value === maxAmount ? 'max' : value.toFixed(1)}
+		formatScaleLabel={value => value.toFixed(1)}
 	/>
+	<!-- formatScaleLabel={value => value === maxAmount ? 'max' : value.toFixed(1)} -->
 {/if}
