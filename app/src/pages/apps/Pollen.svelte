@@ -61,7 +61,7 @@
 				<ListItem
 					title={name}
 					after={balance}
-					link={id}
+					link="/apps/pollen/{id}"
 				>
 					<!-- badge={proposals.length} -->
 					<svelte:fragment slot="footer">

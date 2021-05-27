@@ -14,7 +14,7 @@
 
 	<List strong inset>
 		<ListItem
-			link="wallets"
+			link="/settings/wallets"
 			title="Manage Wallets"
 		>
 			<Icon slot="media" f7="creditcard_fill" />
