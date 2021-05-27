@@ -23,11 +23,11 @@
 	bind:amount
 	showSlider={false}
 />
-<hr>
+<!-- <hr>
 <RecipientSelect
 	preposition={'From'}
 	bind:address={fromAddress}
-/>
+/> -->
 <hr>
 <Button fill
 	onClick={() => transactionStarted = true}
