@@ -78,8 +78,10 @@
 		navigationLink: '/apps/poofcash'
 	}*/]
 
-	import { Block, Card, CardHeader, ListItem, Navbar, NavTitle, NavTitleLarge, Page } from 'framework7-svelte'
+
+	import { Block, Navbar, NavTitle, NavTitleLarge, Page } from 'framework7-svelte'
 	import CurrentWallet from '../components/CurrentWallet.svelte'
+	import HomeSlider from '../components/HomeSlider.svelte'
 </script>
 
 <style>
@@ -125,10 +127,15 @@
 
 <Page name="apps">
 	<Navbar large sliding={false}>
-		<CurrentWallet slot="right" />
 		<NavTitle sliding>Celo DeFi Apps</NavTitle>
 		<NavTitleLarge>Celo DeFi Apps</NavTitleLarge>
+
+		<svelte:fragment slot="right">
+			<CurrentWallet />
+		</svelte:fragment>
 	</Navbar>
+
+	<HomeSlider />
 
 	<Block>
 		<div class="apps">
