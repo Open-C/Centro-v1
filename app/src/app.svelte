@@ -32,6 +32,19 @@
 			iosOverlaysWebView: true,
 			androidOverlaysWebView: false,
 		},
+
+		popup: {
+			closeOnEscape: true,
+		},
+		sheet: {
+			closeOnEscape: true,
+		},
+		popover: {
+			closeOnEscape: true,
+		},
+		actions: {
+			closeOnEscape: true,
+		}
 	}
 
 
