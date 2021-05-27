@@ -33,6 +33,14 @@
 			androidOverlaysWebView: false,
 		},
 
+		view: {
+			// browserHistory: true,
+			browserHistorySeparator: '#',
+			masterDetailBreakpoint: 680,
+			masterDetailResizable: true,
+			// allowDuplicateUrls: true
+		},
+
 		popup: {
 			closeOnEscape: true,
 		},

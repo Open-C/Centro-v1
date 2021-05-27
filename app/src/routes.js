@@ -2,10 +2,12 @@ export default [
 	{
 		path: '/',
 		component: require('./pages/Apps.svelte').default,
+		master: true
 	},
 	{
 		path: '/apps',
 		component: require('./pages/Apps.svelte').default,
+		master: true
 	},
 	{
 		path: '/apps/moolamarket',
@@ -30,6 +32,7 @@ export default [
 	{
 		path: '/apps/pollen',
 		component: require('./pages/apps/Pollen.svelte').default,
+		master: true
 	},
 	{
 		path: '/apps/pollen/:pollenCircleID',
@@ -46,10 +49,12 @@ export default [
 	{
 		path: '/assets',
 		component: require('./pages/Assets.svelte').default,
+		master: true
 	},
 	{
 		path: '/settings',
 		component: require('./pages/Settings.svelte').default,
+		master: true
 	},
 	{
 		path: '/settings/wallets',
