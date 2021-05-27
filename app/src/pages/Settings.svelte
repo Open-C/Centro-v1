@@ -1,6 +1,5 @@
 <script>
-	let theme = 'auto' // 'auto' | 'light' | 'dark'
-	let requirePIN
+	import { theme, requirePIN } from '../data/settings'
 
 
 	import { Page, Navbar, NavTitle, NavTitleLarge, List, ListItem, Toggle, Icon } from 'framework7-svelte'
@@ -27,11 +26,11 @@
 			title="Require PIN to Unlock"
 		>
 			<svelte:fragment slot="media">
-				{#key requirePIN}
-					<Icon f7={requirePIN ? 'lock_filled' : 'lock_slash_filled'} />
+				{#key $requirePIN}
+					<Icon f7={$requirePIN ? 'lock_filled' : 'lock_slash_filled'} />
 				{/key}
 			</svelte:fragment>
-			<Toggle bind:checked={requirePIN} />
+			<Toggle bind:checked={$requirePIN} />
 		</ListItem>
 	</List>
 
@@ -40,12 +39,12 @@
 			title="Theme"
 		>
 			<svelte:fragment slot="media">
-				{#key theme}
-					<Icon f7={{'auto': 'circle_lefthalf_fill', 'light': 'sun_max', 'dark': 'moon'}[theme]} />
+				{#key $theme}
+					<Icon f7={{'auto': 'circle_lefthalf_fill', 'light': 'sun_max', 'dark': 'moon'}[$theme]} />
 				{/key}
 			</svelte:fragment>
 			<SegmentedSelect small
-				bind:value={theme}
+				bind:value={$theme}
 				options={{'auto': 'Auto', 'light': 'Light', 'dark': 'Dark'}}
 			/>
 		</ListItem>

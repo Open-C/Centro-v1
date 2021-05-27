@@ -35,6 +35,10 @@
 	}
 
 
+	import { theme, requirePIN } from './data/settings'
+	import { preferredColorScheme } from './data/preferredColorScheme'
+
+
 	// Login screen demo data
 	let username = ''
 	let password = ''
@@ -44,6 +48,8 @@
 			f7.loginScreen.close()
 		})
 	}
+
+
 	onMount(() => {
 		f7ready(() => {
 
@@ -60,7 +66,7 @@
 	import Wallets from './pages/settings/Wallets.svelte'
 </script>
 
-<App { ...f7params } themeDark>
+<App { ...f7params } themeDark={($theme === 'auto' ? ($preferredColorScheme) : ($theme)) === 'dark' || undefined}>
 	<Panel right effect="cover" swipe id="wallets">
 		<View>
 			<Wallets />
