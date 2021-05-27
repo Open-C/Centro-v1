@@ -185,4 +185,29 @@ contract UbeFarmConnector is UbeSwapConnector {
         address lp = pairFor(_getUbeFactory(), _tok1, _tok2);
         return farmPools[lp];
     }
+
+    function _stakeLiquidity(address _pair, uint256 _amount, address _wallet) internal {
+        CentroWallet wallet = CentroWallet(_wallet);
+        address farmAddress = farmPools[_pair];
+        wallet.approve(msg.sender, _pair, _amount);
+        bytes memory data = abi.encodeWithSignature("stake(uint256)", _amount);
+        wallet.callContract(farmAddress, data);
+    }
+
+    function _withdrawLiquidity(address _pair, uint256 _amount, address _wallet) internal {
+        CentroWallet wallet = CentroWallet(_wallet);
+        address farmAddress = farmPools[_pair];
+        bytes memory data = abi.encodeWithSignature("withdraw(uint256)", _amount);
+        wallet.callContract(farmAddress, data);
+    }
+
+    function stakeLiquidity(address _pair, uint256 _amount, uint256 _walletId) public {
+        CentroWallet wallet = _getWallet(_walletID);
+        _stakeLiquidity(_pair, _amount, address(wallet));
+    }
+
+    function withdrawLiquidity(address _pair, uint256 _amount, uint256 _walletId) public {
+        CentroWallet wallet = _getWallet(_walletID);
+        _withdrawLiquidity(_pair, _amount, address(wallet));
+    }
 }
