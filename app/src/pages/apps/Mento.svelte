@@ -51,18 +51,22 @@
 				axis
 				axisLabels={dates}
 				legend
-				toggleDatasets
 				lineChart
 				formatAxisLabel={(date) => axisDateFormat.format(date)}
 				formatTooltipAxisLabel={(date) => tooltipDateFormat.format(date)}
 				datasets={[
 					{
+						label: fromToken.symbol,
 						color: fromToken.color,
 						values: [0, 100, 250, 300, 175, 400],
 					}
 				]}
 			/>
+			<!-- toggleDatasets -->
 		{/if}
+	</Block>
+
+	<Block strong inset>
 		<TokenSwap
 			bind:fromToken
 			bind:toToken
