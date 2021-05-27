@@ -7,8 +7,26 @@ abstract contract UbePair{
     function getReserves() public view virtual returns (uint112 _reserve0, uint112 _reserve1, uint32 _blockTimestampLast);
 }
 
+abstract contract PoolManager{
+    struct PoolInfo {
+        uint256 index;
+        address stakingToken;
+        address poolAddress;
+        uint256 weight;
+        // The next period in which the pool needs to be filled
+        uint256 nextPeriod;
+    }
+    mapping(address => PoolInfo) public pools;
+}
+
+abstract contract IStakingRewards{
+    function earned(address account) public view virtual returns (uint256);
+}
+
 /// @notice all code in the UbeSwapUtils contract taken from the UniswapV2Library code
 contract UbeSwapUtils {
+
+    address constant ubeToken = address(0x00Be915B9dCf56a3CBE739D9B9c202ca692409EC);
 
     /// @dev copied from UniswapV2Library code.
 	function ubeGetAmountOut(
@@ -174,16 +192,25 @@ contract UbeSwapConnector is WalletFactory, UbeSwapUtils {
 }
 
 contract UbeFarmConnector is UbeSwapConnector {
-    private mapping(address => address) farmPools;
 
-    function addPoolAddress(address _tok1, address _tok2, address _farmPool) public onlyAdmin {
-        address lp = pairFor(_getUbeFactory(), _tok1, _tok2);
-        farmPools[lp] = _farmPool;
+    struct PoolInfo {
+        uint256 index;
+        address stakingToken;
+        address poolAddress;
+        uint256 weight;
+        // The next period in which the pool needs to be filled
+        uint256 nextPeriod;
     }
 
-    function getPoolAddress(address _tok1, address _tok2) public view {
+    function _getPoolAddress(address lp) public view returns (address) {
+        PoolManager pm = PoolManager(store.getAddress("Ube Pool Manager"));
+        PoolInfo memory pool = pm.pools[lp];
+        return pool.poolAddress;
+    }
+
+    function getPoolAddress(address _tok1, address _tok2) public view returns (address){
         address lp = pairFor(_getUbeFactory(), _tok1, _tok2);
-        return farmPools[lp];
+        return _getPoolAddress(lp);
     }
 
     function _stakeLiquidity(address _pair, uint256 _amount, address _wallet) internal {
@@ -201,13 +228,37 @@ contract UbeFarmConnector is UbeSwapConnector {
         wallet.callContract(farmAddress, data);
     }
 
+    function _claimReward(address _pair, address _wallet) internal returns (uint256 _earned) {
+        CentroWallet wallet = CentroWallet(_wallet);
+        address farmAddress = _getPoolAddress(_pair);
+        _earned = IStakingRewards(farmAddress).earned(_wallet);
+
+        bytes memory data = abi.encodeWithSignature("getReward()");
+        wallet.callContract(msg.sender, farmAddress, data);
+    }
+
     function stakeLiquidity(address _pair, uint256 _amount, uint256 _walletId) public {
         CentroWallet wallet = _getWallet(_walletID);
         _stakeLiquidity(_pair, _amount, address(wallet));
     }
 
-    function withdrawLiquidity(address _pair, uint256 _amount, uint256 _walletId) public {
+    function withdrawLiquidityPair(address _pair, uint256 _amount, uint256 _walletId) public {
         CentroWallet wallet = _getWallet(_walletID);
         _withdrawLiquidity(_pair, _amount, address(wallet));
+    }
+
+    function ubeStakeTokens(address _tok1, address _tok2, uint256 _amt, uint256 _walletId) public {
+        CentroWallet wallet = _getWallet(_walletID);
+        address pair = pairFor(_getUbeFactory(), _tok1, _tok2);
+        uint256 toStake = _amt == 0 ? pair.balanceOf(address(wallet)) : _amt
+        stakeLiquidity(pair, toStake, _walletId);
+    }
+
+    function claimRewardUbe(address _tok1, address _tok2, uint256 _walletId) public returns (uint256 _earned) {
+        CentroWallet wallet = _getWallet(_walletID);
+        address pair = pairFor(_getUbeFactory(), _tok1, _tok2);
+        uint256 baseEarned = _claimReward(pair, address(wallet));
+        uint256 siphoned = _siphon(ubeToken, baseEarned, _walletId);
+        return baseEarned - siphoned;
     }
 }
