@@ -15,15 +15,15 @@
 </script>
 
 
-<TabLayout tabs={{'request': 'Request', 'send': 'Send'}} let:tab>
-	{#if tab === 'request'}
+<TabLayout tabs={{'deposit': 'Deposit', 'withdraw': 'Withdraw'}} let:tab>
+	{#if tab === 'deposit'}
 		<Block inset strong>
 			<TokenDeposit
 				token={depositToken}
 				maxAmount={maxDepositAmount}
 			/>
 		</Block>
-	{:else if tab === 'send'}
+	{:else if tab === 'withdraw'}
 		<Block inset strong>
 			<TokenWithdraw
 				token={withdrawToken}
