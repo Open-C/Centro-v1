@@ -42,10 +42,11 @@
 	/>
 </div>
 {#if !isScanning}
-	<Row>
-		<Button small fill color="gray" onClick={scanQRCode}>Scan QR Code</Button>
+	<div class="line">
+		<Button small fill color="gray">Address Book</Button>
+		<Button small fill color="gray" onClick={scanQRCode}>QR Code</Button>
 		<Button small fill color="gray" onClick={paste}>Paste</Button>
-	</Row>
+	</div>
 {:else}
 	<Row>
 		<QRCodeScanner {onDataScanned} />
