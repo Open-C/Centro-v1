@@ -20,11 +20,13 @@
 </script>
 
 
-<Segmented strong>
-	{#each Object.entries(tabs) as [tabID, title] (tabID)}
-		<Button tabLink="#{tabID}-{tabInstanceID}" class={startTab === tabID ? 'tab-link-active' : ''}>{title}</Button>
-	{/each}
-</Segmented>
+<Block>
+	<Segmented strong>
+		{#each Object.entries(tabs) as [tabID, title] (tabID)}
+			<Button tabLink="#{tabID}-{tabInstanceID}" class={startTab === tabID ? 'tab-link-active' : ''}>{title}</Button>
+		{/each}
+	</Segmented>
+</Block>
 
 <Tabs {animated} {swipeable} {routable} {swiperParams}>
 	{#each Object.entries(tabs) as [tabID, title] (tabID)}

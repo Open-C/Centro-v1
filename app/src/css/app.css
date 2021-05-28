@@ -156,9 +156,11 @@ input {
 	--f7-segmented-highlight-active: 0;
 }
 
-.accordion-item-content > .segmented {
+/* .accordion-item-content > .segmented */
+.accordion-item-content > .block {
+	padding: 0;
 	margin-left: calc(var(--f7-block-inset-side-margin) + var(--f7-safe-area-outer-left));
-    margin-right: calc(var(--f7-block-inset-side-margin) + var(--f7-safe-area-outer-right));
+	margin-right: calc(var(--f7-block-inset-side-margin) + var(--f7-safe-area-outer-right));
 	margin-bottom: var(--f7-grid-row-gap);
 }
 
