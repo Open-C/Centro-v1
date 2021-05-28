@@ -88,7 +88,12 @@
 </script>
 
 <App { ...f7params } themeDark={($theme === 'auto' ? ($preferredColorScheme) : ($theme)) === 'dark' || undefined}>
-	<Panel right effect="cover" swipe id="wallets">
+	<Panel
+		id="wallets"
+		right
+		effect="cover"
+		swipe swipeOnlyClose swipeThreshold={100}
+	>
 		<View>
 			<Wallets />
 		</View>
