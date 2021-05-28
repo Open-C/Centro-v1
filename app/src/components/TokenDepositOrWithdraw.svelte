@@ -15,7 +15,13 @@
 </script>
 
 
-<TabLayout tabs={{'deposit': 'Deposit', 'withdraw': 'Withdraw'}} let:tab>
+<TabLayout
+	tabs={{
+		... maxDepositAmount ? {'deposit': maxWithdrawAmount ? 'Deposit More' : 'Deposit'} : {},
+		... maxWithdrawAmount ? {'withdraw': 'Withdraw'} : {}
+	}}
+	let:tab
+>
 	{#if tab === 'deposit'}
 		<Block inset strong>
 			<TokenDeposit

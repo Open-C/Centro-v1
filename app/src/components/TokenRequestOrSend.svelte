@@ -4,6 +4,8 @@
 
 	import { tokenBalances } from '../data/tokenBalances'
 
+	let maxAmount = tokenBalances[token.symbol].amount
+
 
 	import { Block } from 'framework7-svelte'
 	import TabLayout from './TabLayout.svelte'
@@ -12,7 +14,13 @@
 </script>
 
 
-<TabLayout tabs={{'request': 'Request', 'send': 'Send'}} let:tab>
+<TabLayout
+	tabs={{
+		... {'request': 'Request'},
+		... maxAmount ? {'send': 'Send'} : {}
+	}}
+	let:tab
+>
 	{#if tab === 'request'}
 		<Block inset strong>
 			<TokenRequest {token} />
@@ -21,7 +29,7 @@
 		<Block inset strong>
 			<TokenSend
 				token={token}
-				maxAmount={tokenBalances[token.symbol].amount}
+				{maxAmount}
 			/>
 		</Block>
 	{/if}
