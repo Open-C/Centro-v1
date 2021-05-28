@@ -3,17 +3,14 @@
 	
 	
 	const transactionAction = 'Request'
-	let fromAddress
 	let amount
 
 
-	let transactionStarted = false
+	let requestStarted = false
 
 
-	import { Button } from 'framework7-svelte'
+	import { Block, Button, Sheet } from 'framework7-svelte'
 	import TokenAmountSelect from './TokenAmountSelect.svelte'
-	import RecipientSelect from './RecipientSelect.svelte'
-	import TransactionFlow from './TransactionFlow.svelte'
 </script>
 
 
@@ -23,23 +20,27 @@
 	bind:amount
 	showSlider={false}
 />
-<!-- <hr>
-<RecipientSelect
-	preposition={'From'}
-	bind:address={fromAddress}
-/> -->
 <hr>
 <Button fill
-	onClick={() => transactionStarted = true}
-	disabled={!(amount && fromAddress)}>
+	onClick={() => requestStarted = true}
+	disabled={!(amount)}>
 	{transactionAction}
 </Button>
 
 
-<!-- <TransactionFlow
-	bind:isOpen={transactionStarted}
-	{transactionAction}
-	{token}
-	{fromAddress}
-	{amount}
-/> -->
+<Sheet
+	class="request-sheet"
+	opened={requestStarted}
+	onSheetClosed={() => requestStarted = false}
+	swipeToClose
+	swipeToStep
+	backdrop
+>
+	<Block>
+		<h2>Show this QR code to receive tokens.</h2>
+		<img alt="QR Code" width="200" height="200" />
+	</Block>
+	<Block>
+		<Button fill sheetClose>Done</Button>
+	</Block>
+</Sheet>
