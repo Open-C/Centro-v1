@@ -123,6 +123,12 @@ input {
 	padding-top: var(--f7-block-padding-vertical);
 	padding-bottom: var(--f7-block-padding-vertical);
 }
+.block:first-child {
+	margin-top: 0;
+}
+.block:last-child {
+	margin-bottom: 0;
+}
 .block > * + * {
 	margin-top: var(--f7-grid-row-gap);
 }
