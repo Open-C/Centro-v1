@@ -99,7 +99,8 @@
 		padding: 0 1em;
 		max-width: 100%;
 		box-shadow: 0 0.1em 0.5em;
-		aspect-ratio: 1;
+		/* aspect-ratio: 1; */
+		height: 8rem;
 		display: grid;
 		place-content: center;
 		place-items: center;
