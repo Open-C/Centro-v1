@@ -71,8 +71,9 @@
 				Connect {name}
 			</Button>
 		{/each}
-		<Button fill>Create New Centro Wallet</Button>
-		<Button fill>Import Account Key</Button>
+		<hr>
+		<Button large fill>Create New Centro Wallet</Button>
+		<Button large fill>Import Account Key</Button>
 	{:else if $walletMachine.matches('connecting')}
 		<Row>
 			<Preloader />
