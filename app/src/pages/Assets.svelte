@@ -24,6 +24,11 @@
 			title: 'Other Assets',
 			data: [
 				{
+					name: 'Moola CELO',
+					symbol: 'mCELO',
+					image: require('../static/images/celo-icon.png').default
+				},
+				{
 					name: 'Moola cUSD',
 					symbol: 'mcUSD',
 					image: require('../static/images/cusd-icon.png').default
