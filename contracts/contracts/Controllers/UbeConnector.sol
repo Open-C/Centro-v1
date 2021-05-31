@@ -254,11 +254,40 @@ contract UbeFarmConnector is UbeSwapConnector {
         stakeLiquidity(pair, toStake, _walletId);
     }
 
-    function claimRewardUbe(address _tok1, address _tok2, uint256 _walletId) public returns (uint256 _earned) {
-        CentroWallet wallet = _getWallet(_walletID);
-        address pair = pairFor(_getUbeFactory(), _tok1, _tok2);
+    function claimRewardFromPair(address _pair, uint256 _walletId) public returns (uint256 _earned) {
+        CentroWallet wallet = _getWallet(_walletId);
         uint256 baseEarned = _claimReward(pair, address(wallet));
         uint256 siphoned = _siphon(ubeToken, baseEarned, _walletId);
         return baseEarned - siphoned;
+
+    }
+
+    function claimRewardFromTokens(address _tok1, address _tok2, uint256 _walletId) public returns (uint256 _earned) {
+        CentroWallet wallet = _getWallet(_walletId);
+        address pair = pairFor(_getUbeFactory(), _tok1, _tok2);
+        _earned = claimRewardFromPair(pair, _walletId);
+    }
+}
+
+contract UbeCombined is UbeFarmConnector {
+    contract oneTokenToFarm(address _baseToken, uint256 _baseAmount, address _tok1, address _tok2, uint256 _walletId) public {
+        addLiquidityFromOne(_baseToken, _baseAmount, _tok1, _tok2, _walletId);
+        ubeStakeTokens(_tok1, _tok2, 0, _walletId);
+    }
+
+    contract twoTokensToFarm(address _tok1, address _tok2, uint256 _amt1, uint256 _amt2, uint256 _walletId) public {
+        addLiquidity(_tok1, _tok2, _amt1, _amt2, _walletId);
+        ubeStakeTokens(_tok1, _tok2, 0, _walletId);
+    }
+
+    contract compoundFarmPair(address _pair, uint256 _walletId) public {
+        uint256 reward = claimRewardFromPair(_pair, _walletId);
+        UbePair pair = UbePair(pair);
+        oneTokenToFarm(ubeToken, reward, pair.token0, pair.token1, _walletId);
+    }
+
+    contract compoundFarmTokens(address _tok1, address _tok2, uint256 _walletId) public {
+        uint256 reward = claimRewardFromTokens(_tok1, _tok2, _walletId);
+        oneTokenToFarm(ubeToken, reward, _tok1, _tok2, _walletId);
     }
 }
