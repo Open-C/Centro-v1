@@ -75,12 +75,7 @@ contract UbeSwapConnector is WalletFactory, UbeSwapUtils {
     function _getUbeFactory() internal view returns (address) {
         return store.getAddress("UbeswapFactory");
     }
-    
-    // @dev returns the address of UbeLibrary
-    function _getUbeLibrary() internal view returns (address) {
-        return store.getAddress("UbeswapLibrary");
-    }
-    
+        
     // @dev returns the reserves for a given token pair
     // @param _tok1 the address of token 1
     // @param _tok2 the address of token 2 
