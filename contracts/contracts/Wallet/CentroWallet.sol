@@ -1,16 +1,12 @@
-pragma solidity >0.5.0;
+pragma solidity >0.8.0;
 
 //import "@openzeppelin/contracts/math/SafeMath.sol";
 //import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 //import "@openzeppelin/contracts/utils/Address.sol";
 //import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
-import "./Storage.sol";
-import "./Types.sol";
-//import "../connectors/MoolaC.sol";
-import "../interfaces/IERC20Token.sol";
-import "../ContractCaller.sol";
-import "../interfaces/ILendingPoolAddressProvider.sol";
+import "../Storage.sol";
+import "./ContractCaller.sol";
 
 contract CentroWallet is ContractCaller {
 	using SafeMath for uint256;
@@ -133,9 +129,18 @@ contract CentroWallet is ContractCaller {
 		return (tokenAddresses, _bal);
 	}
 
-	function callContract(address _from, address _target, bytes memory _data) public isMain isAuth(_from) onlyRole(Role.owner, _from) returns (bytes memory) {
+	function callContract(address _from, address _target, bytes memory _data)
+		public
+		isMain
+		isAuth(_from)
+		onlyRole(Role.owner, _from)
+		returns (bytes memory) {
 		emit ContractCalled(_target, _data, _from);
 		return this._callContract(_target, _data);
+	}
+
+	function approve(address _from, address _token, address _target, uint256 _amt) public isMain isAuth(_from) onlyRole(Role.owner, _from) {
+		this._approveToken(_token, _target, _amt); 
 	}
 
 }
