@@ -25,7 +25,7 @@ contract CentroMain is MoolaConnector, ExchangeConnector, UbeConnector {
 		}
 	}
 
-	function getWalletBalance(uint256 _walletID) public view returns (address[] memory tokens, uint256[] memory balances) {
+	function getWalletBasis(uint256 _walletID) public view returns (address[] memory tokens, uint256[] memory balances) {
 		CentroWallet wallet = _getWallet(_walletID);
 		return wallet.getBasis(msg.sender);
 	}

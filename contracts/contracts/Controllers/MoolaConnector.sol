@@ -8,12 +8,12 @@ contract MoolaConnector is WalletFactory {
 	string private constant mREDEEM = "redeem(uint256)";
 
     function _getLendingPool() internal view returns (ILendingPool) {
-        ILendingPoolAddressesProvider lpa = ILendingPoolAddressesProvider(store.getAddressProvider("moola"));
+        ILendingPoolAddressesProvider lpa = ILendingPoolAddressesProvider(store.getAddress("moola"));
         return ILendingPool(lpa.getLendingPool());
     }
     
     function _getPoolCore() internal view returns (address payable) {
-        ILendingPoolAddressesProvider lpa = ILendingPoolAddressesProvider(store.getAddressProvider("moola"));
+        ILendingPoolAddressesProvider lpa = ILendingPoolAddressesProvider(store.getAddress("moola"));
         return lpa.getLendingPoolCore();
     }
     
