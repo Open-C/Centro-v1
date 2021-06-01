@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: ISC
+
 pragma solidity >0.5.0;
 
 ///@notice Beneficiaries are not currently implemented in current Centro V1
