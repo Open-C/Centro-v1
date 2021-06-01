@@ -1,5 +1,5 @@
 import { ICeloNetwork, networkNames } from "@ubeswap/hardhat-celo";
-import * as fs from "fs/promises";
+import { promises as fs } from "fs";
 import { ActionType, HardhatRuntimeEnvironment } from "hardhat/types";
 
 export type DeployFunction = (
