@@ -32,7 +32,7 @@ contract MoolaConnector is WalletFactory {
 		if (_token == store.getEthAddress()) {
 		    value = _amount;
 		} else {
-		    wallet.approve(_token, _getPoolCore, _amount);
+		    wallet.approve(msg.sender, _token, _getPoolCore, _amount);
 		}
 		wallet.callContract(msg.sender, address(moola), value, data);
 	}

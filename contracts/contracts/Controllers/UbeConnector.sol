@@ -104,12 +104,12 @@ contract UbeSwapConnector is WalletFactory, UbeSwapUtils {
         address ubeRouter = _getUbeRouter();
         (uint256 reserveIn, uint256 reserveOut) = _getUbeReserves(_tokIn, _tokOut);
         require(_minOut <= ubeGetAmountOut(_amtIn, reserveIn, reserveOut), "Reserve rate lower than user's minimum specified");
-        wallet.approve(_tokIn, ubeRouter, _amtIn);
+        wallet.approve(msg.sender, _tokIn, ubeRouter, _amtIn);
         address[] memory path = new address[](2);
         path[0] = _tokIn;
         path[1] = _tokOut;
         bytes memory data = abi.encodeWithSignature(SWAP_EXACT_TOKENS, _amtIn, _amtIn, path, address(wallet), block.timestamp);
-        bytes memory resp = wallet.callContract(ubeRouter, data);
+        bytes memory resp = wallet.callContract(msg.sender, ubeRouter, data);
         return abi.decode(resp, (uint256));
     }
     
@@ -154,14 +154,14 @@ contract UbeSwapConnector is WalletFactory, UbeSwapUtils {
         address ubeRouter = _getUbeRouter();
         
         if (_amt1 > 0) {
-            wallet.approve(_tok1, ubeRouter, _amt1);
+            wallet.approve(msg.sender, _tok1, ubeRouter, _amt1);
         }
         if (_amt2 > 0) {
-            wallet.approve(_tok2, ubeRouter, _amt2);
+            wallet.approve(msg.sender, _tok2, ubeRouter, _amt2);
         }
         bytes memory data = abi.encodeWithSignature(ADD_LIQUIDITY, _tok1, _tok2, _amt1, _amt2, _amt1.sub(5), _amt2, address(wallet), block.timestamp);
         emit AddedLiquidity(address(wallet), _tok1, _tok2, _amt1, _amt2);
-        return wallet.callContract(ubeRouter, data);
+        return wallet.callContract(msg.sender, ubeRouter, data);
     }
     
     
@@ -179,10 +179,10 @@ contract UbeSwapConnector is WalletFactory, UbeSwapUtils {
         CentroWallet wallet = _getWallet(_walletID);
         address ubeRouter = _getUbeRouter();
         address pair = _getTokenPair(_tok1, _tok2);
-        wallet.approve(pair, _liquidity);
+        wallet.approve(msg.sender, pair, _liquidity);
         bytes memory data = abi.encodeWithSignature(REMOVE_LIQUIDITY, _tok1, _tok2, _liquidity, _min1, _min2, address(wallet), block.timestamp);
         emit AddedLiquidity(address(wallet), _tok1, _tok2, _liquidity);
-        return wallet.callContract(ubeRouter, data);
+        return wallet.callContract(msg.sender, ubeRouter, data);
     }
 }
 
@@ -213,14 +213,14 @@ contract UbeFarmConnector is UbeSwapConnector {
         address farmAddress = farmPools[_pair];
         wallet.approve(msg.sender, _pair, _amount);
         bytes memory data = abi.encodeWithSignature("stake(uint256)", _amount);
-        wallet.callContract(farmAddress, data);
+        wallet.callContract(msg.sender, farmAddress, data);
     }
 
     function _withdrawLiquidity(address _pair, uint256 _amount, address _wallet) internal {
         CentroWallet wallet = CentroWallet(_wallet);
         address farmAddress = farmPools[_pair];
         bytes memory data = abi.encodeWithSignature("withdraw(uint256)", _amount);
-        wallet.callContract(farmAddress, data);
+        wallet.callContract(msg.sender, farmAddress, data);
     }
 
     function _claimReward(address _pair, address _wallet) internal returns (uint256 _earned) {
