@@ -195,3 +195,9 @@ input {
 	padding: 0;
 	padding-right: 0.2em;
 }
+
+
+a, area, button, input, label, select, summary, textarea, [tabindex] {
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+}
