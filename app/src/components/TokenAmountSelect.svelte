@@ -32,17 +32,23 @@
 </script>
 
 <style>
-	:global(input[type="number"]) {
-		font-weight: bold;
+	.token-amount-select :global(.token-amount-input) {
+		--f7-input-font-size: 1.25rem;
+		--f7-input-height: calc(var(--f7-input-font-size) * 2);
+	}
+
+	.token-amount-select :global(.token-amount-input input) {
+		font-weight: 600;
 		text-align: center;
 	}
 </style>
 
-<div class="line">
+<div class="line token-amount-select">
 	<h3>{action}</h3>
 
 	<Input
 		type="number"
+		class="token-amount-input"
 		bind:value={amount}
 		min={0}
 		max={maxAmount}
