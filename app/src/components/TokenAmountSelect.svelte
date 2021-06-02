@@ -85,11 +85,11 @@
 		min={0}
 		max={maxAmount}
 		color={token.color}
-		style="--f7-range-knob-background-image: url('{token.image}')"
 		scale={true}
 		scaleSteps={4}
 		scaleSubSteps={2}
 		formatScaleLabel={value => value.toFixed(1)}
 	/>
+	<!-- style="--f7-range-knob-background-image: url('{token.image}')" -->
 	<!-- formatScaleLabel={value => value === maxAmount ? 'max' : value.toFixed(1)} -->
 {/if}
