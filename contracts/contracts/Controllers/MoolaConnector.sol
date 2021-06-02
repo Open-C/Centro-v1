@@ -2,7 +2,24 @@
 
 pragma solidity >0.5.0;
 import "../WalletFactory.sol";
+import "../Interfaces/LendingPoolProvider.sol";
 
+
+interface ILendingPool {
+    function getUserReserveData(address _reserve, address _user) external view
+        returns (
+            uint256 currentATokenBalance,
+            uint256 currentBorrowBalance,
+            uint256 principalBorrowBalance,
+            uint256 borrowRateMode,
+            uint256 borrowRate,
+            uint256 liquidityRate,
+            uint256 originationFee,
+            uint256 variableBorrowIndex,
+            uint256 lastUpdateTimestamp,
+            bool usageAsCollateralEnabled
+        );
+}
 
 contract MoolaConnector is WalletFactory {
 

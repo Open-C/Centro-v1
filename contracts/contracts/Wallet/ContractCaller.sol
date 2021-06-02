@@ -4,7 +4,7 @@ pragma solidity >0.5.0;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 
-contract ContractCaller {
+abstract contract ContractCaller {
 	function _delegate(address _target, bytes memory _calldata) internal returns (bytes memory response) {
 		require(_target != address(0), "Target invalid!");
 		(bool success, bytes memory returnData) = _target.delegatecall(_calldata);
@@ -18,9 +18,9 @@ contract ContractCaller {
 		return returnData;
 	}
 
-	function _callContract(address payable _target, uint256 _value, bytes memory _calldata) internal returns (bytes memory response) {
+	function _callContract(address payable _target, bytes memory _calldata) internal returns (bytes memory response) {
 		require(_target != address(0), "Target invalid!");
-		(bool success, bytes memory returnData) = _target.call{value: _value}(_calldata);
+		(bool success, bytes memory returnData) = _target.call(_calldata);
 
 		assembly {
 			if eq(success, 0) {

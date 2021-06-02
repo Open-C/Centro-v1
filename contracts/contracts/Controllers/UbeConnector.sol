@@ -26,7 +26,7 @@ abstract contract IStakingRewards{
 }
 
 /// @notice all code in the UbeSwapUtils contract taken from the UniswapV2Library code
-contract UbeSwapUtils {
+abstract contract UbeSwapUtils {
 
     address constant ubeToken = address(0x00Be915B9dCf56a3CBE739D9B9c202ca692409EC);
 
@@ -61,7 +61,9 @@ contract UbeSwapUtils {
 }
 
 contract UbeSwapConnector is WalletFactory, UbeSwapUtils {
-    
+
+    constructor(address _store, address _siphon) WalletFactory(_store, _siphon) {}
+ 
     event AddedLiquidity(address wallet, address tok1, address tok2, uint256 amt1, uint256 amt2);
     event RemovedLiquidity(address wallet, address tok1, address tok2, uint256 liquidity);
     
@@ -122,7 +124,7 @@ contract UbeSwapConnector is WalletFactory, UbeSwapUtils {
 	// @param _tok2 address of the second desired token to add to an LP
     // @param _walletID the wallet to perform the swap in 
 	function addLiquidityFromOne(address _baseToken, uint256 _baseAmount, address _tok1, address _tok2, address _walletID) public {
-		require(_tok1 != _tok2, "Must specify two different assets to add to the LP")
+		require(_tok1 != _tok2, "Must specify two different assets to add to the LP");
 
 		CentroWallet wallet = _getWallet(_walletID);
 		uint256 baseSplit = (_baseAmount / 2);
@@ -130,13 +132,13 @@ contract UbeSwapConnector is WalletFactory, UbeSwapUtils {
 		uint256 amt2;
 
 		if (_tok1 != _baseToken) {
-			uint256 expectedOut = ubeGetAmountOut(baseSplit, _baseToken, _tok1)
+			uint256 expectedOut = ubeGetAmountOut(baseSplit, _baseToken, _tok1);
 			amt1 = makeSwap(_baseAmount, _tok1, baseSplit, expectedOut - 5, _walletID);
 		} else {
 			amt1 = baseSplit;
 		}
 		if (_tok2 != _baseToken) {
-			uint256 expectedOut = ubeGetAmountOut(baseSplit, _baseToken, _tok2)
+			uint256 expectedOut = ubeGetAmountOut(baseSplit, _baseToken, _tok2);
 			amt2 = makeSwap(_baseAmount, _tok2, baseSplit, expectedOut - 5, _walletID);
 		} else {
 			amt2 = baseSplit;
@@ -190,6 +192,8 @@ contract UbeSwapConnector is WalletFactory, UbeSwapUtils {
 
 contract UbeFarmConnector is UbeSwapConnector {
 
+    constructor(address _store, address _siphon) UbeSwapConnector(_store, _siphon) {}
+
     struct PoolInfo {
         uint256 index;
         address stakingToken;
@@ -212,7 +216,7 @@ contract UbeFarmConnector is UbeSwapConnector {
 
     function _stakeLiquidity(address _pair, uint256 _amount, address _wallet) internal {
         CentroWallet wallet = CentroWallet(_wallet);
-        address farmAddress = farmPools[_pair];
+        address farmAddress = _getPoolAddress(_pair);
         wallet.approve(msg.sender, _pair, _amount);
         bytes memory data = abi.encodeWithSignature("stake(uint256)", _amount);
         wallet.callContract(msg.sender, farmAddress, data);
@@ -220,7 +224,7 @@ contract UbeFarmConnector is UbeSwapConnector {
 
     function _withdrawLiquidity(address _pair, uint256 _amount, address _wallet) internal {
         CentroWallet wallet = CentroWallet(_wallet);
-        address farmAddress = farmPools[_pair];
+        address farmAddress = _getPoolAddress(_pair);
         bytes memory data = abi.encodeWithSignature("withdraw(uint256)", _amount);
         wallet.callContract(msg.sender, farmAddress, data);
     }
@@ -235,25 +239,25 @@ contract UbeFarmConnector is UbeSwapConnector {
     }
 
     function stakeLiquidity(address _pair, uint256 _amount, uint256 _walletId) public {
-        CentroWallet wallet = _getWallet(_walletID);
+        CentroWallet wallet = _getWallet(_walletId);
         _stakeLiquidity(_pair, _amount, address(wallet));
     }
 
     function withdrawLiquidityPair(address _pair, uint256 _amount, uint256 _walletId) public {
-        CentroWallet wallet = _getWallet(_walletID);
+        CentroWallet wallet = _getWallet(_walletId);
         _withdrawLiquidity(_pair, _amount, address(wallet));
     }
 
     function ubeStakeTokens(address _tok1, address _tok2, uint256 _amt, uint256 _walletId) public {
-        CentroWallet wallet = _getWallet(_walletID);
+        CentroWallet wallet = _getWallet(_walletId);
         address pair = pairFor(_getUbeFactory(), _tok1, _tok2);
-        uint256 toStake = _amt == 0 ? pair.balanceOf(address(wallet)) : _amt
+        uint256 toStake = _amt == 0 ? pair.balanceOf(address(wallet)) : _amt;
         stakeLiquidity(pair, toStake, _walletId);
     }
 
     function claimRewardFromPair(address _pair, uint256 _walletId) public returns (uint256 _earned) {
         CentroWallet wallet = _getWallet(_walletId);
-        uint256 baseEarned = _claimReward(pair, address(wallet));
+        uint256 baseEarned = _claimReward(_pair, address(wallet));
         uint256 siphoned = _siphon(ubeToken, baseEarned, _walletId);
         return baseEarned - siphoned;
 
@@ -267,23 +271,26 @@ contract UbeFarmConnector is UbeSwapConnector {
 }
 
 contract UbeCombined is UbeFarmConnector {
-    contract oneTokenToFarm(address _baseToken, uint256 _baseAmount, address _tok1, address _tok2, uint256 _walletId) public {
+
+    constructor(address _store, address _siphon) UbeFarmConnector(_store, _siphon) {}
+
+    function oneTokenToFarm(address _baseToken, uint256 _baseAmount, address _tok1, address _tok2, uint256 _walletId) public {
         addLiquidityFromOne(_baseToken, _baseAmount, _tok1, _tok2, _walletId);
         ubeStakeTokens(_tok1, _tok2, 0, _walletId);
     }
 
-    contract twoTokensToFarm(address _tok1, address _tok2, uint256 _amt1, uint256 _amt2, uint256 _walletId) public {
+    function twoTokensToFarm(address _tok1, address _tok2, uint256 _amt1, uint256 _amt2, uint256 _walletId) public {
         addLiquidity(_tok1, _tok2, _amt1, _amt2, _walletId);
         ubeStakeTokens(_tok1, _tok2, 0, _walletId);
     }
 
-    contract compoundFarmPair(address _pair, uint256 _walletId) public {
+    function compoundFarmPair(address _pair, uint256 _walletId) public {
         uint256 reward = claimRewardFromPair(_pair, _walletId);
-        UbePair pair = UbePair(pair);
+        UbePair pair = UbePair(_pair);
         oneTokenToFarm(ubeToken, reward, pair.token0, pair.token1, _walletId);
     }
 
-    contract compoundFarmTokens(address _tok1, address _tok2, uint256 _walletId) public {
+    function compoundFarmTokens(address _tok1, address _tok2, uint256 _walletId) public {
         uint256 reward = claimRewardFromTokens(_tok1, _tok2, _walletId);
         oneTokenToFarm(ubeToken, reward, _tok1, _tok2, _walletId);
     }

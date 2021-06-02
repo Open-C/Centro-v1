@@ -6,12 +6,12 @@ pragma solidity >0.8.0;
 //import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 //import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/math/SafeMath.sol";
+//import "@openzeppelin/contracts/math/SafeMath.sol";
 import "../Storage.sol";
 import "./ContractCaller.sol";
 
 contract CentroWallet is ContractCaller {
-	using SafeMath for uint256;
+	//using SafeMath for uint256;
 	
 	address store;
 	address owner;
@@ -75,7 +75,7 @@ contract CentroWallet is ContractCaller {
 
 	function deposit(address _from, address _token, uint256 _amount) payable external isMain isAuth(_from) excludeRole(_from, Role.beneficiary){
 		if (_token != Storage(store).getEthAddress()) {
-			IERC20Token token = IERC20Token(_token);
+			IERC20 token = IERC20(_token);
 			require(_amount <= token.balanceOf(address(this)), "Not enough moneys.");
 			token.transferFrom(_from, address(this), _amount);
 		} // else, celo was sent and is auto-deposited
@@ -88,7 +88,7 @@ contract CentroWallet is ContractCaller {
 	function withdraw(address payable _from, address _token, uint256 _amount) external isMain isAuth(_from) onlyRole(Role.owner, _from){
 		require(isAuthorized[_from], "Unauthorized withdraw");
 		if (_token != Storage(store).getEthAddress()) {
-			IERC20Token token = IERC20Token(_token);
+			IERC20 token = IERC20(_token);
 			uint256 amount = _amount == uint(0) ? token.balanceOf(address(this)) : _amount;
 			require(amount <= token.balanceOf(address(this)), "Insufficient funds");
 			require(token.approve(_from, amount), "Token approval failed!");
@@ -104,7 +104,7 @@ contract CentroWallet is ContractCaller {
 	function send(address _from, address _token, address payable _to, uint256 _amount) payable external isMain isAuth(_from) onlyRole(Role.owner, _from){
 		require(isAuthorized[_from], "Unauthorized transfer.");
 		if (_token != Storage(store).getEthAddress()) {
-			IERC20Token token = IERC20Token(_token);
+			IERC20 token = IERC20(_token);
 			uint256 amount = _amount == uint(0) ? token.balanceOf(address(this)) : _amount;
 			require(amount <= token.balanceOf(address(this)), "Insufficient funds");
 			require(token.approve(_from, amount), "Token approval failed");
@@ -138,11 +138,11 @@ contract CentroWallet is ContractCaller {
 		onlyRole(Role.owner, _from)
 		returns (bytes memory) {
 		emit ContractCalled(_target, _data, _from);
-		return this._callContract(_target, _data);
+		return _callContract(_target, _data);
 	}
 
 	function approve(address _from, address _token, address _target, uint256 _amt) public isMain isAuth(_from) onlyRole(Role.owner, _from) {
-		this._approveToken(_token, _target, _amt); 
+		_approveToken(_token, _target, _amt); 
 	}
 
 }

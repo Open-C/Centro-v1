@@ -6,7 +6,9 @@ import "./Controllers/MentoConnector.sol";
 import "./Controllers/MoolaConnector.sol";
 import "./Controllers/UbeConnector.sol";
 
-contract CentroMain is MoolaConnector, ExchangeConnector, UbeConnector {
+contract CentroMain is MoolaConnector, MentoConnector, UbeCombined {
+
+	constructor(address _store, address _siphon) MoolaConnector(_store, _siphon) MentoConnector(_store, _siphon) UbeCombined(_store, _siphon) {}
 
 	function persistWallet(uint256 _walletID) public returns (string memory) {
 		address wallet;

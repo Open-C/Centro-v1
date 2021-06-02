@@ -3,7 +3,8 @@
 pragma solidity >0.5.0;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-
+import "./Storage.sol";
+import "./Wallet/CentroWallet.sol";
 
 contract WalletFactory is Types {
 	mapping(address => uint256[]) public addressToWalletIDs;
@@ -19,7 +20,7 @@ contract WalletFactory is Types {
 		store = Storage(_store);
 		numWallets = 0;
 		admin[msg.sender] = true;
-		siphonAddress = _siphon
+		siphonAddress = _siphon;
 	}
 
 	modifier adminOnly() {
@@ -78,11 +79,11 @@ contract WalletFactory is Types {
 		require(walletID != 0, "Provide a wallet id, or persist a wallet.");
 		address wallet;
 		string memory name;
-		(name, wallet) = super.getWallet(walletID);
+		(name, wallet) = getWallet(walletID);
 		return (CentroWallet(wallet));
 	}
 
-	function siphon(address _token, uint256 _earned, uint256 _walletID) internal returns (uint256 _siphoned) {
+	function _siphon(address _token, uint256 _earned, uint256 _walletID) internal returns (uint256 _siphoned) {
 		CentroWallet wallet = _getWallet(_walletID);
 		uint256 toSiphon = _earned * 0.10;
 		wallet.approve(msg.sender, _token, siphonAddress, toSiphon);
