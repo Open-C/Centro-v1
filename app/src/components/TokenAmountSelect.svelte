@@ -48,9 +48,9 @@
 		max={maxAmount}
 		placeholder="0"
 		clearButton
-		autofocus
 		{onBlur}
 	/>
+	<!-- autofocus -->
 
 	<!-- <Input
 		type="number"
