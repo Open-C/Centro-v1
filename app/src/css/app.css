@@ -12,6 +12,7 @@
 	--f7-button-small-height: 1.8em;
 
 	/* --f7-block-margin-vertical: 0; */
+	--f7-block-margin-vertical: 1.5em;
 
 	/* --f7-sheet-bg-color: rgba(0, 0, 0, 0.9); */
 
@@ -21,6 +22,8 @@
 	--f7-panel-backdrop-bg-color: rgba(0, 0, 0, 0.5);
 
 	--f7-page-master-width: 360px;
+
+	--f7-page-content-extra-padding-top: var(--f7-block-padding-vertical);
 
 	--f7-block-strong-bg-color: rgba(0, 0, 0, 0.05);
 
@@ -155,10 +158,10 @@ input {
 	padding-top: var(--f7-block-padding-vertical);
 	padding-bottom: var(--f7-block-padding-vertical);
 }
-.block:first-child {
+.block:first-child, .block-title:first-child, .list:first-child {
 	margin-top: 0;
 }
-.block:last-child {
+.block:last-child, .list:last-child {
 	margin-bottom: 0;
 }
 .block > * + * {
