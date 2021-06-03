@@ -25,6 +25,11 @@
 	--f7-block-strong-bg-color: rgba(0, 0, 0, 0.05);
 
 	--f7-sheet-height: auto;
+
+
+	--border-radius: 0.75rem;
+	--f7-block-inset-border-radius: var(--border-radius);
+	--f7-list-inset-border-radius: var(--border-radius);
 }
 :root .theme-dark {
 	/* --background-color: hsl(230deg 24% 15%); */
