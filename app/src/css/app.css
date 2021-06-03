@@ -183,8 +183,25 @@ input {
 }
 
 
-.sheet-modal {
+/* .sheet-modal {
 	position: fixed;
+} */
+.sheet-modal-bottom {
+	border-top-left-radius: var(--border-radius);
+	border-top-right-radius: var(--border-radius);
+	overflow: hidden;
+	left: 0.5em;
+	right: 0.5em;
+	width: auto;
+}
+.sheet-modal.sheet-modal-bottom:before {
+	content: '';
+	height: 0.5em;
+	width: 20%;
+	margin: 0.5em auto 0;
+	position: relative;
+	background-color: rgba(200, 200, 200, 0.3);
+	border-radius: 1em;
 }
 
 :root {
