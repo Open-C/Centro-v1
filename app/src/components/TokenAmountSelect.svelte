@@ -111,6 +111,6 @@
 		scaleSubSteps={2}
 		formatScaleLabel={value => value.toFixed(1)}
 	/>
-	<!-- style="--f7-range-knob-background-image: url('{token.image}')" -->
+	<!-- style="--f7-range-knob-background-image: url('{token.logoURI}')" -->
 	<!-- formatScaleLabel={value => value === maxAmount ? 'max' : value.toFixed(1)} -->
 {/if}

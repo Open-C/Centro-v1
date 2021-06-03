@@ -60,7 +60,7 @@
 		<Block>
 			<Row>
 				<h2>{transactionAction}</h2>
-				<span><img src={token.image} width="20" /> {amount} {token.symbol}</span>
+				<span><img src={token.logoURI} width="20" /> {amount} {token.symbol}</span>
 			</Row>
 			{#if fromAddress}
 				<Row><h3>From</h3> <Address address={fromAddress} /></Row>

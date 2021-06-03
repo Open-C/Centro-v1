@@ -1,36 +1,5 @@
 <script>
-	const availableTokens = [
-		{
-			name: 'Celo Gold',
-			symbol: 'CELO',
-			image: require('../../static/images/celo-icon.png').default
-		},
-		{
-			name: 'Celo Dollar',
-			symbol: 'cUSD',
-			image: require('../../static/images/cusd-icon.png').default
-		},
-		{
-			name: 'Celo Euro',
-			symbol: 'cEUR',
-			image: require('../../static/images/ceur-icon.png').default
-		},
-		{
-			name: 'Moola cUSD',
-			symbol: 'mcUSD',
-			image: require('../../static/images/cusd-icon.png').default
-		},
-		{
-			name: 'Moola cEUR',
-			symbol: 'mcEUR',
-			image: require('../../static/images/ceur-icon.png').default
-		},
-		{
-			name: 'Celo Moss Carbon Credit',
-			symbol: 'cMCO2',
-			image: require('../../static/images/celo-icon.png').default
-		}
-	]
+	import { tokens } from '../../data/tokens'
 
 
 	import { Page, Navbar, Block, NavTitle } from 'framework7-svelte'
@@ -52,6 +21,6 @@
 
 	
 	<TokenSwap
-		{availableTokens}
+		availableTokens={tokens}
 	/>
 </Page>

@@ -24,7 +24,7 @@
 	<Block inset strong>
 		<TokenSend
 			token={token}
-			maxAmount={tokenBalances[token.symbol].amount}
+			maxAmount={tokenBalances[token.symbol]?.amount}
 		/>
 	</Block>
 	<Block inset strong>

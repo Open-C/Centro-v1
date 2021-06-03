@@ -4,50 +4,45 @@
 	setContext('f7router', f7router)
 
 
-	const tokens = [
-		{
-			name: 'Celo Gold',
-			symbol: 'mCELO',
-			image: require('../../static/images/celo-icon.png').default,
-			color: '#fbcc5c',
+	import { tokensBySymbol } from '../../data/tokens'
+	
+	const depositBorrowRates = {
+		'mCELO': {
 			depositAPY: 0.0001,
 			borrowAPR: 0.0114,
 		},
-		{
-			name: 'Celo Dollar',
-			symbol: 'mcUSD',
-			image: require('../../static/images/cusd-icon.png').default,
-			color: '#54c49b',
+		'mcUSD': {
 			depositAPY: 0.0057,
 			borrowAPR: 0.0057,
 		},
-		{
-			name: 'Celo Euro',
-			symbol: 'mcEUR',
-			image: require('../../static/images/ceur-icon.png').default,
-			color: '#6e9fec',
+		'mcEUR': {
 			depositAPY: 0.0033,
 			borrowAPR: 0.0258
 		}
-	]
-
-	const mapping = {
-		'mCELO': 'CELO',
-		'mcUSD': 'cUSD',
-		'mcEUR': 'cEUR',
 	}
+
+	const moolaTokenPairs = Object.entries({
+		'CELO': 'mCELO',
+		'cUSD': 'mcUSD',
+		'cEUR': 'mcEUR',
+		// 'TEST': 'mTEST'
+	}).map(([base, wrapped]) => ({
+		baseToken: tokensBySymbol[base],
+		wrappedToken: tokensBySymbol[wrapped]
+	}))
+	console.log('moolaTokenPairs', moolaTokenPairs)
+		
 
 	import { tokenBalances } from '../../data/tokenBalances'
 	import { tokenPricesUSD } from '../../data/tokenPrices'
 
+	import { formatPercent } from '../../utils/formatPercent'
 
 	import { Page, Navbar, Block, BlockTitle, List, ListItem, AccordionContent, NavTitle, PieChart } from 'framework7-svelte'
 	import CurrentWallet from '../../components/CurrentWallet.svelte'
 	import TokenDepositOrWithdraw from '../../components/TokenDepositOrWithdraw.svelte'
-	
-	import { formatPercent } from '../../utils/formatPercent'
+	import TokenBorrowOrRepay from '../../components/TokenBorrowOrRepay.svelte'
 	import TabLayout from '../../components/TabLayout.svelte'
-import TokenBorrowOrRepay from '../../components/TokenBorrowOrRepay.svelte';
 </script>
 
 <Page>
@@ -75,10 +70,10 @@ import TokenBorrowOrRepay from '../../components/TokenBorrowOrRepay.svelte';
 				<div class="line">
 					<div class="chart">
 						<PieChart
-							datasets={tokens.map(token => ({
-								label: token.symbol,
-								value: tokenBalances[token.symbol].amount * tokenPricesUSD[token.symbol],
-								color: token.color,
+							datasets={moolaTokenPairs.map(({baseToken, wrappedToken}) => ({
+								label: wrappedToken.symbol,
+								value: tokenBalances[wrappedToken.symbol]?.amount * tokenPricesUSD[wrappedToken.symbol],
+								color: wrappedToken.color,
 							}))}
 							tooltip
 							size={30}
@@ -93,23 +88,23 @@ import TokenBorrowOrRepay from '../../components/TokenBorrowOrRepay.svelte';
 			<BlockTitle medium>Deposited Assets</BlockTitle>
 
 			<List accordionList inset>
-				{#each tokens as token}
+				{#each moolaTokenPairs as {baseToken, wrappedToken}}
 					<ListItem accordionItem
-						title={token.name}
-						footer="{tokenBalances[token.symbol].amount} {token.symbol}"
+						title={wrappedToken.name}
+						footer="{tokenBalances[wrappedToken.symbol]?.amount} {wrappedToken.symbol}"
 					>
-						<img slot="media" src={token.image} height="40" />
+						<img slot="media" src={wrappedToken.logoURI} height="40" />
 
 						<svelte:fragment slot="after">
-							APY:&nbsp;<strong>{formatPercent(token.depositAPY)}</strong>
+							APY:&nbsp;<strong>{formatPercent(depositBorrowRates[wrappedToken.symbol].depositAPY)}</strong>
 						</svelte:fragment>
 
 						<AccordionContent>
 							<TokenDepositOrWithdraw
-								depositToken={{...token, symbol: mapping[token.symbol]}}
-								maxDepositAmount={tokenBalances[mapping[token.symbol]].amount}
-								withdrawToken={token}
-								maxWithdrawAmount={tokenBalances[token.symbol].amount}
+								depositToken={baseToken}
+								maxDepositAmount={tokenBalances[baseToken.symbol]?.amount}
+								withdrawToken={wrappedToken}
+								maxWithdrawAmount={tokenBalances[wrappedToken.symbol]?.amount}
 							/>
 						</AccordionContent>
 					</ListItem>
@@ -121,20 +116,20 @@ import TokenBorrowOrRepay from '../../components/TokenBorrowOrRepay.svelte';
 					<ListItem accordionItem
 						title={token.name}
 						footer={token.symbol}
-						after={tokenBalances[token.symbol].amount}
+						after={tokenBalances[baseToken.symbol]?.amount}
 					>
-						<img slot="media" src={token.image} height="40" />
+						<img slot="media" src={token.logoURI} height="40" />
 
 						<svelte:fragment slot="header">
-							APY:&nbsp;<strong>{formatPercent(token.depositAPY)}</strong>
+							APY:&nbsp;<strong>{formatPercent(depositBorrowRates[token.symbol].depositAPY)}</strong>
 						</svelte:fragment>
 
 						<AccordionContent>
 							<TokenDepositOrWithdraw
-								depositToken={{...token, symbol: mapping[token.symbol]}}
-								maxDepositAmount={tokenBalances[mapping[token.symbol]].amount}
-								withdrawToken={token}
-								maxWithdrawAmount={tokenBalances[token.symbol].amount}
+								depositToken={baseToken}
+								maxDepositAmount={tokenBalances[baseToken.symbol]?.amount}
+								withdrawToken={wrappedToken}
+								maxWithdrawAmount={tokenBalances[wrappedToken.symbol]?.amount}
 							/>
 						</AccordionContent>
 					</ListItem>
@@ -145,20 +140,20 @@ import TokenBorrowOrRepay from '../../components/TokenBorrowOrRepay.svelte';
 				{#each tokens as token}
 					<ListItem accordionItem
 						title={token.name}
-						after="{tokenBalances[token.symbol].amount} {token.symbol}"
+						after="{tokenBalances[baseToken.symbol]?.amount} {baseToken.symbol}"
 					>
-						<img slot="media" src={token.image} height="40" />
+						<img slot="media" src={token.logoURI} height="40" />
 
 						<svelte:fragment slot="footer">
-							APY:&nbsp;<strong>{formatPercent(token.depositAPY)}</strong>
+							APY:&nbsp;<strong>{formatPercent(depositBorrowRates[token.symbol].depositAPY)}</strong>
 						</svelte:fragment>
 
 						<AccordionContent>
 							<TokenDepositOrWithdraw
-								depositToken={{...token, symbol: mapping[token.symbol]}}
-								maxDepositAmount={tokenBalances[mapping[token.symbol]].amount}
-								withdrawToken={token}
-								maxWithdrawAmount={tokenBalances[token.symbol].amount}
+								depositToken={baseToken}
+								maxDepositAmount={tokenBalances[baseToken.symbol]?.amount}
+								withdrawToken={wrappedToken}
+								maxWithdrawAmount={tokenBalances[wrappedToken.symbol]?.amount}
 							/>
 						</AccordionContent>
 					</ListItem>
@@ -171,10 +166,10 @@ import TokenBorrowOrRepay from '../../components/TokenBorrowOrRepay.svelte';
 				<div class="line">
 					<div class="chart">
 						<PieChart
-							datasets={tokens.map(token => ({
-								label: token.symbol,
-								value: tokenBalances[token.symbol].amount * tokenPricesUSD[token.symbol],
-								color: token.color,
+							datasets={moolaTokenPairs.map(({baseToken, wrappedToken}) => ({
+								label: baseToken.symbol,
+								value: tokenBalances[baseToken.symbol]?.amount * tokenPricesUSD[baseToken.symbol],
+								color: baseToken.color,
 							}))}
 							tooltip
 							size={30}
@@ -192,22 +187,22 @@ import TokenBorrowOrRepay from '../../components/TokenBorrowOrRepay.svelte';
 			<BlockTitle medium>Borrowed Assets</BlockTitle>
 
 			<List accordionList inset>
-				{#each tokens as token}
+				{#each moolaTokenPairs as {baseToken, wrappedToken}}
 					<ListItem accordionItem
-						title={token.name}
-						footer="{tokenBalances[token.symbol].amount} {token.symbol}"
+						title={baseToken.name}
+						footer="{tokenBalances[baseToken.symbol]?.amount} {baseToken.symbol}"
 					>
-						<img slot="media" src={token.image} height="40" />
+						<img slot="media" src={baseToken.logoURI} height="40" />
 
 						<svelte:fragment slot="after">
-							APR:&nbsp;<strong>{formatPercent(token.borrowAPR)}</strong>
+							APR:&nbsp;<strong>{formatPercent(depositBorrowRates[wrappedToken.symbol].borrowAPR)}</strong>
 						</svelte:fragment>
 
 						<AccordionContent>
 							<TokenBorrowOrRepay
-								{token}
+								token={baseToken}
 								maxBorrowAmount={100}
-								maxRepayAmount={tokenBalances[token.symbol].amount}
+								maxRepayAmount={tokenBalances[baseToken.symbol]?.amount}
 							/>
 						</AccordionContent>
 					</ListItem>

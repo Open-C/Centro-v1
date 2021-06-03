@@ -1,9 +1,7 @@
 <script>
-	export let token = {
-		name: 'Celo Gold',
-		symbol: 'CELO',
-		image: require('../static/images/celo-icon.png').default
-	}
+	import { tokensBySymbol } from '../data/tokens'
+
+	export let token = tokensBySymbol['CELO']
 
 
 	$: data = [

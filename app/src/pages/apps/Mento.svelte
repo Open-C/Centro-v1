@@ -1,24 +1,5 @@
 <script>
-	const availableTokens = [
-		{
-			name: 'Celo Gold',
-			symbol: 'CELO',
-			image: require('../../static/images/celo-icon.png').default,
-			color: '#fbcc5c'
-		},
-		{
-			name: 'Celo Dollar',
-			symbol: 'cUSD',
-			image: require('../../static/images/cusd-icon.png').default,
-			color: '#54c49b'
-		},
-		{
-			name: 'Celo Euro',
-			symbol: 'cEUR',
-			image: require('../../static/images/ceur-icon.png').default,
-			color: '#6e9fec'
-		}
-	]
+	import { baseTokens } from '../../data/tokens'
 
 
 	let fromToken
@@ -47,6 +28,6 @@
 	<TokenSwap
 		bind:fromToken
 		bind:toToken
-		{availableTokens}
+		availableTokens={baseTokens}
 	/>
 </Page>

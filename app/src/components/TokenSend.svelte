@@ -1,6 +1,7 @@
 <script>
 	export let token
 	export let maxAmount
+	export let availableTokens
 
 
 	const transactionAction = 'Send'
@@ -21,6 +22,7 @@
 <TokenAmountSelect
 	action={transactionAction}
 	{token}
+	{availableTokens}
 	{maxAmount}
 	bind:amount
 />

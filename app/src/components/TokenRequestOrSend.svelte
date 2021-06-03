@@ -4,7 +4,7 @@
 
 	import { tokenBalances } from '../data/tokenBalances'
 
-	let maxAmount = tokenBalances[token.symbol].amount
+	let maxAmount = tokenBalances[token.symbol]?.amount
 
 
 	import { Block } from 'framework7-svelte'

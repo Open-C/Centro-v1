@@ -149,9 +149,9 @@
 				<ListItem accordionItem
 					title={token.name}
 					footer={token.symbol}
-					after={tokenBalances[token.symbol].amount}
+					after={tokenBalances[token.symbol]?.amount || 0}
 				>
-					<img slot="media" src={token.image} height="40" />
+					<img slot="media" src={token.logoURI} height="40" />
 					<AccordionContent>
 						<TokenRequestOrSend {token} />
 					</AccordionContent>
@@ -185,7 +185,7 @@
 			<Icon slot="media" f7="creditcard_fill" />
 			<AccordionContent>
 				<Block>
-					<TokenSend availableTokens={baseAssets} />
+					<TokenSend availableTokens={baseTokens} />
 				</Block>
 			</AccordionContent>
 		</ListItem>
@@ -199,7 +199,7 @@
 				footer={new Date(transaction.timestamp).toLocaleDateString()}
 				after="${transaction.price}"
 			>
-				<img slot="media" src={transaction.token.image} height="40" />
+				<img slot="media" src={transaction.token.logoURI} height="40" />
 				<AccordionContent>
 					<Block>
 						<Button fill>View in Block Explorer</Button>
