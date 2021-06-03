@@ -105,8 +105,8 @@
 		<!-- Tabbar for switching views-tabs -->
 		<Toolbar tabbar labels bottom>
 			<Link tabLink="#view-assets" iconIos="f7:money_dollar_circle" iconAurora="f7:money_dollar_circle" iconMd="f7:money_dollar_circle" text="Assets" />
-			<Link tabLink="#view-apps" tabLinkActive iconIos="f7:house_fill" iconAurora="f7:house_fill" iconMd="material:home" text="Apps" />
-			<Link tabLink="#view-settings" iconIos="f7:gear" iconAurora="f7:gear" iconMd="material:settings" text="Settings" />
+			<Link tabLink="#view-apps" tabLinkActive iconIos="f7:house" iconAurora="f7:house" iconMd="material:home" text="Apps" />
+			<Link tabLink="#view-settings" iconIos="f7:gear_alt" iconAurora="f7:gear_alt" iconMd="material:settings" text="Settings" />
 		</Toolbar>
 
 		<!-- Assets View -->
