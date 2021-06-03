@@ -25,17 +25,10 @@
 	let toToken
 
 
-	const today = new Date()
-	const year = today.getFullYear()
-	const month = today.getMonth()
-	const dates = Array.from({length: 4}).map((_, i) => new Date(year, month - (3 - i)))
-	const axisDateFormat = Intl.DateTimeFormat(undefined, { month: 'short', year: 'numeric' });
-	const tooltipDateFormat = Intl.DateTimeFormat(undefined, { month: 'long', year: 'numeric' });
-
-
-	import { Page, Navbar, Block, AreaChart } from 'framework7-svelte'
+	import { Page, Navbar, Block } from 'framework7-svelte'
 	import CurrentWallet from '../../components/CurrentWallet.svelte'
 	import TokenSwap from '../../components/TokenSwap.svelte'
+	import PriceChart from '../../components/PriceChart.svelte'
 </script>
 
 <Page>
@@ -47,22 +40,7 @@
 
 	<Block strong inset>
 		{#if fromToken}
-			<AreaChart
-				axis
-				axisLabels={dates}
-				legend
-				lineChart
-				formatAxisLabel={(date) => axisDateFormat.format(date)}
-				formatTooltipAxisLabel={(date) => tooltipDateFormat.format(date)}
-				datasets={[
-					{
-						label: fromToken.symbol,
-						color: fromToken.color,
-						values: [0, 100, 250, 300, 175, 400],
-					}
-				]}
-			/>
-			<!-- toggleDatasets -->
+			<PriceChart token={fromToken} />
 		{/if}
 	</Block>
 
