@@ -73,7 +73,7 @@
 	/> -->
 	{#if availableTokens}
 		<TokenSelect
-			bind:token
+			bind:selectedToken={token}
 			{availableTokens}
 		/>
 	{:else}
