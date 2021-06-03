@@ -50,9 +50,8 @@
 		</svelte:fragment>
 	</Navbar>
 
-	<Block strong inset>
-		<TokenSwap
-			{availableTokens}
-		/>
-	</Block>
+	
+	<TokenSwap
+		{availableTokens}
+	/>
 </Page>

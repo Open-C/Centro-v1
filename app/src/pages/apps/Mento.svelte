@@ -66,11 +66,9 @@
 		{/if}
 	</Block>
 
-	<Block strong inset>
-		<TokenSwap
-			bind:fromToken
-			bind:toToken
-			{availableTokens}
-		/>
-	</Block>
+	<TokenSwap
+		bind:fromToken
+		bind:toToken
+		{availableTokens}
+	/>
 </Page>
