@@ -69,7 +69,7 @@
 	</Navbar>
 
 	{#each sections as {title, data: tokens}}
-		<BlockTitle>{title}</BlockTitle>
+		<BlockTitle medium>{title}</BlockTitle>
 
 		<List accordionList inset>
 			{#each tokens as token}

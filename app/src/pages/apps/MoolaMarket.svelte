@@ -70,7 +70,7 @@ import TokenBorrowOrRepay from '../../components/TokenBorrowOrRepay.svelte';
 		let:tab
 	>
 		{#if tab === 'lending'}
-			<BlockTitle>Total Deposited: $100</BlockTitle>
+			<BlockTitle medium>Total Deposited: $100</BlockTitle>
 			<Block inset strong>
 				<div class="line">
 					<div class="chart">
@@ -90,7 +90,7 @@ import TokenBorrowOrRepay from '../../components/TokenBorrowOrRepay.svelte';
 				</div>
 			</Block>
 
-			<BlockTitle>Deposited Assets</BlockTitle>
+			<BlockTitle medium>Deposited Assets</BlockTitle>
 
 			<List accordionList inset>
 				{#each tokens as token}
@@ -166,7 +166,7 @@ import TokenBorrowOrRepay from '../../components/TokenBorrowOrRepay.svelte';
 			</List> -->
 
 		{:else if tab === 'borrowing'}
-			<BlockTitle>Total Borrowed: $0</BlockTitle>
+			<BlockTitle medium>Total Borrowed: $0</BlockTitle>
 			<Block inset strong>
 				<div class="line">
 					<div class="chart">
@@ -189,7 +189,7 @@ import TokenBorrowOrRepay from '../../components/TokenBorrowOrRepay.svelte';
 				</div>
 			</Block>
 
-			<BlockTitle>Borrowed Assets</BlockTitle>
+			<BlockTitle medium>Borrowed Assets</BlockTitle>
 
 			<List accordionList inset>
 				{#each tokens as token}

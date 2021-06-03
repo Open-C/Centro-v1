@@ -39,7 +39,7 @@
 	{/each} -->
 
 	{#if $pollenCircles.length}
-		<BlockTitle>Circle Balances: {972.65}</BlockTitle>
+		<BlockTitle medium>Circle Balances: {972.65}</BlockTitle>
 		<List inset
 			sortable
 			sortableTapHold
