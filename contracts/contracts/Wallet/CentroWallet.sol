@@ -76,7 +76,7 @@ contract CentroWallet is ContractCaller {
 	function deposit(address _from, address _token, uint256 _amount) payable external isMain isAuth(_from) excludeRole(_from, Role.beneficiary){
 		if (_token != Storage(store).getEthAddress()) {
 			IERC20 token = IERC20(_token);
-			require(_amount <= token.balanceOf(address(this)), "Not enough moneys.");
+			//require(_amount <= token.balanceOf(address(this)), "Not enough moneys.");
 			token.transferFrom(_from, address(this), _amount);
 		} // else, celo was sent and is auto-deposited
 		if (deposited[_token] == 0) {
