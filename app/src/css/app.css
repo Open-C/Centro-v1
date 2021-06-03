@@ -227,7 +227,12 @@ input {
 	list-style-type: none;
 }
 
-.list.inline-smart-select {
+
+/* .smart-select select {
+	display: initial;
+} */
+
+/* .list.inline-smart-select {
 	margin: 0;
 	font: inherit;
 }
@@ -237,10 +242,15 @@ input {
 .list.inline-smart-select .item-after {
 	color: inherit;
 	max-width: initial;
-    overflow: initial;
+	overflow: initial;
 	padding: 0;
 	padding-right: 0.2em;
-}
+} */
+
+
+/* .navbar .title-large-text {
+	text-align: center;
+} */
 
 
 a, area, button, input, label, select, summary, textarea, [tabindex] {
