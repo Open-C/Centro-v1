@@ -1,96 +1,62 @@
 <script>
+	import { tokensBySymbol, baseTokens, ethereumTokens, otherTokens } from '../data/tokens'
+
+
 	const sections = [
 		{
 			title: 'Celo Native Assets',
-			data: [
-				{
-					name: 'Celo Gold',
-					symbol: 'CELO',
-					image: require('../static/images/celo-icon.png').default
-				},
-				{
-					name: 'Celo Dollar',
-					symbol: 'cUSD',
-					image: require('../static/images/cusd-icon.png').default
-				},
-				{
-					name: 'Celo Euro',
-					symbol: 'cEUR',
-					image: require('../static/images/ceur-icon.png').default
-				}
-			]
+			data: baseTokens,
 		},
+		// {
+		// 	title: 'Ethereum Assets',
+		// 	data: ethereumTokens,
+		// },
 		{
 			title: 'Other Assets',
-			data: [
-				{
-					name: 'Moola CELO',
-					symbol: 'mCELO',
-					image: require('../static/images/celo-icon.png').default
-				},
-				{
-					name: 'Moola cUSD',
-					symbol: 'mcUSD',
-					image: require('../static/images/cusd-icon.png').default
-				},
-				{
-					name: 'Moola cEUR',
-					symbol: 'mcEUR',
-					image: require('../static/images/ceur-icon.png').default
-				},
-				{
-					name: 'Celo Moss Carbon Credit',
-					symbol: 'cMCO2',
-					image: require('../static/images/celo-icon.png').default
-				}
-			]
+			data: otherTokens
 		}
 	]
-
-	const baseAssets = sections[0].data
-
-	import { tokenBalances } from '../data/tokenBalances'
 
 
 	let transactions = [
 		{
 			action: 'Send',
-			token: baseAssets[0],
+			token: tokensBySymbol['CELO'],
 			amount: 10,
 			price: 10,
 			timestamp: 1612345678901
 		},
 		{
 			action: 'Withdraw',
-			token: baseAssets[1],
+			token: tokensBySymbol['cUSD'],
 			amount: 11,
 			price: 11.23,
 			timestamp: 1622345678901
 		},
 		{
 			action: 'Deposit',
-			token: baseAssets[2],
+			token: tokensBySymbol['cEUR'],
 			amount: 600,
 			price: 4.5,
 			timestamp: 1621234567890
 		},
 		{
 			action: 'Sell',
-			token: baseAssets[0],
+			token: tokensBySymbol['CELO'],
 			amount: 10,
 			price: 10,
 			timestamp: 1622345678901
 		},
 		{
 			action: 'Buy',
-			token: baseAssets[1],
+			token: tokensBySymbol['cUSD'],
 			amount: 100,
 			price: 20.09,
 			timestamp: 1622345678901
 		},
 		{
 			action: 'Receive',
-			token: baseAssets[2],
+			token: tokensBySymbol['cEUR'],
 			amount: 10,
 			price: 235,
 			timestamp: 1622345678901
@@ -103,6 +69,7 @@
 
 	import { Page, Navbar, NavLeft, NavTitle, NavTitleLarge, NavRight, Link, Toolbar, Block, BlockTitle, List, ListItem, Row, Col, Button, AccordionContent, Card, Progressbar, Icon } from 'framework7-svelte'
 	import CurrentWallet from '../components/CurrentWallet.svelte'
+	import TokenList from '../components/TokenList.svelte'
 	import TokenSend from '../components/TokenSend.svelte'
 	import TokenRequestOrSend from '../components/TokenRequestOrSend.svelte'
 	import PriceChart from '../components/PriceChart.svelte'
@@ -144,20 +111,14 @@
 	{#each sections as {title, data: tokens}}
 		<BlockTitle medium>{title}</BlockTitle>
 
-		<List accordionList inset>
-			{#each tokens as token}
-				<ListItem accordionItem
-					title={token.name}
-					footer={token.symbol}
-					after={tokenBalances[token.symbol]?.amount || 0}
-				>
-					<img slot="media" src={token.logoURI} height="40" />
-					<AccordionContent>
-						<TokenRequestOrSend {token} />
-					</AccordionContent>
-				</ListItem>
-			{/each}
-		</List>
+		<TokenList accordionList
+			{tokens}
+			let:token
+		>
+			<AccordionContent>
+				<TokenRequestOrSend {token} />
+			</AccordionContent>
+		</TokenList>
 	{/each}
 
 	<BlockTitle medium>Deposit/Withdraw</BlockTitle>
@@ -195,9 +156,10 @@
 	<List accordionList inset>
 		{#each transactions as transaction}
 			<ListItem accordionItem
+				header={new Date(transaction.timestamp).toLocaleDateString()}
 				title="{actionVerbs[transaction.action].pastTense} {transaction.amount} {transaction.token.symbol}"
-				footer={new Date(transaction.timestamp).toLocaleDateString()}
-				after="${transaction.price}"
+				footer="Price: {transaction.price}"
+				after="${transaction.price * transaction.amount}"
 			>
 				<img slot="media" src={transaction.token.logoURI} height="40" />
 				<AccordionContent>
