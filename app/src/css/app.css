@@ -21,9 +21,28 @@
 	--f7-panel-backdrop-bg-color: rgba(0, 0, 0, 0.5);
 
 	--f7-page-master-width: 360px;
+
+	--f7-block-strong-bg-color: rgba(0, 0, 0, 0.05);
 }
 :root .theme-dark {
-	--f7-block-strong-bg-color: #30303099;
+	/* --background-color: hsl(230deg 24% 15%); */
+	/* --background-color: hsl(230deg 28% 25%); */
+	--background-color: hsl(229deg 26% 21%);
+	/* --foreground-color: #30303099; */
+	/* --foreground-color: hsl(229deg 26% 21%); */
+	--foreground-color: hsl(230deg 24% 16%);
+
+	
+	--f7-page-bg-color: var(--background-color);
+
+	--f7-card-bg-color: var(--foreground-color);
+	--f7-block-strong-bg-color: var(--foreground-color);
+	--f7-card-expandable-bg-color: var(--foreground-color);
+	--f7-list-bg-color: var(--foreground-color);
+	--f7-toolbar-bg-color: var(--foreground-color);
+	--f7-bars-bg-color: var(--foreground-color);
+
+	--f7-navbar-bg-color: var(--foreground-color);
 }
 
 * {
