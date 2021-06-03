@@ -70,6 +70,8 @@
 			{/if}
 		</Block>
 
+		<hr>
+
 		<Block>
 			{#if status === 'created'}
 				<Button large fill onClick={() => transactionStore.dispatch('sign')}>Sign Transaction</Button>
@@ -94,11 +96,11 @@
 					<Icon f7="checkmark_circle_fill" color="green" />
 					<strong>Transaction confirmed!</strong>
 				</p>
-				<Button fill onClick={() => f7router.navigate('/explorer/', { props: transactionID })} sheetClose>View Transaction</Button>
-				<Button fill sheetClose>Done</Button>
+				<Button large fill onClick={() => f7router.navigate('/explorer/', { props: transactionID })} sheetClose>View Transaction</Button>
+				<Button medium fill sheetClose>Done</Button>
 			{/if}
 		</Block>
 	</div>
 
-	<!-- <div>Extra CContent</div> -->
+	<!-- <div>Extra Content</div> -->
 </Sheet>
