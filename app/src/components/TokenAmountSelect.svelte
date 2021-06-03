@@ -7,27 +7,30 @@
 
 
 	export let showSlider = true
-	// let isFocused = false
-	// let textInputValue = String(amount)
 
 
-	// $: {
-	// 	const parsedAmount = Math.min(parseFloat(textInputValue), maxAmount)
-	// 	if(Number.isFinite(parsedAmount))
-	// 		amount = parsedAmount
-	// }
+	let sheetComponent
+	$: sheet = sheetComponent?.instance()
+
+
+	let isFocused = false
+
+	$: if(sheet) isFocused ? sheet.open() : sheet.close()
+
+	function onFocus(){
+		isFocused = true
+	}
 
 	function onBlur(){
+		isFocused = false
+
 		const parsedAmount = Math.min(parseFloat(amount), maxAmount ?? Infinity)
 		if(Number.isFinite(parsedAmount))
 			amount = parsedAmount
 	}
 
-	// $: if(!isFocused)
-	// 	textInputValue = String(amount)
 
-
-	import { Row, Button, Range, Input } from 'framework7-svelte'
+	import { Block, Row, Button, Range, Input, Toolbar, Sheet } from 'framework7-svelte'
 	import TokenSelect from './TokenSelect.svelte'
 </script>
 
@@ -54,6 +57,7 @@
 		max={maxAmount}
 		placeholder="0"
 		clearButton
+		{onFocus}
 		{onBlur}
 	/>
 	<!-- autofocus -->
@@ -78,13 +82,24 @@
 </div>
 
 {#if showSlider}
-	<!-- <Row>
-		<Button small fill color="gray" onClick={() => amount = 0.10 * maxAmount}>10%</Button>
-		<Button small fill color="gray" onClick={() => amount = 0.25 * maxAmount}>25%</Button>
-		<Button small fill color="gray" onClick={() => amount = 0.50 * maxAmount}>50%</Button>
-		<Button small fill color="gray" onClick={() => amount = 0.75 * maxAmount}>75%</Button>
-		<Button small fill color="gray" onClick={() => amount = 1.00 * maxAmount}>max</Button>
-	</Row> -->
+	{#if maxAmount}
+		<Sheet
+			bind:this={sheetComponent}
+			class="buttons-sheet"
+			push
+		>
+		<!-- opened={isFocused || undefined} -->
+			<Block>
+				<Row>
+					<Button small fill color="gray" onClick={e => {amount = 0.10 * maxAmount; e.preventDefault()}}>10%</Button>
+					<Button small fill color="gray" onClick={() => amount = 0.25 * maxAmount}>25%</Button>
+					<Button small fill color="gray" onClick={() => amount = 0.50 * maxAmount}>50%</Button>
+					<Button small fill color="gray" onClick={() => amount = 0.75 * maxAmount}>75%</Button>
+					<Button small fill color="gray" onClick={() => amount = 1.00 * maxAmount}>max</Button>
+				</Row>
+			</Block>
+		</Sheet>
+	{/if}
 
 	<Range
 		value={amount} onRangeChange={_ => amount = _}
