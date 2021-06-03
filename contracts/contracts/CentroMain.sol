@@ -6,9 +6,9 @@ import "./Controllers/MentoConnector.sol";
 import "./Controllers/MoolaConnector.sol";
 import "./Controllers/UbeConnector.sol";
 
-contract CentroMain is MoolaConnector, MentoConnector, UbeCombined {
+contract CentroMain is UbeCombined {
 
-	constructor(address _store, address _siphon) MoolaConnector(_store, _siphon) MentoConnector(_store, _siphon) UbeCombined(_store, _siphon) {}
+	constructor(address _store, address _siphonAddress) UbeCombined(_store, _siphonAddress) {}
 
 	function persistWallet(uint256 _walletID) public returns (string memory) {
 		address wallet;
@@ -36,7 +36,7 @@ contract CentroMain is MoolaConnector, MentoConnector, UbeCombined {
 
 	function deposit(address _token, uint256 _amount, uint256 _walletID) external payable {
 		CentroWallet wallet = _getWallet(_walletID);
-		wallet.deposit.value(msg.value)(msg.sender, _token, _amount);
+		wallet.deposit(msg.sender, _token, _amount);
 	}
 
 	function encodeSelector(bytes memory selector) private pure returns (bytes4) {
@@ -51,14 +51,14 @@ contract CentroMain is MoolaConnector, MentoConnector, UbeCombined {
 	function send(address _token, uint256 _receiver, uint256 _amount, uint256 _walletID) payable external {
 		CentroWallet from = _getWallet(_walletID);
 		CentroWallet to = _getWallet(_receiver);
-		from.send(msg.sender, _token, address(uint160(address(to))), _amount);
+		from.send(msg.sender, _token, address(to), _amount);
 		to.incrementBasis(_token, _amount);
 	}
 
-	function callContract(string calldata _connector, bytes calldata _calldata, uint256 _walletID) external {
-		address target = store.getConnector(_connector);
-		require(target != address(0), "Not a valid connector name");
-		CentroWallet wallet = _getWallet(_walletID);
-		wallet.callContract(msg.sender, target, _calldata);
-	}
+	// function callContract(string calldata _connector, bytes calldata _calldata, uint256 _walletID) external {
+	// 	address target = store.getAddress(_connector);
+	// 	require(target != address(0), "Not a valid connector name");
+	// 	CentroWallet wallet = _getWallet(_walletID);
+	// 	wallet.callContract(msg.sender, target, _calldata);
+	// }
 }

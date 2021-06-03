@@ -18,7 +18,7 @@ abstract contract ContractCaller {
 		return returnData;
 	}
 
-	function _callContract(address payable _target, bytes memory _calldata) internal returns (bytes memory response) {
+	function _callContract(address _target, bytes memory _calldata) internal returns (bytes memory response) {
 		require(_target != address(0), "Target invalid!");
 		(bool success, bytes memory returnData) = _target.call(_calldata);
 
@@ -30,7 +30,7 @@ abstract contract ContractCaller {
 		return returnData;
 	}
 
-	function _approveToken(address _token, address payable _toApprove, uint256 _amt) internal {
+	function _approveToken(address _token, address _toApprove, uint256 _amt) internal {
 		require(_token != address(0), "Invalid token address");
 		require(_toApprove != address(0), "Invalid approvee");
 		IERC20(_token).approve(_toApprove, _amt);

@@ -85,32 +85,34 @@ contract CentroWallet is ContractCaller {
 		deposited[_token] += _amount;
 	}
 
-	function withdraw(address payable _from, address _token, uint256 _amount) external isMain isAuth(_from) onlyRole(Role.owner, _from){
+	function withdraw(address _from, address _token, uint256 _amount) external isMain isAuth(_from) onlyRole(Role.owner, _from){
 		require(isAuthorized[_from], "Unauthorized withdraw");
+		IERC20 token = IERC20(_token);
+
 		if (_token != Storage(store).getEthAddress()) {
-			IERC20 token = IERC20(_token);
 			uint256 amount = _amount == uint(0) ? token.balanceOf(address(this)) : _amount;
 			require(amount <= token.balanceOf(address(this)), "Insufficient funds");
 			require(token.approve(_from, amount), "Token approval failed!");
 			token.transfer(_from, amount);
 		} else {
-			_from.transfer(_amount);
+			token.transfer(_from, _amount);
 			
 		}
 
 		deposited[_token] -= _amount;
 	}
 
-	function send(address _from, address _token, address payable _to, uint256 _amount) payable external isMain isAuth(_from) onlyRole(Role.owner, _from){
+	function send(address _from, address _token, address _to, uint256 _amount) payable external isMain isAuth(_from) onlyRole(Role.owner, _from){
 		require(isAuthorized[_from], "Unauthorized transfer.");
+		IERC20 token = IERC20(_token);
+
 		if (_token != Storage(store).getEthAddress()) {
-			IERC20 token = IERC20(_token);
 			uint256 amount = _amount == uint(0) ? token.balanceOf(address(this)) : _amount;
 			require(amount <= token.balanceOf(address(this)), "Insufficient funds");
-			require(token.approve(_from, amount), "Token approval failed");
-			token.transfer(_from, amount);
+			require(token.approve(_to, amount), "Token approval failed");
+			token.transfer(_to, amount);
 		} else {
-			_to.transfer(_amount);
+			token.transfer(_to, _amount);
 			// (bool success, ) = _from.call.value(_amount)("");
 			// require(success, "payment failed");
 		}

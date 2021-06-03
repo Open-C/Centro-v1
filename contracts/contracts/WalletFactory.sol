@@ -16,11 +16,11 @@ contract WalletFactory is Types {
 	Storage store;
 	
 	
-	constructor (address _store, address _siphon) public {
+	constructor (address _store, address _siphonAddress) public {
 		store = Storage(_store);
 		numWallets = 0;
 		admin[msg.sender] = true;
-		siphonAddress = _siphon;
+		siphonAddress = _siphonAddress;
 	}
 
 	modifier adminOnly() {
@@ -85,7 +85,7 @@ contract WalletFactory is Types {
 
 	function _siphon(address _token, uint256 _earned, uint256 _walletID) internal returns (uint256 _siphoned) {
 		CentroWallet wallet = _getWallet(_walletID);
-		uint256 toSiphon = _earned * 0.10;
+		uint256 toSiphon = _earned / 10;
 		wallet.approve(msg.sender, _token, siphonAddress, toSiphon);
 		IERC20(_token).transferFrom(address(wallet), siphonAddress, toSiphon);
 		_siphoned = toSiphon;

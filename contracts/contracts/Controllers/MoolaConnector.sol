@@ -21,7 +21,9 @@ interface ILendingPool {
         );
 }
 
-contract MoolaConnector is WalletFactory {
+abstract contract MoolaConnector is WalletFactory {
+
+	constructor(address _store, address _siphonAddress) WalletFactory(_store, _siphonAddress) {}
 
 	string private constant mDEPOSIT = "deposit(address,uint256,uint16)";
 	string private constant mREDEEM = "redeem(uint256)";
@@ -51,9 +53,9 @@ contract MoolaConnector is WalletFactory {
 		if (_token == store.getEthAddress()) {
 		    value = _amount;
 		} else {
-		    wallet.approve(msg.sender, _token, _getPoolCore, _amount);
+		    wallet.approve(msg.sender, _token, address(_getPoolCore()), _amount);
 		}
-		wallet.callContract(msg.sender, address(moola), value, data);
+		wallet.callContract(msg.sender, address(moola), data);
 	}
 	
 	function moolaWithdraw(address _token, uint256 _amount, uint256 _walletID) external payable {
