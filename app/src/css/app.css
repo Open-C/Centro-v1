@@ -23,6 +23,8 @@
 	--f7-page-master-width: 360px;
 
 	--f7-block-strong-bg-color: rgba(0, 0, 0, 0.05);
+
+	--f7-sheet-height: auto;
 }
 :root .theme-dark {
 	/* --background-color: hsl(230deg 24% 15%); */
