@@ -1,5 +1,9 @@
 <script>
-	export let token
+	export let token = {
+		name: 'Celo Gold',
+		symbol: 'CELO',
+		image: require('../static/images/celo-icon.png').default
+	}
 
 
 	$: data = [
