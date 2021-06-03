@@ -31,16 +31,19 @@
 	/* --foreground-color: #30303099; */
 	/* --foreground-color: hsl(229deg 26% 21%); */
 	--foreground-color: hsl(230deg 24% 16%);
+	--foreground-color: hsl(230deg 24% 17%);
+	--foreground-color-relative: hsla(230deg 24% 8% / 0.25);
 
 	
 	--f7-page-bg-color: var(--background-color);
 
-	--f7-card-bg-color: var(--foreground-color);
-	--f7-block-strong-bg-color: var(--foreground-color);
+	--f7-card-bg-color: var(--foreground-color-relative);
+	--f7-block-strong-bg-color: var(--foreground-color-relative);
 	--f7-card-expandable-bg-color: var(--foreground-color);
 	--f7-list-bg-color: var(--foreground-color);
 	--f7-toolbar-bg-color: var(--foreground-color);
 	--f7-bars-bg-color: var(--foreground-color);
+	--f7-sheet-bg-color: var(--foreground-color);
 
 	--f7-navbar-bg-color: var(--foreground-color);
 }
