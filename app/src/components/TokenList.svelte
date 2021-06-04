@@ -26,8 +26,7 @@
 	{#each tokens as token}
 		<ListItem accordionItem={$$props.accordionList}
 			title={token.name}
-			footer={token.symbol}
-			after={tokenBalances[token.symbol]?.amount || 0}
+			footer="{tokenBalances[token.symbol]?.amount ?? 0} {token.symbol}"
 
 			link={link ? link(token) : undefined}
 			onClick={onClick ? () => onClick(token) : undefined}
@@ -46,7 +45,28 @@
 				</Icon>
 			</svelte:fragment>
 
+			<div slot="after">
+				<mark class="value">{(tokenBalances[token.symbol]?.amount ?? 0) * (tokenPricesUSD[token.symbol] ?? 0)}</mark>
+				<span class="after-footer">
+					<slot name="after-below" {token}>
+						+0.5% (+$100)
+					</slot>
+				</span>
+			</div>
+
 			<slot {token} />
 		</ListItem>
 	{/each}
 </List>
+
+
+<style>
+	[slot="after"] {
+		display: flex;
+		flex-direction: column;
+		text-align: right;
+	}
+	.after-footer {
+		font-size: var(--f7-list-item-footer-font-size);
+	}
+</style>
