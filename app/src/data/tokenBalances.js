@@ -5,5 +5,7 @@ export const tokenBalances = {
 	'mCELO': { amount: 80 },
 	'mcUSD': { amount: 0 }, // 1000.01
 	'mcEUR': { amount: 123.45 },
-	'cMCO2': { amount: 0 }, // 50
+	'cMCO2': { amount: 0 }, // 50,
+	'UBE': { amount: 360.98 },
+	'cBTC': { amount: 0.05 },
 }
