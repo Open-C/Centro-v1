@@ -158,15 +158,21 @@
 	<List accordionList inset>
 		{#each transactions as transaction}
 			<ListItem accordionItem
-				header={new Date(transaction.timestamp).toLocaleDateString()}
 				title="{actionVerbs[transaction.action].pastTense} {formatValue(transaction.amount, transaction.token.symbol)}"
-				footer="Price: {formatValue(transaction.price, $quoteCurrency)}"
-				after={formatValue(transaction.price * transaction.amount, $quoteCurrency)}
+				footer={new Date(transaction.timestamp).toLocaleDateString()}
 				style="
 					--f7-theme-color: {transaction.token.color}
 				"
 			>
 				<img slot="media" src={transaction.token.logoURI} height="40" />
+
+				<div slot="after">
+					<mark class="value">{formatValue(transaction.price * transaction.amount, $quoteCurrency)}</mark>
+					<span class="after-footer">
+						Price: {formatValue(transaction.price, $quoteCurrency)}
+					</span>
+				</div>
+
 				<AccordionContent>
 					<Block>
 						<Button fill>View in Block Explorer</Button>
