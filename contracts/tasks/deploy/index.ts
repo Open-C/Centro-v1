@@ -2,6 +2,7 @@ import { ICeloNetwork, networkNames } from "@ubeswap/hardhat-celo";
 import { promises as fs } from "fs";
 import { ActionType, HardhatRuntimeEnvironment } from "hardhat/types";
 import { deployStorage } from "./001_storage";
+import { deployCentroMain } from "./002_centro_main";
 
 export type DeployFunction = (
   env: HardhatRuntimeEnvironment
@@ -9,6 +10,7 @@ export type DeployFunction = (
 
 const deployers: { [step: string]: DeployFunction } = {
   storage: deployStorage,
+  main: deployCentroMain,
 };
 
 const makeConfigPath = (step: string, chainId: ICeloNetwork): string =>
