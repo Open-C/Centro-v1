@@ -1,5 +1,5 @@
 <script>
-	import { theme, requirePIN } from '../data/settings'
+	import { theme, requirePIN, quoteCurrency } from '../data/settings'
 
 
 	import { Page, Navbar, NavTitle, NavTitleLarge, List, ListItem, Toggle, Icon } from 'framework7-svelte'
@@ -18,6 +18,32 @@
 			title="Manage Wallets"
 		>
 			<Icon slot="media" f7="creditcard_fill" />
+		</ListItem>
+
+		<ListItem
+			title="Quote Currency"
+
+			smartSelect
+			smartSelectParams={{
+				openIn: 'popup',
+				searchbar: true,
+				searchbarPlaceholder: 'Search Tokens',
+				scrollToSelectedItem: true,
+
+				closeOnSelect: true
+			}}
+		>
+			<svelte:fragment slot="media">
+				{#key $quoteCurrency}
+					<Icon f7={{'USD': 'money_dollar_circle', 'EUR': 'money_euro_circle', 'JPY': 'money_yen_circle', 'INR': 'money_ruble_circle'}[$quoteCurrency] ?? 'asterisk_circle'} />
+				{/key}
+			</svelte:fragment>
+
+			<select bind:value={$quoteCurrency}>
+				{#each ['USD', 'EUR', 'JPY', 'ZMW', 'CELO'] as currency}
+					<option value={currency}>{currency}</option>
+				{/each}
+			</select>
 		</ListItem>
 	</List>
 
