@@ -24,7 +24,7 @@
 	bind:amount
 />
 <hr>
-<Button fill
+<Button large fill
 	onClick={() => transactionStarted = true}
 	disabled={!(amount)}>
 	{transactionAction}

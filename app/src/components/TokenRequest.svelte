@@ -21,7 +21,7 @@
 	showSlider={false}
 />
 <hr>
-<Button fill
+<Button large fill
 	onClick={() => requestStarted = true}
 	disabled={!(amount)}>
 	{transactionAction}
@@ -41,6 +41,6 @@
 		<img alt="QR Code" width="200" height="200" />
 	</Block>
 	<Block>
-		<Button fill sheetClose>Done</Button>
+		<Button large fill sheetClose>Done</Button>
 	</Block>
 </Sheet>

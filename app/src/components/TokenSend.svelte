@@ -31,7 +31,7 @@
 	bind:address={toAddress}
 />
 <hr>
-<Button fill
+<Button large fill
 	onClick={() => transactionStarted = true}
 	disabled={!(amount && toAddress)}>
 	{transactionAction}
