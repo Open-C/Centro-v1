@@ -7,6 +7,6 @@
     "resolveJsonModule": true,
     "noUncheckedIndexedAccess": true
   },
-  "include": ["./scripts", "./test"],
+  "include": ["./scripts", "./test", "tasks/tests/MoolaConnector-test.ts"],
   "files": ["./hardhat.config.ts"]
 }
