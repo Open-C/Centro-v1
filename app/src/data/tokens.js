@@ -55,12 +55,20 @@ const centroTokenList = [
 	{
 		symbol: 'cMCO2',
 		name: 'Celo Moss Carbon Credit',
-		logoURI: require('../static/images/celo-icon.png').default,
+		logoURI: require('../static/images/cusd-icon.png').default,
 		color: '#51c7fc'
 	},
 	{
 		symbol: 'UBE',
 		color: '#8b7cc4'
+	},
+	{
+		symbol: 'sCELO',
+		color: '#fbcc5c'
+	},
+	{
+		symbol: 'cXOF',
+		color: '#1392cb'
 	}
 ]
 
