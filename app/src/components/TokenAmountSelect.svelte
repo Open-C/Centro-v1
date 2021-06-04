@@ -12,10 +12,8 @@
 	let sheetComponent
 	$: sheet = sheetComponent?.instance()
 
-
 	let isFocused = false
-
-	$: if(sheet) isFocused ? sheet.open() : sheet.close()
+	$: isFocused ? sheet?.open() : sheet?.close()
 
 	function onFocus(){
 		isFocused = true
