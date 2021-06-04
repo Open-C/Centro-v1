@@ -69,10 +69,10 @@
 				>
 					<Icon slot="media" f7="person_crop_circle_badge" />
 
-					<div slot="after" class="line">
+					<span slot="after">
 						<Badge>{proposals.length}</Badge>
 						{formatValue(balance, $quoteCurrency)}
-					</div>
+					</span>
 
 					<svelte:fragment slot="footer">
 						<p>{periodTimeRemaining} days to contribute</p>

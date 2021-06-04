@@ -241,6 +241,10 @@ input {
 }
 
 
+.badge {
+	margin: 0 0.5em;
+}
+
 :not(ul) > li {
 	list-style-type: none;
 }

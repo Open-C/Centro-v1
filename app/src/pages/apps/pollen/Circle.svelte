@@ -89,11 +89,11 @@
 						accordionItem
 					>
 						<Icon slot="media" f7="person_crop_circle_badge" />
-
-						<div slot="after" class="line">
+						
+						<span slot="after">
 							<Badge>{proposal.type}</Badge>
 							{formatValue(proposal.amount, $quoteCurrency)}
-						</div>
+						</span>
 
 						<AccordionContent>
 							<Block>
