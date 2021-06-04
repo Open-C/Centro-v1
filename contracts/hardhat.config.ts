@@ -39,7 +39,7 @@ task(
   async (...args: Parameters<ActionType<{ step: string }>>) => {
     return await (await import("./tasks/deploy")).deploy(...args);
   }
-);
+).addParam("step", "The step to deploy");
 
 //task("test", "Test the contracts", async () => {});
 const accounts: HDAccountsUserConfig = {
@@ -48,6 +48,7 @@ const accounts: HDAccountsUserConfig = {
     "test test test test test test test test test test test junk",
   path: "m/44'/52752'/0'/0/",
 };
+
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
@@ -107,6 +108,17 @@ export default {
   spdxLicenseIdentifier: {
     overwrite: false,
     runOnCompile: true,
+  },
+  tenderly: {
+    project: process.env.TENDERLY_PROJECT,
+    username: process.env.TENDERLY_USERNAME,
+  },
+  watcher: {
+    compile: {
+      tasks: ["compile"],
+      files: ["./contracts"],
+      verbose: true,
+    },
   },
   namedAccounts: {
     deployer: 0,

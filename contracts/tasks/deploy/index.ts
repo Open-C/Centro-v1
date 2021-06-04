@@ -1,12 +1,15 @@
 import { ICeloNetwork, networkNames } from "@ubeswap/hardhat-celo";
 import { promises as fs } from "fs";
 import { ActionType, HardhatRuntimeEnvironment } from "hardhat/types";
+import { deployStorage } from "./001_storage";
 
 export type DeployFunction = (
   env: HardhatRuntimeEnvironment
 ) => Promise<{ [contractName: string]: string }>;
 
-const deployers: { [step: string]: DeployFunction } = {};
+const deployers: { [step: string]: DeployFunction } = {
+  storage: deployStorage,
+};
 
 const makeConfigPath = (step: string, chainId: ICeloNetwork): string =>
   __dirname +
@@ -33,6 +36,7 @@ export const getDeployment = async (
 };
 
 export const deploy: ActionType<{ step: string }> = async ({ step }, env) => {
+  console.log(step);
   const chainId = await env.celo.kit.connection.chainId();
   const deployer = deployers[step];
   if (!deployer) {
