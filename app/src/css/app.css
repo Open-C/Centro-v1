@@ -95,6 +95,10 @@ mark {
 	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
+:root {
+	--f7-range-bar-size: 3px;
+	--f7-range-bar-bg-color: rgba(127, 127, 127, 0.25);
+}
 .range-knob {
 	background-image: var(--f7-range-knob-background-image);
 	background-repeat: no-repeat;
