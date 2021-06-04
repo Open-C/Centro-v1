@@ -51,6 +51,7 @@
 
 	<Input
 		type="number"
+		inputmode="decimal"
 		class="token-amount-input"
 		bind:value={amount}
 		min={0}
@@ -64,6 +65,7 @@
 
 	<!-- <Input
 		type="number"
+		inputmode="decimal"
 		clearButton
 		autofocus
 		placeholder="0"
