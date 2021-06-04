@@ -15,7 +15,7 @@
 
 	// <List>
 	var _
-	$: ({tokens: _, link: _, onClick: _, ...listProps} = $$props)
+	$: ({tokens: _, link: _, onClick: _, checked: _, ...listProps} = $$props)
 	
 
 	import { List, ListItem, Badge, Icon } from 'framework7-svelte'
