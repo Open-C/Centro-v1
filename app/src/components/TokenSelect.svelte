@@ -10,6 +10,11 @@
 	$: isSelecting ? sheet?.open() : sheet?.close()
 
 
+	import { tokenBalances } from '../data/tokenBalances'
+	import { tokenPricesUSD } from '../data/tokenPrices'
+	import { sortTokensByBalance } from '../utils/sortTokensByBalance'
+
+
 	import { Button, ListItem, List, Icon, Sheet, Searchbar, Toolbar, PageContent } from 'framework7-svelte'
 	import TokenList from './TokenList.svelte'
 </script>
@@ -89,7 +94,7 @@
 		<TokenList
 			class="token-list"
 
-			tokens={availableTokens}
+			tokens={sortTokensByBalance(availableTokens, tokenBalances, tokenPricesUSD)}
 
 			onClick={async token => {
 				selectedToken = token
