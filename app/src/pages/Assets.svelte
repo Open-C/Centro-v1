@@ -111,7 +111,7 @@
 	{#each sections as {title, data: tokens}}
 		<BlockTitle medium>{title}</BlockTitle>
 
-		<TokenList accordionList
+		<TokenList inset accordionList
 			{tokens}
 			let:token
 		>
