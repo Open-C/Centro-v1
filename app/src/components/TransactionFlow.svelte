@@ -46,6 +46,9 @@
 	swipeToClose
 	swipeToStep
 	backdrop
+	style="
+		--f7-theme-color: {token.color}
+	"
 >
 	{#if status === 'created'}
 		<Toolbar>

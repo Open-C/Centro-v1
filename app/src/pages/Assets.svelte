@@ -160,6 +160,9 @@
 				title="{actionVerbs[transaction.action].pastTense} {transaction.amount} {transaction.token.symbol}"
 				footer="Price: {transaction.price}"
 				after="${transaction.price * transaction.amount}"
+				style="
+					--f7-theme-color: {transaction.token.color}
+				"
 			>
 				<img slot="media" src={transaction.token.logoURI} height="40" />
 				<AccordionContent>

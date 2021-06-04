@@ -1,5 +1,6 @@
 <script>
 	import { tokenBalances } from '../../data/tokenBalances'
+	import { tokensBySymbol } from '../../data/tokens'
 
 	const token = {
 		name: 'Celo Dollar',
@@ -14,7 +15,8 @@
 	import TokenSend from '../../components/TokenSend.svelte'
 </script>
 
-<Page>
+
+<Page style="--f7-theme-color: {tokensBySymbol['cEUR'].color}">
 	<Navbar title="Pay" backLink="Apps">
 		<svelte:fragment slot="right">
 			<CurrentWallet />

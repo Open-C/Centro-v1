@@ -1,5 +1,6 @@
 <script>
 	import { pollenCircles } from '../../data/pollen'
+	import { tokensBySymbol } from '../../data/tokens'
 	
 
 	let mode
@@ -9,7 +10,7 @@
 	import CurrentWallet from '../../components/CurrentWallet.svelte'
 </script>
 
-<Page>
+<Page style="--f7-theme-color: {tokensBySymbol['CELO'].color}">
 	<Navbar title="Pollen" backLink="Apps">
 		<svelte:fragment slot="right">
 			<CurrentWallet />

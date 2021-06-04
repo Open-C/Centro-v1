@@ -1,5 +1,5 @@
 <script>
-	import { baseTokens } from '../../data/tokens'
+	import { baseTokens, tokensBySymbol } from '../../data/tokens'
 
 
 	let fromToken
@@ -12,7 +12,7 @@
 	import PriceChart from '../../components/PriceChart.svelte'
 </script>
 
-<Page>
+<Page style="--f7-theme-color: {tokensBySymbol['cMCO2'].color}">
 	<Navbar title="Mento" backLink="Apps">
 		<svelte:fragment slot="right">
 			<CurrentWallet />

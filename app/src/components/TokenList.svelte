@@ -1,5 +1,6 @@
 <script>
 	import { tokenBalances } from '../data/tokenBalances'
+	import { tokenPricesUSD } from '../data/tokenPrices'
 
 
 	export let tokens = []
@@ -33,6 +34,10 @@
 
 			{radio}
 			checked={checked ? checked(token) : false}
+
+			style="
+				--f7-theme-color: {token.color}
+			"
 		>
 		<!-- onChange={onChange ? () => onChange(token) : undefined} -->
 			<!-- <img slot="media" src={token.logoURI} height="40" /> -->

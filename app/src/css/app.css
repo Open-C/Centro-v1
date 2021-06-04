@@ -89,6 +89,12 @@ hr {
 	transform: scaleY(calc(1 / var(--f7-device-pixel-ratio)));
 }
 
+mark {
+	background-color: transparent;
+	color: var(--f7-theme-color);
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
 .range-knob {
 	background-image: var(--f7-range-knob-background-image);
 	background-repeat: no-repeat;

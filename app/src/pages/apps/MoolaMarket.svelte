@@ -45,7 +45,7 @@
 	import TabLayout from '../../components/TabLayout.svelte'
 </script>
 
-<Page>
+<Page style="--f7-theme-color: {tokensBySymbol['mcUSD'].color}">
 	<Navbar sliding={false} backLink="Apps">
 		<NavTitle slot="title" sliding>
 			<img src={require('../../static/images/moola-logo.png').default} alt="MoolaMarket" height={30} />
@@ -92,11 +92,14 @@
 					<ListItem accordionItem
 						title={wrappedToken.name}
 						footer="{tokenBalances[wrappedToken.symbol]?.amount} {wrappedToken.symbol}"
+						style="
+							--f7-theme-color: {wrappedToken.color}
+						"
 					>
 						<img slot="media" src={wrappedToken.logoURI} height="40" />
 
 						<svelte:fragment slot="after">
-							APY:&nbsp;<strong>{formatPercent(depositBorrowRates[wrappedToken.symbol].depositAPY)}</strong>
+							APY:&nbsp;<strong><mark>{formatPercent(depositBorrowRates[wrappedToken.symbol].depositAPY)}</mark></strong>
 						</svelte:fragment>
 
 						<AccordionContent>
@@ -191,11 +194,14 @@
 					<ListItem accordionItem
 						title={baseToken.name}
 						footer="{tokenBalances[baseToken.symbol]?.amount} {baseToken.symbol}"
+						style="
+							--f7-theme-color: {baseToken.color}
+						"
 					>
 						<img slot="media" src={baseToken.logoURI} height="40" />
 
 						<svelte:fragment slot="after">
-							APR:&nbsp;<strong>{formatPercent(depositBorrowRates[wrappedToken.symbol].borrowAPR)}</strong>
+							APR:&nbsp;<strong><mark>{formatPercent(depositBorrowRates[wrappedToken.symbol].borrowAPR)}</mark></strong>
 						</svelte:fragment>
 
 						<AccordionContent>
