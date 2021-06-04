@@ -58,7 +58,7 @@
 			<div slot="after">
 				<mark class="value">{formatValue((tokenBalances[token.symbol]?.amount ?? 0) * (tokenPricesUSD[token.symbol] ?? 0), $quoteCurrency)}</mark>
 				<span class="after-footer">
-					<slot name="after-below" {token}>
+					<slot name="after-footer" {token}>
 						+{formatPercent(0.005)} (+{formatValue(100, $quoteCurrency)})
 					</slot>
 				</span>
@@ -68,15 +68,3 @@
 		</ListItem>
 	{/each}
 </List>
-
-
-<style>
-	[slot="after"] {
-		display: flex;
-		flex-direction: column;
-		text-align: right;
-	}
-	.after-footer {
-		font-size: var(--f7-list-item-footer-font-size);
-	}
-</style>
