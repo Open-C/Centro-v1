@@ -3,9 +3,13 @@
 	export let f7router
 	setContext('f7router', f7router)
 
-
-	import { tokensBySymbol } from '../../data/tokens'
 	
+	import { quoteCurrency } from '../../data/settings'
+	import { tokensBySymbol } from '../../data/tokens'
+	import { tokenBalances } from '../../data/tokenBalances'
+	import { tokenPricesUSD } from '../../data/tokenPrices'
+
+
 	const depositBorrowRates = {
 		'mCELO': {
 			depositAPY: 0.0001,
@@ -25,18 +29,25 @@
 		'CELO': 'mCELO',
 		'cUSD': 'mcUSD',
 		'cEUR': 'mcEUR',
-		// 'TEST': 'mTEST'
 	}).map(([base, wrapped]) => ({
 		baseToken: tokensBySymbol[base],
 		wrappedToken: tokensBySymbol[wrapped]
 	}))
-	console.log('moolaTokenPairs', moolaTokenPairs)
-		
-
-	import { tokenBalances } from '../../data/tokenBalances'
-	import { tokenPricesUSD } from '../../data/tokenPrices'
-
+	
+	
 	import { formatPercent } from '../../utils/formatPercent'
+	import { formatValue } from '../../utils/formatValue'
+	
+	function formatTooltip({index, value, label, color, percentage}){
+		return `
+			<div class="pie-chart-tooltip-label">
+				<span class="pie-chart-tooltip-color" style="background-color: ${color};"></span>
+				<img src="${tokensBySymbol[label].logoURI}" height="15" />
+				${label}: ${formatValue(value, $quoteCurrency)} (${formatPercent(percentage / 100)})
+			</div>
+		`
+	}
+
 
 	import { Page, Navbar, Block, BlockTitle, List, ListItem, AccordionContent, NavTitle, PieChart } from 'framework7-svelte'
 	import CurrentWallet from '../../components/CurrentWallet.svelte'
@@ -65,7 +76,7 @@
 		let:tab
 	>
 		{#if tab === 'lending'}
-			<BlockTitle medium>Total Deposited: $100</BlockTitle>
+			<BlockTitle medium>Total Deposited: {formatValue(100, $quoteCurrency)}</BlockTitle>
 			<Block inset strong>
 				<div class="line">
 					<div class="chart">
@@ -76,11 +87,12 @@
 								color: wrappedToken.color,
 							}))}
 							tooltip
+							{formatTooltip}
 							size={30}
 						/>
 					</div>
 					<div>
-						<p>Overall APY: 0.3%</p>
+						<p>Overall APY: {formatPercent(0.0003)}</p>
 					</div>
 				</div>
 			</Block>
@@ -91,7 +103,7 @@
 				{#each moolaTokenPairs as {baseToken, wrappedToken}}
 					<ListItem accordionItem
 						title={wrappedToken.name}
-						footer="{tokenBalances[wrappedToken.symbol]?.amount} {wrappedToken.symbol}"
+						footer="{formatValue(tokenBalances[wrappedToken.symbol]?.amount)} {wrappedToken.symbol}"
 						style="
 							--f7-theme-color: {wrappedToken.color}
 						"
@@ -164,7 +176,7 @@
 			</List> -->
 
 		{:else if tab === 'borrowing'}
-			<BlockTitle medium>Total Borrowed: $0</BlockTitle>
+			<BlockTitle medium>Total Borrowed: {formatValue(0.0003, $quoteCurrency)}</BlockTitle>
 			<Block inset strong>
 				<div class="line">
 					<div class="chart">
@@ -175,13 +187,14 @@
 								color: baseToken.color,
 							}))}
 							tooltip
+							{formatTooltip}
 							size={30}
 						/>
 					</div>
 					<div>
-						<p>Overall APR: 0.3%</p>
-						<p>Liquidation Threshold: 80%</p>
-						<p>Maximum Loan to Value: 75%</p>
+						<p>Overall APR: {formatPercent(0.0003)}</p>
+						<p>Liquidation Threshold: {formatPercent(0.80)}</p>
+						<p>Maximum Loan to Value: {formatPercent(0.75)}</p>
 						<p>Health Factor: SAFE</p>
 					</div>
 				</div>

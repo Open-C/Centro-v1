@@ -1,4 +1,5 @@
 <script>
+	import { quoteCurrency } from '../data/settings'
 	import { tokensBySymbol, baseTokens, ethereumTokens, otherTokens } from '../data/tokens'
 
 
@@ -65,6 +66,7 @@
 
 
 	import { actionVerbs } from '../data/actions'
+	import { formatValue } from '../utils/formatValue'
 
 
 	import { Page, Navbar, NavLeft, NavTitle, NavTitleLarge, NavRight, Link, Toolbar, Block, BlockTitle, List, ListItem, Row, Col, Button, AccordionContent, Card, Progressbar, Icon } from 'framework7-svelte'
@@ -87,7 +89,7 @@
 	</Navbar>
 
 	<Block strong inset>
-		<h2>$972.65</h2>
+		<h2>{formatValue(972.65, $quoteCurrency)}</h2>
 		<PriceChart />
 	</Block>
 
@@ -95,14 +97,14 @@
 		<Row>
 			<Col>
 				<Block strong>
-					<p><strong>Goal</strong>: Donate $10/mo</p>
+					<p><strong>Goal</strong>: Donate {formatValue(10, $quoteCurrency, 0)}/mo</p>
 					<Progressbar progress={70} />
 				</Block>
 			</Col>
 			<Col>
 				<Block strong>
 					<h4>Total Interest Earned</h4>
-					<p>$12.34</p>
+					<p>{formatValue(12.34, $quoteCurrency)}</p>
 				</Block>
 			</Col>
 		</Row>
@@ -157,9 +159,9 @@
 		{#each transactions as transaction}
 			<ListItem accordionItem
 				header={new Date(transaction.timestamp).toLocaleDateString()}
-				title="{actionVerbs[transaction.action].pastTense} {transaction.amount} {transaction.token.symbol}"
-				footer="Price: {transaction.price}"
-				after="${transaction.price * transaction.amount}"
+				title="{actionVerbs[transaction.action].pastTense} {formatValue(transaction.amount, transaction.token.symbol)}"
+				footer="Price: {formatValue(transaction.price, $quoteCurrency)}"
+				after={formatValue(transaction.price * transaction.amount, $quoteCurrency)}
 				style="
 					--f7-theme-color: {transaction.token.color}
 				"

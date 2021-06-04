@@ -1,4 +1,5 @@
 <script>
+	import { quoteCurrency } from '../data/settings'
 	import { tokenBalances } from '../data/tokenBalances'
 	import { tokenPricesUSD } from '../data/tokenPrices'
 
@@ -18,6 +19,10 @@
 	var _
 	$: ({tokens: _, link: _, onClick: _, checked: _, ...listProps} = $$props)
 	
+
+	import { formatValue } from '../utils/formatValue'
+	import { formatPercent } from '../utils/formatPercent'
+
 
 	import { List, ListItem, Badge, Icon } from 'framework7-svelte'
 </script>
@@ -51,10 +56,10 @@
 			</svelte:fragment>
 
 			<div slot="after">
-				<mark class="value">{(tokenBalances[token.symbol]?.amount ?? 0) * (tokenPricesUSD[token.symbol] ?? 0)}</mark>
+				<mark class="value">{formatValue((tokenBalances[token.symbol]?.amount ?? 0) * (tokenPricesUSD[token.symbol] ?? 0), $quoteCurrency)}</mark>
 				<span class="after-footer">
 					<slot name="after-below" {token}>
-						+0.5% (+$100)
+						+{formatPercent(0.005)} (+{formatValue(100, $quoteCurrency)})
 					</slot>
 				</span>
 			</div>

@@ -1,9 +1,13 @@
 <script>
 	import { pollenCircles } from '../../data/pollen'
 	import { tokensBySymbol } from '../../data/tokens'
+	import { quoteCurrency } from '../../data/settings'
 	
 
 	let mode
+
+
+	import { formatValue } from '../../utils/formatValue'
 
 
 	import { Page, Navbar, Block, Progressbar, ListItem, BlockTitle, List, Segmented, Button, Icon } from 'framework7-svelte'
@@ -17,7 +21,7 @@
 		</svelte:fragment>
 	</Navbar>
 
-	<!-- <h1>Circle Balances: {972.65}</h1>
+	<!-- <h1>Circle Balances: {formatValue(972.65, $quoteCurrency)}</h1>
 	
 	{#each circles as {
 		name,
@@ -40,7 +44,7 @@
 	{/each} -->
 
 	{#if $pollenCircles.length}
-		<BlockTitle medium>Circle Balances: {972.65}</BlockTitle>
+		<BlockTitle medium>Circle Balances: {formatValue(972.65, $quoteCurrency)}</BlockTitle>
 		<List inset
 			sortable
 			sortableTapHold
@@ -61,7 +65,7 @@
 			}}
 				<ListItem
 					title={name}
-					after={balance}
+					after={formatValue(balance, $quoteCurrency)}
 					link="/apps/pollen/{id}"
 				>
 					<!-- badge={proposals.length} -->

@@ -27,10 +27,14 @@
 		[fromAmount, toAmount] = [toAmount, fromAmount]
 	}
 
+
+	import { formatValue } from '../utils/formatValue'
+
 	
 	import { Accordion, AccordionContent, AccordionItem, AccordionToggle, Block, Button, Icon, List, ListItem, Row, Segmented } from 'framework7-svelte'
 	import TokenAmountSelect from './TokenAmountSelect.svelte'
 	import TransactionFlow from './TransactionFlow.svelte'
+import { formatPercent } from '../utils/formatPercent'
 </script>
 
 
@@ -45,15 +49,15 @@
 <Block>
 	<div class="line">
 		<p class="conversion">
-			<span>{exchangeRate.toFixed(3)} {toToken.symbol}</span>
+			<span>{formatValue(exchangeRate, toToken.symbol, 5)}</span>
 			<span> = </span>
 			<span>1 {fromToken.symbol}</span>
 		</p>
-		<Button onClick={reverseDirection} >
+		<Button onClick={reverseDirection}>
 			<Icon f7="arrow_down" />
 		</Button>
 		<p class="conversion">
-			<span>{(1 / exchangeRate).toFixed(3)} {fromToken.symbol}</span>
+			<span>{formatValue(1 / exchangeRate, fromToken.symbol, 5)}</span>
 			<span> = </span>
 			<span>1 {toToken.symbol}</span>
 		</p>
@@ -83,9 +87,9 @@
 				<div class="line">
 					<h4>Slippage Tolerance</h4>
 					<Segmented strong>
-						<Button small active={slippage === 0.005} onClick={() => slippage = 0.005}>0.5%</Button>
-						<Button small active={slippage === 0.01} onClick={() => slippage = 0.01}>1%</Button>
-						<Button small active={slippage === 0.02} onClick={() => slippage = 0.02}>2%</Button>
+						{#each [0.005, 0.01, 0.02] as slippageValue}
+							<Button small active={slippage === slippageValue} onClick={() => slippage = slippageValue}>{formatPercent(slippageValue, 1)}</Button>
+						{/each}
 					</Segmented>
 				</div>
 			</Block>
@@ -102,9 +106,9 @@
 			<div class="line">
 				<h4>Slippage Tolerance</h4>
 				<Segmented strong>
-					<Button small active={slippage === 0.005} onClick={() => slippage = 0.005}>0.5%</Button>
-					<Button small active={slippage === 0.01} onClick={() => slippage = 0.01}>1%</Button>
-					<Button small active={slippage === 0.02} onClick={() => slippage = 0.02}>2%</Button>
+					{#each [0.005, 0.01, 0.02] as slippageValue}
+						<Button small active={slippage === slippageValue} onClick={() => slippage = slippageValue}>{formatPercent(slippageValue, 1)}</Button>
+					{/each}
 				</Segmented>
 			</div>
 		</AccordionContent>

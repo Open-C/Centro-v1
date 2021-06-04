@@ -1,6 +1,8 @@
 <script>
-	// export let f7router
 	export let f7route
+
+
+	import { quoteCurrency } from '../../../data/settings'
 
 
 	import { pollenCircles } from '../../../data/pollen'
@@ -15,27 +17,33 @@
 	$: circle = $pollenCircles.find(circle => circle.id == pollenCircleID) || {}
 
 
-	import { Block, Button, Col, Icon, List, ListItem, Navbar, Page, Progressbar, Row, Segmented, Subnavbar, Tab, Tabs } from 'framework7-svelte'
+	import { formatValue } from '../../../utils/formatValue'
+
+
+	import { Block, Icon, List, ListItem, Navbar, Page, Progressbar, Row } from 'framework7-svelte'
+	import TabLayout from '../../../components/TabLayout.svelte'
 </script>
+
 
 <Page>
 	<Navbar	title="{circle.name}" backLink="Pollen">
-		<Subnavbar sliding={true}>
-			<Segmented strong>
-				<Button tabLink="#deposits" tabLinkActive>Deposits</Button>
-				<Button tabLink="#proposals">Proposals</Button>
-				<Button tabLink="#debts">Debts</Button>
-			</Segmented>
-		</Subnavbar>
 	</Navbar>
 
-	<Tabs swipeable>
-		<Tab id="deposits" tabActive>
+	<TabLayout
+		swipeable
+		tabs={{
+			'deposits': 'Deposits',
+			'proposals': 'Proposals',
+			'debts': 'Debts'
+		}}
+		let:tab
+	>
+		{#if tab === 'deposits'}
 			<Block inset strong>
 				<Row>
 					<div>
 						<h3>Circle Reserve</h3>
-						<span>{circle.balance}</span>
+						<span>{formatValue(circle.balance, $quoteCurrency)}</span>
 					</div>
 					<div>
 						<h3>Period Ends In</h3>
@@ -56,7 +64,7 @@
 				{#each circle.members as member}
 					<ListItem
 						title={member.name}
-						after={member.balance}
+						after={formatValue(member.balance, $quoteCurrency)}
 					>
 						<Icon slot="media" f7="person_crop_circle_badge" />
 
@@ -66,9 +74,8 @@
 					</ListItem>
 				{/each}
 			</List>
-		</Tab>
 
-		<Tab id="proposals">
+		{:else if tab === 'proposals'}
 			<List inset
 				sortable
 				sortableTapHold
@@ -83,14 +90,13 @@
 						<Icon slot="media" f7="person_crop_circle_badge" />
 
 						<svelte:fragment slot="footer">
-							<p>{proposal.amount}</p>
+							<p>{formatValue(proposal.amount, $quoteCurrency)}</p>
 						</svelte:fragment>
 					</ListItem>
 				{/each}
 			</List>
-		</Tab>
 
-		<Tab id="debts">
+		{:else if tab === 'debts'}
 			<List inset
 				sortable
 				sortableTapHold
@@ -99,7 +105,7 @@
 				{#each circle.debts as debt}
 					<ListItem
 						title={debt.member.name}
-						after={debt.amount}
+						after={formatValue(debt.amount, $quoteCurrency)}
 						footer={debt.description}
 					>
 						<Icon slot="media" f7="person_crop_circle_badge" />
@@ -111,6 +117,6 @@
 					</ListItem>
 				{/each}
 			</List>
-		</Tab>
-	</Tabs>
+		{/if}
+	</TabLayout>
 </Page>
