@@ -240,6 +240,10 @@ input {
 	margin-bottom: var(--f7-grid-row-gap);
 }
 
+.framework7-root:not(.theme-dark) .list .block,
+.framework7-root:not(.theme-dark) .block .block {
+	--f7-block-strong-bg-color: rgba(0, 0, 0, 0.05);
+}
 
 .badge {
 	margin: 0 0.5em;
