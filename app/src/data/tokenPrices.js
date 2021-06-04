@@ -7,4 +7,6 @@ export const tokenPricesUSD = {
 	'mcEUR': 0.82,
 	'cMCO2': 9.5,
 	'UBE': 1,
+	'cBTC': 50000,
+	'cXOF': 0.013,
 }
