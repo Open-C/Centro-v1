@@ -11,6 +11,7 @@
 
 	import { Page, Navbar, Block } from 'framework7-svelte'
 	import CurrentWallet from '../../components/CurrentWallet.svelte'
+	import TabLayout from '../../components/TabLayout.svelte'
 	import TokenRequest from '../../components/TokenRequest.svelte'
 	import TokenSend from '../../components/TokenSend.svelte'
 </script>
@@ -23,7 +24,30 @@
 		</svelte:fragment>
 	</Navbar>
 
-	<Block inset strong>
+	
+	<TabLayout swipeable
+		tabs={{
+			'send': 'Send',
+			'request': 'Request'
+		}}
+		startTab={'send'}
+		
+		let:tab
+	>
+		{#if tab === 'request'}
+			<Block inset strong>
+				<TokenRequest {token} />
+			</Block>
+		{:else if tab === 'send'}
+			<Block inset strong>
+				<TokenSend
+					token={token}
+				/>
+			</Block>
+		{/if}
+	</TabLayout>
+
+	<!-- <Block inset strong>
 		<TokenSend
 			token={token}
 			maxAmount={tokenBalances[token.symbol]?.amount}
@@ -31,5 +55,5 @@
 	</Block>
 	<Block inset strong>
 		<TokenRequest {token} />
-	</Block>
+	</Block> -->
 </Page>
