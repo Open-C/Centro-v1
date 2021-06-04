@@ -20,7 +20,7 @@
 	import { formatValue } from '../../../utils/formatValue'
 
 
-	import { Block, Icon, List, ListItem, Navbar, Page, Progressbar, Row } from 'framework7-svelte'
+	import { AccordionContent, AccordionItem, Badge, Block, BlockTitle, Button, Icon, List, ListItem, Navbar, Page, Progressbar, Row } from 'framework7-svelte'
 	import TabLayout from '../../../components/TabLayout.svelte'
 </script>
 
@@ -40,7 +40,7 @@
 	>
 		{#if tab === 'deposits'}
 			<Block inset strong>
-				<Row>
+				<div class="line">
 					<div>
 						<h3>Circle Reserve</h3>
 						<span>{formatValue(circle.balance, $quoteCurrency)}</span>
@@ -53,7 +53,7 @@
 						<h3>Interest Earned</h3>
 						<span>{circle.earned}</span>
 					</div>
-				</Row>
+				</div>
 			</Block>
 
 			<List inset
@@ -76,6 +76,7 @@
 			</List>
 
 		{:else if tab === 'proposals'}
+			<BlockTitle medium>Outstanding Proposals</BlockTitle>
 			<List inset
 				sortable
 				sortableTapHold
@@ -84,17 +85,64 @@
 				{#each circle.proposals as proposal}
 					<ListItem
 						title={proposal.member.name}
-						after={proposal.type}
 						footer={proposal.description}
+						accordionItem
 					>
 						<Icon slot="media" f7="person_crop_circle_badge" />
 
-						<svelte:fragment slot="footer">
-							<p>{formatValue(proposal.amount, $quoteCurrency)}</p>
-						</svelte:fragment>
+						<div slot="after" class="line">
+							<Badge>{proposal.type}</Badge>
+							{formatValue(proposal.amount, $quoteCurrency)}
+						</div>
+
+						<AccordionContent>
+							<Block>
+								<Row>
+									<Button fill>Vote to Approve</Button>
+									<Button fill>Vote to Deny</Button>
+								</Row>
+							</Block>
+						</AccordionContent>
 					</ListItem>
+				{:else}
+					There aren't any outstanding proposals.
 				{/each}
 			</List>
+
+			<List inset>
+				<ListItem
+					title={'Create new proposal...'}
+					link={'propose'}
+				>
+					<svelte:fragment slot="media">
+						<Icon f7="plus_circle" />
+					</svelte:fragment>
+				</ListItem>
+			</List>
+
+			{#if circle.pastProposals?.length}
+				<BlockTitle medium>Past Proposals</BlockTitle>
+				<List inset
+					sortable
+					sortableTapHold
+					mediaList
+				>
+					{#each circle.pastProposals as proposal}
+						<ListItem
+							title={proposal.member.name}
+							footer={proposal.description}
+							accordionItem
+						>
+							<Icon slot="media" f7="person_crop_circle_badge" />
+
+							<div slot="after" class="line">
+								<Badge>{proposal.type}</Badge>
+								{formatValue(proposal.amount, $quoteCurrency)}
+							</div>
+						</ListItem>
+					{/each}
+				</List>
+			{/if}
 
 		{:else if tab === 'debts'}
 			<List inset

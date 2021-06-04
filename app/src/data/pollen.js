@@ -44,6 +44,16 @@ export const pollenCircles = writable([
 				description: 'seeds & fertilizer'
 			}
 		],
+		pastProposals: [
+			{
+				type: 'Loan',
+				amount: 70,
+				member: {
+					name: 'Eric'
+				},
+				description: 'seeds & fertilizer'
+			}
+		],
 		debts: [
 			{
 				type: 'Loan',
@@ -106,6 +116,8 @@ export const pollenCircles = writable([
 				description: 'seeds & fertilizer'
 			}
 		],
+		pastProposals: [
+		],
 		debts: [
 			{
 				type: 'Loan',
@@ -164,6 +176,16 @@ export const pollenCircles = writable([
 				amount: 70,
 				member: {
 					name: 'Marek'
+				},
+				description: 'seeds & fertilizer'
+			}
+		],
+		pastProposals: [
+			{
+				type: 'Loan',
+				amount: 70,
+				member: {
+					name: 'Eric'
 				},
 				description: 'seeds & fertilizer'
 			}

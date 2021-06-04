@@ -10,7 +10,7 @@
 	import { formatValue } from '../../utils/formatValue'
 
 
-	import { Page, Navbar, Block, Progressbar, ListItem, BlockTitle, List, Segmented, Button, Icon } from 'framework7-svelte'
+	import { Page, Navbar, Block, Progressbar, ListItem, BlockTitle, List, Segmented, Button, Icon, Badge } from 'framework7-svelte'
 	import CurrentWallet from '../../components/CurrentWallet.svelte'
 </script>
 
@@ -65,10 +65,15 @@
 			}}
 				<ListItem
 					title={name}
-					after={formatValue(balance, $quoteCurrency)}
 					link="/apps/pollen/{id}"
 				>
-					<!-- badge={proposals.length} -->
+					<Icon slot="media" f7="person_crop_circle_badge" />
+
+					<div slot="after" class="line">
+						<Badge>{proposals.length}</Badge>
+						{formatValue(balance, $quoteCurrency)}
+					</div>
+
 					<svelte:fragment slot="footer">
 						<p>{periodTimeRemaining} days to contribute</p>
 						<Progressbar progress={70} />
