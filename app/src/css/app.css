@@ -172,7 +172,8 @@ input {
 	display: grid;
 	gap: var(--f7-grid-gap);
 } */
-.block {
+.block.block-strong {
+	border-radius: var(--f7-block-inset-border-radius);
 	padding-top: var(--f7-block-padding-vertical);
 	padding-bottom: var(--f7-block-padding-vertical);
 }

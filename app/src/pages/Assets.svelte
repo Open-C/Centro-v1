@@ -96,13 +96,13 @@
 	<Block>
 		<Row>
 			<Col>
-				<Block strong>
+				<Block strong noHairlines>
 					<p><strong>Goal</strong>: Donate {formatValue(10, $quoteCurrency, 0)}/mo</p>
 					<Progressbar progress={70} />
 				</Block>
 			</Col>
 			<Col>
-				<Block strong>
+				<Block strong noHairlines>
 					<h4>Total Interest Earned</h4>
 					<p>{formatValue(12.34, $quoteCurrency)}</p>
 				</Block>
