@@ -285,12 +285,14 @@ input {
 
 
 
-.list [slot="after"] {
-	display: flex;
-	flex-direction: column;
+.list [slot="after"], .list .item-after {
+	display: block;
+	/* display: flex;
+	flex-direction: column; */
 	text-align: right;
 }
 .list .after-footer {
+	display: block;
 	font-size: var(--f7-list-item-footer-font-size);
 }
 
