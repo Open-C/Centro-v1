@@ -2,11 +2,7 @@
 	import { tokenBalances } from '../../data/tokenBalances'
 	import { tokensBySymbol } from '../../data/tokens'
 
-	const token = {
-		name: 'Celo Dollar',
-		symbol: 'cUSD',
-		image: require('../../static/images/cusd-icon.png').default
-	}
+	const token = tokensBySymbol['cUSD']
 
 
 	import { Page, Navbar, Block } from 'framework7-svelte'
