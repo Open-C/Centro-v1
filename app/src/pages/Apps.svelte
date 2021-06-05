@@ -12,7 +12,7 @@
 	}, {
 		image: require('../static/images/mento-thumbnail.png').default,
 		name: ['celo', 'mento'],
-		description: 'limit orders for\nthe Celo exchange',
+		description: 'buy and sell CELO\nfrom the Celo Reserve',
 		navigationLink: '/apps/mento',
 		theme: {
 			gradientColors: ['#68d9df', '#08d2bd'],
@@ -32,7 +32,7 @@
 	}, {
 		image: require('../static/images/ubeswap-thumbnail.png').default,
 		name: ['ube', 'swap'],
-		description: 'swap between\nERC-20 tokens',
+		description: 'swap between\ncERC-20 tokens',
 		navigationLink: '/apps/ubeswap',
 		theme: {
 			gradientColors: ['#A3AEFF', '#5F47E6'],
@@ -177,5 +177,6 @@
 		font-size: 0.7em;
 		line-height: 1.1;
 		opacity: 0.8;
+		white-space: pre-line;
 	}
 </style>
