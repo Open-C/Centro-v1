@@ -33,6 +33,9 @@
 	--border-radius: 0.75rem;
 	--f7-block-inset-border-radius: var(--border-radius);
 	--f7-list-inset-border-radius: var(--border-radius);
+
+
+	--f7-progressbar-height: 3px;
 }
 :root .theme-dark {
 	/* --background-color: hsl(230deg 24% 15%); */
