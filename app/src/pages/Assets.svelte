@@ -164,7 +164,7 @@
 					--f7-theme-color: {transaction.token.color}
 				"
 			>
-				<img slot="media" src={transaction.token.logoURI} height="40" />
+				<img slot="media" src={transaction.token.logoURI} width="40" height="40" />
 
 				<div slot="after">
 					<mark class="value">{formatValue(transaction.price * transaction.amount, $quoteCurrency)}</mark>

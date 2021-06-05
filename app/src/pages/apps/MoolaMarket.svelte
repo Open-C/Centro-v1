@@ -108,7 +108,7 @@
 							--f7-theme-color: {wrappedToken.color}
 						"
 					>
-						<img slot="media" src={wrappedToken.logoURI} height="40" />
+						<img slot="media" src={wrappedToken.logoURI} width="40" height="40" />
 
 						<svelte:fragment slot="after">
 							APY:&nbsp;<strong><mark>{formatPercent(depositBorrowRates[wrappedToken.symbol].depositAPY)}</mark></strong>
@@ -133,7 +133,7 @@
 						footer={token.symbol}
 						after={tokenBalances[baseToken.symbol]?.amount}
 					>
-						<img slot="media" src={token.logoURI} height="40" />
+						<img slot="media" src={token.logoURI} width="40" height="40" />
 
 						<svelte:fragment slot="header">
 							APY:&nbsp;<strong>{formatPercent(depositBorrowRates[token.symbol].depositAPY)}</strong>
@@ -157,7 +157,7 @@
 						title={token.name}
 						after="{tokenBalances[baseToken.symbol]?.amount} {baseToken.symbol}"
 					>
-						<img slot="media" src={token.logoURI} height="40" />
+						<img slot="media" src={token.logoURI} width="40" height="40" />
 
 						<svelte:fragment slot="footer">
 							APY:&nbsp;<strong>{formatPercent(depositBorrowRates[token.symbol].depositAPY)}</strong>
@@ -211,7 +211,7 @@
 							--f7-theme-color: {baseToken.color}
 						"
 					>
-						<img slot="media" src={baseToken.logoURI} height="40" />
+						<img slot="media" src={baseToken.logoURI} width="40" height="40" />
 
 						<svelte:fragment slot="after">
 							APR:&nbsp;<strong><mark>{formatPercent(depositBorrowRates[wrappedToken.symbol].borrowAPR)}</mark></strong>

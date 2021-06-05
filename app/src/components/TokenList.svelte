@@ -45,10 +45,10 @@
 			"
 		>
 		<!-- onChange={onChange ? () => onChange(token) : undefined} -->
-			<!-- <img slot="media" src={token.logoURI} height="40" /> -->
+			<!-- <img slot="media" src={token.logoURI} width="40" height="40" /> -->
 			<svelte:fragment slot="media">
 				<Icon>
-					<img src={token.logoURI} height="40" />
+					<img src={token.logoURI} width="40" height="40" />
 					{#if checked ? checked(token) : false}
 						<Badge color><Icon size="0.9em" f7="checkmark" /></Badge>
 					{/if}
