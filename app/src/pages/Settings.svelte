@@ -66,7 +66,7 @@
 		>
 			<svelte:fragment slot="media">
 				{#key $theme}
-					<Icon f7={{'auto': 'circle_lefthalf_fill', 'light': 'sun_max', 'dark': 'moon'}[$theme]} />
+					<Icon f7={{'auto': 'circle_lefthalf_fill', 'light': 'sun_max', 'dark': 'moon_stars'}[$theme]} />
 				{/key}
 			</svelte:fragment>
 			<SegmentedSelect small
