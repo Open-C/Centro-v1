@@ -8,7 +8,7 @@
 
 <style>
     .token-icon {
-        border-radius: 100%;
+        border-radius: 30%;
         width: 2.4em;
         height: 2.4em;
     }
