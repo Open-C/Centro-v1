@@ -8,7 +8,14 @@ export function formatValue(value, currency, decimals = 2){ // value: number, cu
 			}).format(value)
 			: value
 	}catch(e){
-		console.error(e)
-		return value?.toString() + (currency ? ` ${currency}` : currency)
+		try {
+			return new Intl.NumberFormat(globalThis.navigator.languages, {
+				minimumFractionDigits: decimals,
+				maximumFractionDigits: decimals,
+			}).format(value) + (currency ? ` ${currency}` : currency)
+		}catch(e){
+			console.error(e)
+			return value?.toString() + (currency ? ` ${currency}` : currency)
+		}
 	}
 }
