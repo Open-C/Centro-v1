@@ -28,6 +28,9 @@
 	}
 
 
+	import { getDevice } from 'framework7'
+
+
 	import { Block, Row, Button, Range, Input, Toolbar, Sheet } from 'framework7-svelte'
 	import TokenIcon from './TokenIcon.svelte'
 	import TokenSelect from './TokenSelect.svelte'
@@ -54,8 +57,9 @@
 		<h3>{action}</h3>
 
 		<Input
-			type="number"
+			type={getDevice().ios ? 'text' : 'number'}
 			inputmode="decimal"
+			pattern="[0-9]*"
 			class="token-amount-input"
 			bind:value={amount}
 			min={0}
@@ -70,6 +74,7 @@
 		<!-- <Input
 			type="number"
 			inputmode="decimal"
+			pattern="[0-9]*"
 			clearButton
 			autofocus
 			placeholder="0"
