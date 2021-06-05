@@ -165,7 +165,9 @@
 					--f7-theme-color: {transaction.token.color}
 				"
 			>
-				<TokenIcon token={transaction.token} />
+				<svelte:fragment slot="media">
+					<TokenIcon token={transaction.token} />
+				</svelte:fragment>
 
 				<div slot="after">
 					<mark class="value">{formatValue(transaction.price * transaction.amount, $quoteCurrency)}</mark>
