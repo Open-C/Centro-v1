@@ -69,6 +69,7 @@ h1, h2, h3, h4, h5, h6 {
 
 img {
 	vertical-align: middle;
+	object-fit: contain;
 }
 .button img {
 	margin: 0.33em;
@@ -282,6 +283,25 @@ input {
 }
 
 
+:root {
+	--f7-navbar-height: 4.5rem;
+	--extra-top-navbar-height: 2em;
+
+	--f7-navbar-title-font-size: 1.75rem;
+	--f7-navbar-title-font-weight: var(--f7-navbar-large-title-font-weight);
+	--f7-navbar-title-letter-spacing: var(--f7-navbar-large-title-letter-spacing);
+
+	--f7-navbar-subtitle-font-size: 0.85rem;
+}
+.navbar {
+	height: calc(var(--f7-navbar-height) + var(--f7-safe-area-top) + var(--extra-top-navbar-height));
+}
+.navbar ~ *, .navbars ~ * {
+	--f7-page-navbar-offset: calc(var(--f7-navbar-height) + var(--f7-safe-area-top) + var(--extra-top-navbar-height));
+}
+.navbar-inner {
+	padding-top: calc(var(--f7-safe-area-top) + var(--extra-top-navbar-height));
+}
 /* .navbar .title-large-text {
 	text-align: center;
 } */

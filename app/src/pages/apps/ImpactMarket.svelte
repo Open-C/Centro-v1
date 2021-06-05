@@ -4,9 +4,10 @@
 </script>
 
 <Page>
-	<Navbar title="Impact Market" backLink="Apps">
+	<Navbar title="Impact Market" backLink="Apps" />
+	<!-- <Navbar title="Impact Market" backLink="Apps">
 		<svelte:fragment slot="right">
 			<CurrentWallet />
 		</svelte:fragment>
-	</Navbar>
+	</Navbar> -->
 </Page>

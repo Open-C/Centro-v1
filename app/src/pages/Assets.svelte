@@ -80,14 +80,17 @@
 
 <Page name="assets">
 	<!-- Top Navbar -->
-	<Navbar large sliding={false}>
+	<Navbar>
+		<NavTitle>Assets</NavTitle>
+	</Navbar>
+	<!-- <Navbar large sliding={false}>
 		<NavTitle sliding>Assets</NavTitle>
 		<NavTitleLarge>Assets</NavTitleLarge>
 
 		<svelte:fragment slot="right">
 			<CurrentWallet />
 		</svelte:fragment>
-	</Navbar>
+	</Navbar> -->
 
 	<Block strong inset>
 		<h2>{formatValue(972.65, $quoteCurrency)}</h2>

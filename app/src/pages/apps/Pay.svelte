@@ -14,11 +14,12 @@
 
 
 <Page style="--f7-theme-color: {tokensBySymbol['cEUR'].color}">
-	<Navbar title="Pay" backLink="Apps">
+	<Navbar title="Pay" backLink="Apps" />
+	<!-- <Navbar title="Pay" backLink="Apps">
 		<svelte:fragment slot="right">
 			<CurrentWallet />
 		</svelte:fragment>
-	</Navbar>
+	</Navbar> -->
 
 	
 	<TabLayout swipeable

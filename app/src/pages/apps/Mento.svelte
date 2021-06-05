@@ -14,9 +14,9 @@
 
 <Page style="--f7-theme-color: {tokensBySymbol['cMCO2'].color}">
 	<Navbar title="Mento" backLink="Apps">
-		<svelte:fragment slot="right">
+		<!-- <svelte:fragment slot="right">
 			<CurrentWallet />
-		</svelte:fragment>
+		</svelte:fragment> -->
 	</Navbar>
 
 	<Block strong inset>

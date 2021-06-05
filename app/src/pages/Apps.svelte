@@ -94,14 +94,21 @@
 
 
 <Page name="apps">
-	<Navbar large sliding={false}>
-		<NavTitle sliding>Celo DeFi Apps</NavTitle>
+	<Navbar sliding={false}>
+		<NavTitle>
+			Centro
+			<div class="subtitle">DeFi Apps on Celo</div>
+			<!-- <div class="subtitle">Celo DeFi Center</div> -->
+		</NavTitle>
+	</Navbar>
+	<!-- <Navbar large>
+		<NavTitle>Celo DeFi Apps</NavTitle>
 		<NavTitleLarge>Celo DeFi Apps</NavTitleLarge>
 
 		<svelte:fragment slot="right">
 			<CurrentWallet />
 		</svelte:fragment>
-	</Navbar>
+	</Navbar> -->
 
 	<HomeSlider />
 

@@ -8,6 +8,9 @@
 	*/
 
 
+	export let isPage = true
+
+
 	import { walletMachines } from '../../data/wallets'
 
 
@@ -17,13 +20,16 @@
 </script>
 
 <Page name="wallets">
-	<Navbar large sliding={false} backLink="Back">
+	{#if isPage}
+		<Navbar title="Wallets" backLink="Settings" />
+	{/if}
+	<!-- <Navbar large sliding={false} backLink="Back">
 		<NavTitleLarge>Wallets</NavTitleLarge>
 
 		<svelte:fragment slot="right">
 			<CurrentWallet />
 		</svelte:fragment>
-	</Navbar>
+	</Navbar> -->
 
 	<!-- {#each walletStores as walletMachine}
 		<Wallet

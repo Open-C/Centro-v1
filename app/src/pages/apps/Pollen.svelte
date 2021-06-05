@@ -15,11 +15,12 @@
 </script>
 
 <Page style="--f7-theme-color: {tokensBySymbol['CELO'].color}">
-	<Navbar title="Pollen" backLink="Apps">
+	<Navbar title="Pollen" backLink="Apps" />
+	<!-- <Navbar title="Pollen" backLink="Apps">
 		<svelte:fragment slot="right">
 			<CurrentWallet />
 		</svelte:fragment>
-	</Navbar>
+	</Navbar> -->
 
 	<!-- <h1>Circle Balances: {formatValue(972.65, $quoteCurrency)}</h1>
 	

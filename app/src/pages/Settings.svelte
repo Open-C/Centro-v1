@@ -7,10 +7,11 @@
 </script>
 
 <Page name="settings">
-	<Navbar large sliding={false}>
+	<Navbar title="Settings" />
+	<!-- <Navbar large sliding={false}>
 		<NavTitle sliding>Settings</NavTitle>
 		<NavTitleLarge>Settings</NavTitleLarge>
-	</Navbar>
+	</Navbar> -->
 
 	<List strong inset>
 		<ListItem

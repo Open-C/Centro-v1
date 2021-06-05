@@ -85,6 +85,7 @@
 
 	import { App, Panel, Views, View, Popup, Page, Navbar, Toolbar, NavRight, Link, Block, BlockTitle, LoginScreen, LoginScreenTitle, List, ListItem, ListInput, ListButton, BlockFooter, Button } from 'framework7-svelte'
 	import Wallets from './pages/settings/Wallets.svelte'
+	import CurrentWallet from './components/CurrentWallet.svelte'
 </script>
 
 <App { ...f7params } themeDark={($theme === 'auto' ? ($preferredColorScheme) : ($theme)) === 'dark' || undefined}>
@@ -95,7 +96,7 @@
 		swipe swipeOnlyClose swipeThreshold={100}
 	>
 		<View>
-			<Wallets />
+			<Wallets isPage={false} />
 		</View>
 	</Panel>
 
@@ -113,11 +114,16 @@
 		<View id="view-assets" name="assets" tab url="/assets" />
 
 		<!-- Your main view/tab, should have "view-main" class. It also has "tabActive" prop -->
-		<View id="view-apps" main tab tabActive url="/apps" />
+		<View id="view-apps" main tab tabActive url="/apps" /><!-- browserHistory -->
 
 		<!-- Settings View -->
 		<View id="view-settings" name="settings" tab url="/settings" />
 	</Views>
+
+
+	<div class="current-wallet">
+		<CurrentWallet />
+	</div>
 
 
 	<!-- Popup -->
@@ -164,3 +170,13 @@
 		</View>
 	</LoginScreen>
 </App>
+
+
+<style>
+	.current-wallet {
+		position: fixed;
+		right: calc(var(--f7-safe-area-right) + 0.5em);
+		top: calc(var(--f7-safe-area-top) + 0.5em);
+		z-index: 10000;
+	}
+</style>

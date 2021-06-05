@@ -49,7 +49,7 @@
 	}
 
 
-	import { Page, Navbar, Block, BlockTitle, List, ListItem, AccordionContent, NavTitle, PieChart } from 'framework7-svelte'
+	import { Page, Navbar, Block, BlockTitle, List, ListItem, AccordionContent, NavTitle, PieChart, NavTitleLarge } from 'framework7-svelte'
 	import CurrentWallet from '../../components/CurrentWallet.svelte'
 	import TokenDepositOrWithdraw from '../../components/TokenDepositOrWithdraw.svelte'
 	import TokenIcon from '../../components/TokenIcon.svelte'
@@ -58,15 +58,25 @@
 </script>
 
 <Page style="--f7-theme-color: {tokensBySymbol['mcUSD'].color}">
-	<Navbar sliding={false} backLink="Apps">
+	<Navbar backLink="Apps">
+		<NavTitle>
+			<img src={require('../../static/images/moola-logo.png').default} alt="MoolaMarket" width={87.5} height={35} />
+			<div class="subtitle">Earn interest on your idle assets</div>
+		</NavTitle>
+	</Navbar>
+	<!-- <Navbar sliding={false} backLink="Apps">
 		<NavTitle slot="title" sliding>
 			<img src={require('../../static/images/moola-logo.png').default} alt="MoolaMarket" height={30} />
-		</NavTitle>
+		</NavTitle> -->
+	<!-- <Navbar sliding large backLink="Apps">
+		<NavTitleLarge sliding={false}>
+			<img src={require('../../static/images/moola-logo.png').default} alt="MoolaMarket" height={35} />
+		</NavTitleLarge>
 
 		<svelte:fragment slot="right">
 			<CurrentWallet />
 		</svelte:fragment>
-	</Navbar>
+	</Navbar> -->
 
 	<TabLayout swipeable
 		tabs={{

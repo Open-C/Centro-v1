@@ -3,6 +3,5 @@
 </script>
 
 <Page>
-	<Navbar title="Carbon Offset" backLink="Apps">
-	</Navbar>
+	<Navbar title="Carbon Offset" backLink="Apps" />
 </Page>

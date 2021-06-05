@@ -15,8 +15,7 @@
 </script>
 
 <Page>
-	<Navbar title="Block Explorer" backLink="Apps">
-	</Navbar>
+	<Navbar title="Block Explorer" backLink="Apps" />
 
 	<iframe title="Celo Block Explorer" src={uri} />
 </Page>
