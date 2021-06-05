@@ -29,6 +29,7 @@
 
 
 	import { Block, Row, Button, Range, Input, Toolbar, Sheet } from 'framework7-svelte'
+	import TokenIcon from './TokenIcon.svelte'
 	import TokenSelect from './TokenSelect.svelte'
 </script>
 
@@ -82,7 +83,10 @@
 				{availableTokens}
 			/>
 		{:else}
-			<span>{token.symbol}</span>
+			<div>
+				<TokenIcon {token} />
+				<span>{token.symbol}</span>
+			</div>
 		{/if}
 	</div>
 

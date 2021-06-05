@@ -25,6 +25,7 @@
 
 
 	import { List, ListItem, Badge, Icon } from 'framework7-svelte'
+	import TokenIcon from './TokenIcon.svelte'
 </script>
 
 
@@ -45,10 +46,10 @@
 			"
 		>
 		<!-- onChange={onChange ? () => onChange(token) : undefined} -->
-			<!-- <img slot="media" src={token.logoURI} width="40" height="40" /> -->
+			<!-- <TokenIcon {token} /> -->
 			<svelte:fragment slot="media">
 				<Icon>
-					<img src={token.logoURI} width="40" height="40" />
+					<TokenIcon {token} />
 					{#if checked ? checked(token) : false}
 						<Badge color><Icon size="0.9em" f7="checkmark" /></Badge>
 					{/if}
