@@ -71,6 +71,7 @@
 
 	import { Page, Navbar, NavLeft, NavTitle, NavTitleLarge, NavRight, Link, Toolbar, Block, BlockTitle, List, ListItem, Row, Col, Button, AccordionContent, Card, Progressbar, Icon } from 'framework7-svelte'
 	import CurrentWallet from '../components/CurrentWallet.svelte'
+	import TokenIcon from '../components/TokenIcon.svelte'
 	import TokenList from '../components/TokenList.svelte'
 	import TokenSend from '../components/TokenSend.svelte'
 	import TokenRequestOrSend from '../components/TokenRequestOrSend.svelte'
@@ -164,7 +165,7 @@
 					--f7-theme-color: {transaction.token.color}
 				"
 			>
-				<img slot="media" src={transaction.token.logoURI} width="40" height="40" />
+				<TokenIcon token={transaction.token} />
 
 				<div slot="after">
 					<mark class="value">{formatValue(transaction.price * transaction.amount, $quoteCurrency)}</mark>

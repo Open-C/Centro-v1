@@ -52,6 +52,7 @@
 	import { Page, Navbar, Block, BlockTitle, List, ListItem, AccordionContent, NavTitle, PieChart } from 'framework7-svelte'
 	import CurrentWallet from '../../components/CurrentWallet.svelte'
 	import TokenDepositOrWithdraw from '../../components/TokenDepositOrWithdraw.svelte'
+	import TokenIcon from '../../components/TokenIcon.svelte'
 	import TokenBorrowOrRepay from '../../components/TokenBorrowOrRepay.svelte'
 	import TabLayout from '../../components/TabLayout.svelte'
 </script>
@@ -108,7 +109,9 @@
 							--f7-theme-color: {wrappedToken.color}
 						"
 					>
-						<img slot="media" src={wrappedToken.logoURI} width="40" height="40" />
+						<svelte:fragment slot="media">
+							<TokenIcon token={wrappedToken} />
+						</svelte:fragment>
 
 						<svelte:fragment slot="after">
 							APY:&nbsp;<strong><mark>{formatPercent(depositBorrowRates[wrappedToken.symbol].depositAPY)}</mark></strong>
@@ -133,7 +136,9 @@
 						footer={token.symbol}
 						after={tokenBalances[baseToken.symbol]?.amount}
 					>
-						<img slot="media" src={token.logoURI} width="40" height="40" />
+						<svelte:fragment slot="media">
+							<TokenIcon token={wrappedToken} />
+						</svelte:fragment>
 
 						<svelte:fragment slot="header">
 							APY:&nbsp;<strong>{formatPercent(depositBorrowRates[token.symbol].depositAPY)}</strong>
@@ -157,7 +162,9 @@
 						title={token.name}
 						after="{tokenBalances[baseToken.symbol]?.amount} {baseToken.symbol}"
 					>
-						<img slot="media" src={token.logoURI} width="40" height="40" />
+						<svelte:fragment slot="media">
+							<TokenIcon token={wrappedToken} />
+						</svelte:fragment>
 
 						<svelte:fragment slot="footer">
 							APY:&nbsp;<strong>{formatPercent(depositBorrowRates[token.symbol].depositAPY)}</strong>
@@ -211,7 +218,9 @@
 							--f7-theme-color: {baseToken.color}
 						"
 					>
-						<img slot="media" src={baseToken.logoURI} width="40" height="40" />
+						<svelte:fragment slot="media">
+							<TokenIcon token={wrappedToken} />
+						</svelte:fragment>
 
 						<svelte:fragment slot="after">
 							APR:&nbsp;<strong><mark>{formatPercent(depositBorrowRates[wrappedToken.symbol].borrowAPR)}</mark></strong>
