@@ -69,7 +69,9 @@
 						<Icon slot="media" f7="person_crop_circle_badge" />
 
 						<svelte:fragment slot="footer">
-							<Progressbar progress={70} />
+							<p>
+								<Progressbar progress={70} />
+							</p>
 						</svelte:fragment>
 					</ListItem>
 				{/each}
@@ -89,11 +91,13 @@
 						accordionItem
 					>
 						<Icon slot="media" f7="person_crop_circle_badge" />
-						
-						<span slot="after">
-							<Badge>{proposal.type}</Badge>
+
+						<svelte:fragment slot="after">
 							{formatValue(proposal.amount, $quoteCurrency)}
-						</span>
+							<span class="after-footer">
+								{proposal.type}
+							</span>
+						</svelte:fragment>
 
 						<AccordionContent>
 							<Block>
@@ -135,10 +139,12 @@
 						>
 							<Icon slot="media" f7="person_crop_circle_badge" />
 
-							<div slot="after" class="line">
-								<Badge>{proposal.type}</Badge>
+							<svelte:fragment slot="after">
 								{formatValue(proposal.amount, $quoteCurrency)}
-							</div>
+								<span class="after-footer">
+									{proposal.type}
+								</span>
+							</svelte:fragment>
 						</ListItem>
 					{/each}
 				</List>
@@ -153,14 +159,21 @@
 				{#each circle.debts as debt}
 					<ListItem
 						title={debt.member.name}
-						after={formatValue(debt.amount, $quoteCurrency)}
 						footer={debt.description}
 					>
 						<Icon slot="media" f7="person_crop_circle_badge" />
 
+						<svelte:fragment slot="after">
+							{formatValue(debt.amount, $quoteCurrency)}
+							<span class="after-footer">
+								{debt.type}
+							</span>
+						</svelte:fragment>
+
 						<svelte:fragment slot="footer">
-							<p>{debt.type}</p>
-							<Progressbar progress={70} />
+							<p>
+								<Progressbar progress={70} />
+							</p>
 						</svelte:fragment>
 					</ListItem>
 				{/each}

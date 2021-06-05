@@ -67,16 +67,23 @@
 					title={name}
 					link="/apps/pollen/{id}"
 				>
-					<Icon slot="media" f7="person_crop_circle_badge" />
+					<Icon slot="media" f7={['house', 'paw', 'house_alt', 'lasso'][Math.random() * 4 | 0]}>
+						{#if proposals.length}
+							<Badge color="yellow">{proposals.length}</Badge>
+						{:else}
+							<Badge color="green" icon="checkmark"><Icon f7="checkmark" size="0.9em" /></Badge>
+						{/if}
+					</Icon>
 
 					<span slot="after">
-						<Badge>{proposals.length}</Badge>
 						{formatValue(balance, $quoteCurrency)}
 					</span>
 
 					<svelte:fragment slot="footer">
 						<p>{periodTimeRemaining} days to contribute</p>
-						<Progressbar progress={70} />
+						<p>
+							<Progressbar progress={70} />
+						</p>
 					</svelte:fragment>
 				</ListItem>
 
