@@ -109,7 +109,9 @@
 						</AccordionContent>
 					</ListItem>
 				{:else}
-					There aren't any outstanding proposals.
+					<ListItem>
+						There aren't any outstanding proposals.
+					</ListItem>
 				{/each}
 			</List>
 
