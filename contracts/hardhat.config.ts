@@ -41,6 +41,14 @@ task(
   }
 ).addParam("step", "The step to deploy");
 
+task(
+  "liveTest",
+  "Tests the connectors on the specified network",
+  async (...args: Parameters<ActionType<{ step: string }>>) => {
+    return await (await import("./tasks/tests")).test(...args);
+  }
+).addParam("step", "The step to deploy");
+
 // task("test", "Test the contracts", async () => {});
 const accounts: HDAccountsUserConfig = {
   mnemonic:
@@ -70,7 +78,7 @@ export default {
       chainId: ICeloNetwork.MAINNET,
       live: true,
       gasPrice: 0.5 * 10 ** 9,
-      gas: 8000000,
+      gas: 25e6,
     },
     alfajores: {
       url: fornoURLs[ICeloNetwork.ALFAJORES],
@@ -78,7 +86,7 @@ export default {
       chainId: ICeloNetwork.ALFAJORES,
       live: true,
       gasPrice: 0.5 * 10 ** 9,
-      gas: 8000000,
+      gas: 25e6,
     },
     hardhat: {
       chainId: 31337,

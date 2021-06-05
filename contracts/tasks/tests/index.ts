@@ -1,12 +1,17 @@
 import { ICeloNetwork, networkNames } from "@ubeswap/hardhat-celo";
 import { promises as fs } from "fs";
 import { ActionType, HardhatRuntimeEnvironment } from "hardhat/types";
+import { TestMoolaConnector } from "./MoolaConnector-test";
 
 export type TestFunction = (
   env: HardhatRuntimeEnvironment
 ) => Promise<{ [testName: string]: string }>;
 
-const testers: { [step: string]: TestFunction } = {};
+export type UnitTest = Promise<Record<string, string>>;
+
+const testers: { [step: string]: TestFunction } = {
+  moola: TestMoolaConnector,
+};
 
 const makeConfigPath = (step: string, chainId: ICeloNetwork): string =>
   __dirname +
