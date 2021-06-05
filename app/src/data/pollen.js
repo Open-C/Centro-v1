@@ -171,14 +171,7 @@ export const pollenCircles = writable([
 			}
 		],
 		proposals: [
-			{
-				type: 'Loan',
-				amount: 70,
-				member: {
-					name: 'Marek'
-				},
-				description: 'seeds & fertilizer'
-			}
+			
 		],
 		pastProposals: [
 			{
