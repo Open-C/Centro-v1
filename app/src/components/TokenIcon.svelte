@@ -3,7 +3,7 @@
 </script>
 
 
-<img class="token-icon" alt="{token.name} icon" title="{token.name} ({token.symbol})" src={token.logoURI} />
+<img class="token-icon" title="{token.name} ({token.symbol})" src={token.logoURI} />
 
 
 <style>
