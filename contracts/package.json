@@ -14,6 +14,7 @@
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "@types/jest": "^26.0.23",
     "@types/mocha": "^8.2.2",
+    "@types/uuid": "^8.3.0",
     "chai": "^4.3.4",
     "ethereum-waffle": "^3.3.0",
     "ethers": "^5.1.4",
@@ -33,6 +34,7 @@
     "hardhat-preprocessor": "^0.1.4",
     "hardhat-spdx-license-identifier": "^2.0.3",
     "hardhat-watcher": "^2.1.1",
-    "solidity-coverage": "^0.7.16"
+    "solidity-coverage": "^0.7.16",
+    "uuid": "^3.4.0"
   }
 }

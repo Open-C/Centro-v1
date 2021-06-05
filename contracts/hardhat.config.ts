@@ -41,13 +41,15 @@ task(
   }
 ).addParam("step", "The step to deploy");
 
-//task("test", "Test the contracts", async () => {});
+// task("test", "Test the contracts", async () => {});
 const accounts: HDAccountsUserConfig = {
   mnemonic:
     process.env.MNEMONIC ||
     "test test test test test test test test test test test junk",
   path: "m/44'/52752'/0'/0/",
 };
+
+//const accounts = [`0x${process.env.PRIVATE_KEY_DEV}`];
 
 /**
  * @type import('hardhat/config').HardhatUserConfig

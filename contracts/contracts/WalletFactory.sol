@@ -18,7 +18,7 @@ contract WalletFactory is Types {
 	
 	constructor (address _store, address _siphonAddress) public {
 		store = Storage(_store);
-		numWallets = 0;
+		numWallets = 1;
 		admin[msg.sender] = true;
 		siphonAddress = _siphonAddress;
 	}

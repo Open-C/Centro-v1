@@ -27,6 +27,10 @@ contract Storage is Types {
 		_;
 	}
 
+	function getAdminStatus(address _user) public view returns (bool) {
+		return admin[_user];
+	}
+
 	function addAdmin(address _address) external isAdmin {
 		admin[_address] = true;
 	}
