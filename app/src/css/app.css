@@ -14,6 +14,9 @@
 	/* --f7-block-margin-vertical: 0; */
 	--f7-block-margin-vertical: 1.5em;
 
+	/* --f7-block-title-font-size: 1.33em;
+	--f7-block-title-line-height: 1.3; */
+
 	/* --f7-sheet-bg-color: rgba(0, 0, 0, 0.9); */
 
 	/* --f7-card-bg-color: #ffffff12; */
@@ -63,7 +66,7 @@
 	box-sizing: border-box;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, p {
 	margin: 0;
 }
 
@@ -167,6 +170,7 @@ input {
 	grid-area: stack;
 }
 
+
 /* .block {
 	display: grid;
 	gap: var(--f7-grid-gap);
@@ -182,14 +186,20 @@ input {
 .block:last-child, .list:last-child {
 	margin-bottom: 0;
 }
-.block > * + * {
-	margin-top: var(--f7-grid-row-gap);
-}
-
 .block.inset > .block.inset {
 	margin-left: 0;
 	margin-right: 0;
 }
+
+
+.list.inset, .block.block-strong {
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.block > * + *, .card-content > * + * {
+	margin-top: var(--f7-grid-row-gap);
+}
+
 
 /* .accordion-item .block {
 	margin-top: var(--f7-grid-row-gap);
@@ -244,7 +254,7 @@ input {
 }
 
 .framework7-root:not(.theme-dark) .list .block,
-.framework7-root:not(.theme-dark) .block .block {
+.framework7-root:not(.theme-dark) .block-strong .block {
 	--f7-block-strong-bg-color: rgba(0, 0, 0, 0.05);
 }
 
@@ -252,6 +262,22 @@ input {
 	margin: 0 0.5em;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
+
+
+/* .page {
+	position: relative;
+	margin: 0;
+}
+.page > .toolbar {
+	position: relative;
+} */
+
+
+/* .block-card {
+	border-radius: var(--f7-block-inset-border-radius);
+	background-color: var(--f7-block-strong-bg-color);
+} */
+
 
 :not(ul) > li {
 	list-style-type: none;
