@@ -31,7 +31,7 @@
 	import { getDevice } from 'framework7'
 
 
-	import { Block, Row, Button, Range, Input, Toolbar, Sheet } from 'framework7-svelte'
+	import { Block, Row, Button, Range, Input, Toolbar, Sheet, PageContent } from 'framework7-svelte'
 	import TokenIcon from './TokenIcon.svelte'
 	import TokenSelect from './TokenSelect.svelte'
 </script>
@@ -103,7 +103,7 @@
 				push
 			>
 			<!-- opened={isFocused || undefined} -->
-				<Block>
+				<PageContent>
 					<Row>
 						<Button small fill color="gray" onClick={e => {amount = 0.10 * maxAmount; e.preventDefault()}}>10%</Button>
 						<Button small fill color="gray" onClick={() => amount = 0.25 * maxAmount}>25%</Button>
@@ -111,7 +111,7 @@
 						<Button small fill color="gray" onClick={() => amount = 0.75 * maxAmount}>75%</Button>
 						<Button small fill color="gray" onClick={() => amount = 1.00 * maxAmount}>max</Button>
 					</Row>
-				</Block>
+				</PageContent>
 			</Sheet>
 		{/if}
 

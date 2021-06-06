@@ -34,13 +34,13 @@
 	// let provider = useStore(walletStore, 'provider', _ => provider = _)
 	
 	
-	import { Button, Sheet, Block, Row, Icon, Link, Preloader, Toolbar } from 'framework7-svelte'
+	import { Button, Sheet, Block, Row, Icon, Link, Preloader, Toolbar, PageContent } from 'framework7-svelte'
 	import Address from './Address.svelte'
 </script>
 
 
 <Sheet
-	class="transaction-sheet"
+	class="transaction-sheet swipe-handle"
 	opened={isOpen}
 	onSheetClosed={() => isOpen = false}
 	swipeToClose
@@ -59,7 +59,7 @@
 		</Toolbar>
 	{/if}
 
-	<div class="sheet-modal-swipe-step">
+	<PageContent class="sheet-modal-swipe-step">
 		<Block>
 			<Row>
 				<h2>{transactionAction}</h2>
@@ -103,7 +103,7 @@
 				<Button medium fill sheetClose>Done</Button>
 			{/if}
 		</Block>
-	</div>
+	</PageContent>
 
 	<!-- <div>Extra Content</div> -->
 </Sheet>

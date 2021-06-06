@@ -226,14 +226,14 @@ input {
 	right: 0.5em;
 	width: auto;
 }
-.sheet-modal.sheet-modal-bottom:before {
+.sheet-modal.sheet-modal-bottom.swipe-handle:before {
 	content: '';
-	height: 0.5em;
+	height: 10px;
 	width: 20%;
-	margin: 0.5em auto 0;
+	margin: 0.75rem auto 0;
 	position: relative;
 	background-color: rgba(200, 200, 200, 0.3);
-	border-radius: 1em;
+	border-radius: 5px;
 }
 
 :root {

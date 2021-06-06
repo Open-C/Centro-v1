@@ -75,6 +75,7 @@
 
 <Sheet
 	bind:this={sheetComponent}
+	class="swipe-handle"
 	opened={isSelecting}
 	onSheetClosed={() => isSelecting = false}
 	swipeToClose

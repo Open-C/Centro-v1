@@ -9,7 +9,7 @@
 	let requestStarted = false
 
 
-	import { Block, Button, Sheet } from 'framework7-svelte'
+	import { Block, Button, Sheet, PageContent } from 'framework7-svelte'
 	import TokenAmountSelect from './TokenAmountSelect.svelte'
 </script>
 
@@ -29,18 +29,20 @@
 
 
 <Sheet
-	class="request-sheet"
+	class="request-sheet swipe-handle"
 	opened={requestStarted}
 	onSheetClosed={() => requestStarted = false}
 	swipeToClose
 	swipeToStep
 	backdrop
 >
-	<Block>
-		<h2>Show this QR code to receive tokens.</h2>
-		<img alt="QR Code" width="200" height="200" />
-	</Block>
-	<Block>
-		<Button large fill sheetClose>Done</Button>
-	</Block>
+	<PageContent>
+		<Block>
+			<h2>Show this QR code to receive tokens.</h2>
+			<img alt="QR Code" width="200" height="200" />
+		</Block>
+		<Block>
+			<Button large fill sheetClose>Done</Button>
+		</Block>
+	</PageContent>
 </Sheet>
