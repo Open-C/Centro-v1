@@ -58,7 +58,7 @@
 </script>
 
 <Page style="--f7-theme-color: {tokensBySymbol['mcUSD'].color}">
-	<Navbar backLink="Apps">
+	<Navbar backLink="Apps" style="--f7-theme-color: {tokensBySymbol['mcUSD'].color}">
 		<NavTitle>
 			<img src={require('../../static/images/moola-logo.png').default} alt="MoolaMarket" width={87.5} height={35} style="margin-bottom: 0.2em" />
 			<div class="subtitle">earn interest on idle assets</div>

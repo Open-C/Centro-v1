@@ -14,7 +14,7 @@
 
 
 <Page style="--f7-theme-color: {tokensBySymbol['cEUR'].color}">
-	<Navbar backLink="Apps">
+	<Navbar backLink="Apps" style="--f7-theme-color: {tokensBySymbol['cEUR'].color}">
 		<NavTitle>
 			Pay
 			<div class="subtitle">send money to anyone, anywhere</div>

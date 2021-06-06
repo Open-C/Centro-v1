@@ -15,7 +15,7 @@
 </script>
 
 <Page style="--f7-theme-color: {tokensBySymbol['CELO'].color}">
-	<Navbar backLink="Apps">
+	<Navbar backLink="Apps" style="--f7-theme-color: {tokensBySymbol['CELO'].color}">
 		<NavTitle>
 			Pollen
 			<div class="subtitle">save and lend with trusted peers</div>

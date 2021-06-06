@@ -10,7 +10,7 @@
 </script>
 
 <Page style="--f7-theme-color: {tokensBySymbol['UBE'].color}">
-	<Navbar backLink="Apps">
+	<Navbar backLink="Apps" style="--f7-theme-color: {tokensBySymbol['UBE'].color}">
 		<NavTitle>
 			<img src={require('../../static/images/ubeswap-logo.png').default} alt="Ubeswap" width={25} height={25} />
 			Ubeswap

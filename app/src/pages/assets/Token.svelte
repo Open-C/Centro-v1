@@ -26,7 +26,7 @@
 
 
 <Page style="--f7-theme-color: {token.color}">
-	<Navbar backLink="Assets">
+	<Navbar backLink="Assets" style="--f7-theme-color: {token.color}">
 		<NavTitle>
 			{token.symbol}
 			<div class="subtitle">{token.name}</div>

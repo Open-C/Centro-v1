@@ -13,7 +13,7 @@
 </script>
 
 <Page style="--f7-theme-color: {tokensBySymbol['cMCO2'].color}">
-	<Navbar backLink="Apps">
+	<Navbar backLink="Apps" style="--f7-theme-color: {tokensBySymbol['cMCO2'].color}">
 		<NavTitle>
 			Mento
 			<div class="subtitle">buy/sell CELO from the reserve</div>
