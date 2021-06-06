@@ -4,7 +4,36 @@
 	--f7-theme-color-rgb: 0, 142, 255;
 	--f7-theme-color-shade: #0077d6;
 	--f7-theme-color-tint: #29a0ff;
+	
+	--background-color: #efeff4;
+	--foreground-color: #f7f7f8;
+	--foreground-color-relative: #ffffffdd;
+}
+:root .theme-dark {
+	/* --background-color: hsl(230deg 24% 15%); */
+	/* --background-color: hsl(230deg 28% 25%); */
+	--background-color: hsl(229deg 26% 21%);
 
+	/* --foreground-color: #30303099; */
+	/* --foreground-color: hsl(229deg 26% 21%); */
+	--foreground-color: hsl(230deg 24% 16%);
+	--foreground-color: hsl(230deg 24% 17%);
+	--foreground-color-relative: hsla(230deg 24% 8% / 0.25);
+}
+
+:root, :root .theme-dark {
+	--f7-page-bg-color: var(--background-color);
+	--f7-card-bg-color: var(--foreground-color-relative);
+	--f7-block-strong-bg-color: var(--foreground-color-relative);
+	--f7-card-expandable-bg-color: var(--foreground-color);
+	--f7-list-bg-color: var(--foreground-color-relative);
+	--f7-toolbar-bg-color: var(--foreground-color);
+	--f7-bars-bg-color: var(--foreground-color);
+	--f7-sheet-bg-color: var(--foreground-color);
+	--f7-navbar-bg-color: var(--foreground-color);
+}
+
+:root {
 	--f7-grid-row-gap: calc(0.75 * var(--f7-grid-gap));
 
 	--f7-button-height: 2.3em;
@@ -40,29 +69,6 @@
 
 
 	--f7-progressbar-height: 3px;
-}
-:root .theme-dark {
-	/* --background-color: hsl(230deg 24% 15%); */
-	/* --background-color: hsl(230deg 28% 25%); */
-	--background-color: hsl(229deg 26% 21%);
-	/* --foreground-color: #30303099; */
-	/* --foreground-color: hsl(229deg 26% 21%); */
-	--foreground-color: hsl(230deg 24% 16%);
-	--foreground-color: hsl(230deg 24% 17%);
-	--foreground-color-relative: hsla(230deg 24% 8% / 0.25);
-
-	
-	--f7-page-bg-color: var(--background-color);
-
-	--f7-card-bg-color: var(--foreground-color-relative);
-	--f7-block-strong-bg-color: var(--foreground-color-relative);
-	--f7-card-expandable-bg-color: var(--foreground-color);
-	--f7-list-bg-color: var(--foreground-color);
-	--f7-toolbar-bg-color: var(--foreground-color);
-	--f7-bars-bg-color: var(--foreground-color);
-	--f7-sheet-bg-color: var(--foreground-color);
-
-	--f7-navbar-bg-color: var(--foreground-color);
 }
 
 * {
