@@ -10,12 +10,17 @@
 	import { formatValue } from '../../utils/formatValue'
 
 
-	import { Page, Navbar, Block, Progressbar, ListItem, BlockTitle, List, Segmented, Button, Icon, Badge } from 'framework7-svelte'
+	import { Page, Navbar, NavTitle, Block, Progressbar, ListItem, BlockTitle, List, Segmented, Button, Icon, Badge } from 'framework7-svelte'
 	import CurrentWallet from '../../components/CurrentWallet.svelte'
 </script>
 
 <Page style="--f7-theme-color: {tokensBySymbol['CELO'].color}">
-	<Navbar title="Pollen" backLink="Apps" />
+	<Navbar backLink="Apps">
+		<NavTitle>
+			Pollen
+			<div class="subtitle">save and lend with trusted peers</div>
+		</NavTitle>
+	</Navbar>
 	<!-- <Navbar title="Pollen" backLink="Apps">
 		<svelte:fragment slot="right">
 			<CurrentWallet />

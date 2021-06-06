@@ -1,7 +1,12 @@
 <script>
-	import { Page, Navbar } from 'framework7-svelte'
+	import { Page, Navbar, NavTitle } from 'framework7-svelte'
 </script>
 
 <Page>
-	<Navbar title="Carbon Offset" backLink="Apps" />
+<Navbar backLink="Apps">
+	<NavTitle>
+		Carbon Offset
+		<div class="subtitle">buy quality carbon credits</div>
+	</NavTitle>
+</Navbar>
 </Page>

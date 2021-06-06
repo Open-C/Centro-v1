@@ -5,7 +5,7 @@
 	const token = tokensBySymbol['cUSD']
 
 
-	import { Page, Navbar, Block } from 'framework7-svelte'
+	import { Page, Navbar, Block, NavTitle } from 'framework7-svelte'
 	import CurrentWallet from '../../components/CurrentWallet.svelte'
 	import TabLayout from '../../components/TabLayout.svelte'
 	import TokenRequest from '../../components/TokenRequest.svelte'
@@ -14,7 +14,12 @@
 
 
 <Page style="--f7-theme-color: {tokensBySymbol['cEUR'].color}">
-	<Navbar title="Pay" backLink="Apps" />
+	<Navbar backLink="Apps">
+		<NavTitle>
+			Pay
+			<div class="subtitle">send money to anyone, anywhere</div>
+		</NavTitle>
+	</Navbar>
 	<!-- <Navbar title="Pay" backLink="Apps">
 		<svelte:fragment slot="right">
 			<CurrentWallet />

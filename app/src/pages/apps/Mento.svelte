@@ -6,18 +6,24 @@
 	let toToken
 
 
-	import { Page, Navbar, Block } from 'framework7-svelte'
+	import { Page, Navbar, Block, NavTitle } from 'framework7-svelte'
 	import CurrentWallet from '../../components/CurrentWallet.svelte'
 	import TokenSwap from '../../components/TokenSwap.svelte'
 	import PriceChart from '../../components/PriceChart.svelte'
 </script>
 
 <Page style="--f7-theme-color: {tokensBySymbol['cMCO2'].color}">
-	<Navbar title="Mento" backLink="Apps">
-		<!-- <svelte:fragment slot="right">
-			<CurrentWallet />
-		</svelte:fragment> -->
+	<Navbar backLink="Apps">
+		<NavTitle>
+			Mento
+			<div class="subtitle">buy/sell CELO from the reserve</div>
+		</NavTitle>
 	</Navbar>
+	<!-- <Navbar title="Mento" backLink="Apps">
+		<svelte:fragment slot="right">
+			<CurrentWallet />
+		</svelte:fragment>
+	</Navbar> -->
 
 	<Block strong inset>
 		{#if fromToken}
