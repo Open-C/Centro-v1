@@ -75,6 +75,10 @@
 	box-sizing: border-box;
 }
 
+.page-content {
+	background: linear-gradient(135deg, transparent, var(--f7-theme-color) 1000%);
+}
+
 h1, h2, h3, h4, h5, h6, p {
 	margin: 0;
 }
