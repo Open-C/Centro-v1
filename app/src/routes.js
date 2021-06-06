@@ -2,11 +2,17 @@ export default [
 	{
 		path: '/',
 		component: require('./pages/Apps.svelte').default,
+		// options: {
+		// 	transition: 'f7-dive',
+		// }
 		master: true
 	},
 	{
 		path: '/apps',
 		component: require('./pages/Apps.svelte').default,
+		// options: {
+		// 	transition: 'f7-dive',
+		// },
 		master: true
 	},
 	{
@@ -50,6 +56,10 @@ export default [
 		path: '/assets',
 		component: require('./pages/Assets.svelte').default,
 		master: true
+	},
+	{
+		path: '/assets/:tokenSymbolOrContractAddress',
+		component: require('./pages/assets/Token.svelte').default
 	},
 	{
 		path: '/settings',

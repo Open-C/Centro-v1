@@ -71,14 +71,18 @@
 	{#each sections as {title, data: tokens}}
 		<BlockTitle medium>{title}</BlockTitle>
 
-		<TokenList inset accordionList
+		<TokenList inset
+			{tokens}
+			link={token => `/assets/${token.symbol || token.contractAddress}`}
+		/>
+		<!-- <TokenList inset accordionList
 			{tokens}
 			let:token
 		>
 			<AccordionContent>
 				<TokenRequestOrSend {token} />
 			</AccordionContent>
-		</TokenList>
+		</TokenList> -->
 	{/each}
 
 	<BlockTitle medium>Deposit/Withdraw</BlockTitle>
