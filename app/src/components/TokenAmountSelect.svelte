@@ -59,7 +59,7 @@
 		<Input
 			type={getDevice().ios ? 'text' : 'number'}
 			inputmode="decimal"
-			pattern="[0-9]*"
+			pattern="[0-9.]*"
 			class="token-amount-input"
 			bind:value={amount}
 			min={0}
