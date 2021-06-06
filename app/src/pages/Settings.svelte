@@ -28,7 +28,7 @@
 			smartSelectParams={{
 				openIn: 'popup',
 				searchbar: true,
-				searchbarPlaceholder: 'Search Tokens',
+				searchbarPlaceholder: 'Search Currencies',
 				scrollToSelectedItem: true,
 
 				closeOnSelect: true
