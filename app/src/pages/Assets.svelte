@@ -1,5 +1,6 @@
 <script>
 	import { quoteCurrency } from '../data/settings'
+	import { transactions } from '../data/transactions'
 	import { tokensBySymbol, baseTokens, ethereumTokens, otherTokens } from '../data/tokens'
 
 
@@ -17,61 +18,14 @@
 			data: otherTokens
 		}
 	]
+	
 
-
-	let transactions = [
-		{
-			action: 'Send',
-			token: tokensBySymbol['CELO'],
-			amount: 10,
-			price: 10,
-			timestamp: 1612345678901
-		},
-		{
-			action: 'Withdraw',
-			token: tokensBySymbol['cUSD'],
-			amount: 11,
-			price: 11.23,
-			timestamp: 1622345678901
-		},
-		{
-			action: 'Deposit',
-			token: tokensBySymbol['cEUR'],
-			amount: 600,
-			price: 4.5,
-			timestamp: 1621234567890
-		},
-		{
-			action: 'Sell',
-			token: tokensBySymbol['CELO'],
-			amount: 10,
-			price: 10,
-			timestamp: 1622345678901
-		},
-		{
-			action: 'Buy',
-			token: tokensBySymbol['cUSD'],
-			amount: 100,
-			price: 20.09,
-			timestamp: 1622345678901
-		},
-		{
-			action: 'Receive',
-			token: tokensBySymbol['cEUR'],
-			amount: 10,
-			price: 235,
-			timestamp: 1622345678901
-		}
-	]
-
-
-	import { actionVerbs } from '../data/actions'
 	import { formatValue } from '../utils/formatValue'
 
 
 	import { Page, Navbar, NavLeft, NavTitle, NavTitleLarge, NavRight, Link, Toolbar, Block, BlockTitle, List, ListItem, Row, Col, Button, AccordionContent, Card, Progressbar, Icon } from 'framework7-svelte'
 	import CurrentWallet from '../components/CurrentWallet.svelte'
-	import TokenIcon from '../components/TokenIcon.svelte'
+	import Transactions from '../components/Transactions.svelte'
 	import TokenList from '../components/TokenList.svelte'
 	import TokenSend from '../components/TokenSend.svelte'
 	import TokenRequestOrSend from '../components/TokenRequestOrSend.svelte'
@@ -159,32 +113,5 @@
 	</List>
 
 	<BlockTitle medium>Past Transactions</BlockTitle>
-	<List accordionList inset>
-		{#each transactions as transaction}
-			<ListItem accordionItem
-				title="{actionVerbs[transaction.action].pastTense} {formatValue(transaction.amount, transaction.token.symbol)}"
-				footer={new Date(transaction.timestamp).toLocaleDateString()}
-				style="
-					--f7-theme-color: {transaction.token.color}
-				"
-			>
-				<svelte:fragment slot="media">
-					<TokenIcon token={transaction.token} />
-				</svelte:fragment>
-
-				<div slot="after">
-					<mark class="value">{formatValue(transaction.price * transaction.amount, $quoteCurrency)}</mark>
-					<span class="after-footer">
-						Price: {formatValue(transaction.price, $quoteCurrency)}
-					</span>
-				</div>
-
-				<AccordionContent>
-					<Block>
-						<Button fill>View in Block Explorer</Button>
-					</Block>
-				</AccordionContent>
-			</ListItem>
-		{/each}
-	</List>
+	<Transactions transactions={$transactions} />
 </Page>
