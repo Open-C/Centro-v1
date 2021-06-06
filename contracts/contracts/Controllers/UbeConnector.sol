@@ -113,13 +113,16 @@ contract UbeSwapConnector is MentoConnector {
     function makeSwap(address _tokIn, address _tokOut, uint256 _amtIn, uint256 _minOut, uint256 _walletID) public returns (uint256 _received) {
         CentroWallet wallet = _getWallet(_walletID);
         address ubeRouter = _getUbeRouter();
+        address pair = _getTokenPair(_tokIn, _tokOut);
         (uint256 reserveIn, uint256 reserveOut) = _getUbeReserves(_tokIn, _tokOut);
-        require(_minOut <= UbeSwapUtils.ubeGetAmountOut(_amtIn, reserveIn, reserveOut), "Reserve rate lower than user's minimum specified");
+        // require(_minOut <= UbeSwapUtils.ubeGetAmountOut(_amtIn, reserveIn, reserveOut), "Reserve rate lower than user's minimum specified");
+        wallet.approve(msg.sender, _tokIn, pair, _amtIn);
         wallet.approve(msg.sender, _tokIn, ubeRouter, _amtIn);
         address[] memory path = new address[](2);
         path[0] = _tokIn;
         path[1] = _tokOut;
-        bytes memory data = abi.encodeWithSignature(SWAP_EXACT_TOKENS, _amtIn, _amtIn, path, address(wallet), block.timestamp);
+        // TO DO: Fix this call. See swapExactTokensForTokens in the UBE github.
+        bytes memory data = abi.encodeWithSignature(SWAP_EXACT_TOKENS, _amtIn, _minOut, path, address(wallet), block.timestamp);
         bytes memory resp = wallet.callContract(msg.sender, ubeRouter, data);
         return abi.decode(resp, (uint256));
     }
@@ -162,7 +165,7 @@ contract UbeSwapConnector is MentoConnector {
     // @param _amt2 the desired amount of the second token to add to the LP
     // @param _walletID the specified wallet
     // @return response of UbeRouter addLiquidity function
-    function addLiquidity(address _tok1, address _tok2, uint256 _amt1, uint256 _amt2, uint256 _walletID) internal returns (bytes memory) {
+    function addLiquidity(address _tok1, address _tok2, uint256 _amt1, uint256 _amt2, uint256 _walletID) public returns (bytes memory) {
         CentroWallet wallet = _getWallet(_walletID);
         address ubeRouter = _getUbeRouter();
         
@@ -172,7 +175,7 @@ contract UbeSwapConnector is MentoConnector {
         if (_amt2 > 0) {
             wallet.approve(msg.sender, _tok2, ubeRouter, _amt2);
         }
-        bytes memory data = abi.encodeWithSignature(ADD_LIQUIDITY, _tok1, _tok2, _amt1, _amt2, _amt1.sub(5), _amt2, address(wallet), block.timestamp);
+        bytes memory data = abi.encodeWithSignature(ADD_LIQUIDITY, _tok1, _tok2, uint(_amt1), uint(_amt2), uint(_amt1 - 500), uint(_amt2), address(wallet), block.timestamp + 1);
         emit AddedLiquidity(address(wallet), _tok1, _tok2, _amt1, _amt2);
         return wallet.callContract(msg.sender, ubeRouter, data);
     }

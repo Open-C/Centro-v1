@@ -78,7 +78,7 @@ export default {
       chainId: ICeloNetwork.MAINNET,
       live: true,
       gasPrice: 0.5 * 10 ** 9,
-      gas: 25e6,
+      gas: 8000000,
     },
     alfajores: {
       url: fornoURLs[ICeloNetwork.ALFAJORES],
@@ -86,7 +86,7 @@ export default {
       chainId: ICeloNetwork.ALFAJORES,
       live: true,
       gasPrice: 0.5 * 10 ** 9,
-      gas: 25e6,
+      gas: 8000000,
     },
     hardhat: {
       chainId: 31337,
