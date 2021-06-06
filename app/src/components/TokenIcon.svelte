@@ -1,5 +1,5 @@
 <script>
-    export let token
+	export let token
 </script>
 
 
@@ -7,9 +7,9 @@
 
 
 <style>
-    .token-icon {
-        border-radius: 30%;
-        width: 2.4em;
-        height: 2.4em;
-    }
+	.token-icon {
+		border-radius: 30%;
+		width: 2.4em;
+		height: 2.4em;
+	}
 </style>
