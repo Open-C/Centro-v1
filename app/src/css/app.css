@@ -22,6 +22,8 @@
 	/* --f7-card-bg-color: #ffffff12; */
 
 	--f7-panel-width: 360px;
+	--f7-panel-width: 80vw;
+	--f7-panel-width: min(80vw, 360px);
 	--f7-panel-backdrop-bg-color: rgba(0, 0, 0, 0.5);
 
 	--f7-page-master-width: 360px;
