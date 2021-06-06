@@ -4,7 +4,9 @@
 
 	import { Page, Navbar, NavTitle, Block } from 'framework7-svelte'
 	import CurrentWallet from '../../components/CurrentWallet.svelte'
+	import TabLayout from '../../components/TabLayout.svelte'
 	import TokenSwap from '../../components/TokenSwap.svelte'
+	import TokenPool from '../../components/TokenPool.svelte'
 </script>
 
 <Page style="--f7-theme-color: {tokensBySymbol['UBE'].color}">
@@ -29,7 +31,23 @@
 	</Navbar> -->
 
 	
-	<TokenSwap
-		availableTokens={tokens}
-	/>
+	<TabLayout swipeable
+		tabs={{
+			'swap': 'Swap',
+			'deposit': 'Deposit/Farm'
+		}}
+		startTab={'swap'}
+		
+		let:tab
+	>
+		{#if tab === 'swap'}
+			<TokenSwap
+				availableTokens={tokens}
+			/>
+		{:else if tab === 'deposit'}
+			<TokenPool
+				availableTokens={tokens}
+			/>
+		{/if}
+	</TabLayout>
 </Page>
