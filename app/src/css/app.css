@@ -27,6 +27,7 @@
 	--f7-page-master-width: 360px;
 
 	--f7-page-content-extra-padding-top: var(--f7-block-padding-vertical);
+	--f7-page-content-extra-padding-bottom: var(--f7-block-padding-vertical);
 
 	--f7-sheet-height: auto;
 
@@ -311,7 +312,7 @@ input {
 
 :root {
 	--f7-navbar-height: 4.5rem;
-	--extra-top-navbar-height: 2em;
+	--extra-top-navbar-height: 2rem;
 
 	--f7-navbar-title-font-size: 1.75rem;
 	--f7-navbar-title-font-weight: var(--f7-navbar-large-title-font-weight);
