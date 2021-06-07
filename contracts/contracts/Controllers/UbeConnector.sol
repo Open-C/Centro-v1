@@ -74,9 +74,9 @@ contract UbeSwapConnector is MentoConnector {
     event AddedLiquidity(address wallet, address tok1, address tok2, uint256 amt1, uint256 amt2);
     event RemovedLiquidity(address wallet, address tok1, address tok2, uint256 liquidity);
     
-    string private constant ADD_LIQUIDITY  = "addLiquidity(address,address,uint,uint,uint,uint,address,uint)";
-    string private constant REMOVE_LIQUIDITY = "removeLiquidity(address,address,uint,uint,uint,address,uint)";
-    string private constant SWAP_EXACT_TOKENS = "swapExactTokensForTokens(uint,uint,address[],address,uint)";
+    string private constant ADD_LIQUIDITY  = "addLiquidity(address,address,uint256,uint256,uint256,uint256,address,uint256)";
+    string private constant REMOVE_LIQUIDITY = "removeLiquidity(address,address,uint256,uint256,uint256,address,uint256)";
+    string private constant SWAP_EXACT_TOKENS = "swapExactTokensForTokens(uint256,uint256,address[],address,uint256)";
 
     // @dev returns address of UbeRouter contract
     function _getUbeRouter() internal view returns (address) {
@@ -124,7 +124,8 @@ contract UbeSwapConnector is MentoConnector {
         // TO DO: Fix this call. See swapExactTokensForTokens in the UBE github.
         bytes memory data = abi.encodeWithSignature(SWAP_EXACT_TOKENS, _amtIn, _minOut, path, address(wallet), block.timestamp);
         bytes memory resp = wallet.callContract(msg.sender, ubeRouter, data);
-        return abi.decode(resp, (uint256));
+        uint256[] memory amounts = abi.decode(resp, (uint256[]));
+        return amounts[amounts.length - 1];
     }
     
     // @notice Uses one asset to split and add liquidity to a lending pool of _tok1 and _tok2
@@ -165,19 +166,22 @@ contract UbeSwapConnector is MentoConnector {
     // @param _amt2 the desired amount of the second token to add to the LP
     // @param _walletID the specified wallet
     // @return response of UbeRouter addLiquidity function
-    function addLiquidity(address _tok1, address _tok2, uint256 _amt1, uint256 _amt2, uint256 _walletID) public returns (bytes memory) {
+    function addLiquidity(address _tok1, address _tok2, uint256 _amt1, uint256 _amt2, uint256 _walletID) public returns (bool) {
         CentroWallet wallet = _getWallet(_walletID);
         address ubeRouter = _getUbeRouter();
-        
+        address pair = _getTokenPair(_tok1, _tok2);
         if (_amt1 > 0) {
+            wallet.approve(msg.sender, _tok1, pair, _amt1);
             wallet.approve(msg.sender, _tok1, ubeRouter, _amt1);
         }
         if (_amt2 > 0) {
+            wallet.approve(msg.sender, _tok2, pair, _amt2);
             wallet.approve(msg.sender, _tok2, ubeRouter, _amt2);
         }
-        bytes memory data = abi.encodeWithSignature(ADD_LIQUIDITY, _tok1, _tok2, uint(_amt1), uint(_amt2), uint(_amt1 - 500), uint(_amt2), address(wallet), block.timestamp + 1);
-        emit AddedLiquidity(address(wallet), _tok1, _tok2, _amt1, _amt2);
-        return wallet.callContract(msg.sender, ubeRouter, data);
+        bytes memory data = abi.encodeWithSignature(ADD_LIQUIDITY, _tok1, _tok2, _amt1, _amt2, 0, 0, address(wallet), block.timestamp);
+        //emit AddedLiquidity(address(wallet), _tok1, _tok2, _amt1, _amt2);
+        wallet.callContract(msg.sender, ubeRouter, data);
+        return true;
     }
     
     
