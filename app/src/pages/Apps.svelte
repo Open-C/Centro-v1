@@ -136,20 +136,28 @@
 
 <style>
 	.apps {
+		--size: 8rem;
+		--size: 8.5rem;
+		font-size: calc(8.5em / 8);
+
 		display: grid;
-		/* grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); */
-		grid-template-columns: repeat(auto-fit, 8rem);
+		/* grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); */
+		grid-template-columns: repeat(auto-fit, var(--size));
 		justify-content: center;
 		text-align: center;
 		gap: var(--f7-grid-gap);
 	}
 
+	@supports not ( aspect-ratio: 1 ) {
+		.app {
+			height: var(--size);
+		}
+	}
 	.app {
 		border-radius: 1em;
 		padding: 0 1em;
 		max-width: 100%;
-		/* aspect-ratio: 1; */
-		height: 8rem;
+		aspect-ratio: 1;
 
 		display: grid;
 		place-content: center;
