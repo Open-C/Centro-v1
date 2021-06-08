@@ -76,6 +76,10 @@
 	box-sizing: border-box;
 }
 
+.framework7-root {
+	background-color: var(--f7-page-bg-color);
+}
+
 .page-content {
 	background: linear-gradient(135deg, transparent, var(--f7-theme-color) 1000%);
 }
