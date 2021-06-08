@@ -8,6 +8,10 @@ import "./Controllers/UbeConnector.sol";
 
 contract CentroMain is UbeCombined {
 
+	event DepositMade(address _wallet, address _token, uint256 _amount);
+	event WithdrawMade(address _wallet, address _token, uint256 _amount);
+	event TransferMade(address _sender, address _receiver, address _token, uint256 _amount);
+
 	constructor(address _store, address _siphonAddress) UbeCombined(_store, _siphonAddress) {}
 
 	function persistWallet(uint256 _walletID) public returns (string memory) {
@@ -36,6 +40,7 @@ contract CentroMain is UbeCombined {
 
 	function deposit(address _token, uint256 _amount, uint256 _walletID) external payable {
 		CentroWallet wallet = _getWallet(_walletID);
+		emit DepositMade(address(wallet), _token, _amount);
 		wallet.deposit(msg.sender, _token, _amount);
 	}
 
@@ -45,6 +50,7 @@ contract CentroMain is UbeCombined {
 
 	function withdraw(address _token, uint256 _amount, uint256 _walletID) external payable {
 		CentroWallet wallet = _getWallet(_walletID);
+		emit WithdrawMade(address(wallet), _token, _amount);
 		wallet.withdraw(msg.sender, _token, _amount);
 	}
 
@@ -53,6 +59,8 @@ contract CentroMain is UbeCombined {
 		CentroWallet to = _getWallet(_receiver);
 		from.send(msg.sender, _token, address(to), _amount);
 		to.incrementBasis(_token, _amount);
+
+		emit TransferMade(address(from), address(to), _token, _amount);
 	}
 
 	// function callContract(string calldata _connector, bytes calldata _calldata, uint256 _walletID) external {
