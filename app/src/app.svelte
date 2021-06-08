@@ -83,7 +83,7 @@
 	})
 
 
-	import { App, Panel, Views, View, Popup, Page, Navbar, Toolbar, NavRight, Link, Block, BlockTitle, LoginScreen, LoginScreenTitle, List, ListItem, ListInput, ListButton, BlockFooter, Button } from 'framework7-svelte'
+	import { App, Appbar, Panel, Views, View, Popup, Page, Navbar, Toolbar, NavRight, Link, Block, BlockTitle, LoginScreen, LoginScreenTitle, List, ListItem, ListInput, ListButton, BlockFooter, Button } from 'framework7-svelte'
 	import Wallets from './pages/settings/Wallets.svelte'
 	import CurrentWallet from './components/CurrentWallet.svelte'
 </script>
@@ -103,6 +103,13 @@
 
 	<!-- Views/Tabs container -->
 	<Views tabs class="safe-areas">
+		<Appbar noHairline>
+			<div class="left"></div>
+			<div class="right">
+				<CurrentWallet />
+			</div>
+		</Appbar>
+
 		<!-- Tabbar for switching views-tabs -->
 		<Toolbar tabbar labels bottom>
 			<Link tabLink="#view-assets" iconIos="f7:money_dollar_circle" iconAurora="f7:money_dollar_circle" iconMd="f7:money_dollar_circle" text="Assets" />
@@ -119,11 +126,6 @@
 		<!-- Settings View -->
 		<View id="view-settings" name="settings" tab url="/settings" />
 	</Views>
-
-
-	<div class="current-wallet">
-		<CurrentWallet />
-	</div>
 
 
 	<!-- Popup -->
@@ -173,10 +175,8 @@
 
 
 <style>
-	.current-wallet {
-		position: fixed;
-		right: calc(var(--f7-safe-area-right) + 0.5em);
-		top: calc(var(--f7-safe-area-top) + 0.5em);
-		z-index: 10000;
+	:global(.appbar .chip) {
+		align-self: flex-start;
+		margin-top: 0.5em;
 	}
 </style>

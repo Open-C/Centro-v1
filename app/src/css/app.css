@@ -330,16 +330,21 @@ input {
 
 
 :root {
-	--f7-navbar-height: 4.5rem;
-	--extra-top-navbar-height: 2rem;
+	--f7-appbar-height: 1.5rem;
+}
+:root {
 
-	--f7-navbar-title-font-size: 1.75rem;
+	--f7-navbar-height: 4.25rem;
+	/* --extra-top-navbar-height: 2rem; */
+
+	--f7-navbar-title-font-size: 1.5rem;
 	--f7-navbar-title-font-weight: var(--f7-navbar-large-title-font-weight);
 	--f7-navbar-title-letter-spacing: var(--f7-navbar-large-title-letter-spacing);
+	--f7-navbar-title-line-height: 1.33;
 
-	--f7-navbar-subtitle-font-size: 0.85rem;
+	--f7-navbar-subtitle-font-size: 0.8rem;
 }
-.navbar {
+/* .navbar {
 	height: calc(var(--f7-navbar-height) + var(--f7-safe-area-top) + var(--extra-top-navbar-height));
 }
 .navbar ~ *, .navbars ~ * {
@@ -347,7 +352,7 @@ input {
 }
 .navbar-inner {
 	padding-top: calc(var(--f7-safe-area-top) + var(--extra-top-navbar-height));
-}
+} */
 /* .navbar .title-large-text {
 	text-align: center;
 } */
