@@ -3,6 +3,7 @@
 
 
 	import { quoteCurrency } from '../../../data/settings'
+	import { tokensBySymbol } from '../../../data/tokens'
 
 
 	import { pollenCircles } from '../../../data/pollen'
@@ -20,13 +21,17 @@
 	import { formatValue } from '../../../utils/formatValue'
 
 
-	import { AccordionContent, AccordionItem, Badge, Block, BlockTitle, Button, Icon, List, ListItem, Navbar, Page, Progressbar, Row } from 'framework7-svelte'
+	import { AccordionContent, AccordionItem, Badge, Block, BlockTitle, Button, Icon, List, ListItem, Navbar, NavTitle, Page, Progressbar, Row } from 'framework7-svelte'
 	import TabLayout from '../../../components/TabLayout.svelte'
 </script>
 
 
-<Page>
-	<Navbar	title="{circle.name}" backLink="Pollen">
+<Page style="--f7-theme-color: {tokensBySymbol['CELO'].color}">
+	<Navbar backLink="Pollen" style="--f7-theme-color: {tokensBySymbol['CELO'].color}">
+		<NavTitle>
+			{circle.name}
+			<div class="subtitle">save and lend with trusted peers</div>
+		</NavTitle>
 	</Navbar>
 
 	<TabLayout
@@ -36,6 +41,7 @@
 			'proposals': 'Proposals',
 			'debts': 'Debts'
 		}}
+		startTab={'deposits'}
 		let:tab
 	>
 		{#if tab === 'deposits'}
