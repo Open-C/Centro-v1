@@ -5,6 +5,7 @@ pragma solidity >0.5.0;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./Storage.sol";
 import "./Wallet/CentroWallet.sol";
+import "./EventEmitter.sol";
 
 contract WalletFactory is Types {
 	mapping(address => uint256[]) public addressToWalletIDs;
@@ -37,6 +38,7 @@ contract WalletFactory is Types {
 		address owner = msg.sender;
 		Wallet storage _wallet = walletIDToWallet[numWallets];
 		uint256[] storage walletIDs = addressToWalletIDs[owner];
+		bool isFirstWallet = walletIDs.length == 0;
 		uint256 walletID = numWallets;
 
 		_wallet.name = name;
@@ -45,6 +47,8 @@ contract WalletFactory is Types {
 		walletIDs.push(walletID);
 		numWallets++;
 		currentWallet[msg.sender] = walletID;
+
+		EventEmitter(store.getEventEmitter()).emitWalletCreated(msg.sender, address(wallet), isFirstWallet);
 		return true;
 	}
 

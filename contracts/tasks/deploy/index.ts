@@ -3,6 +3,7 @@ import { promises as fs } from "fs";
 import { ActionType, HardhatRuntimeEnvironment } from "hardhat/types";
 import { deployStorage } from "./001_storage";
 import { deployCentroMain } from "./002_centro_main";
+import { deployEventEmitter } from "./003_event_emitter";
 
 export type DeployFunction = (
   env: HardhatRuntimeEnvironment
@@ -11,6 +12,7 @@ export type DeployFunction = (
 const deployers: { [step: string]: DeployFunction } = {
   storage: deployStorage,
   main: deployCentroMain,
+  emitter: deployEventEmitter,
 };
 
 const makeConfigPath = (step: string, chainId: ICeloNetwork): string =>

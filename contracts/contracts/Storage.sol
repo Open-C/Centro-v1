@@ -16,6 +16,7 @@ contract Storage is Types {
 	mapping(address => bool) admin;
 	mapping(string => address) contracts;
 	address centroAddress;
+	address eventEmitter;
 	bool adminSet;
 
 	constructor() public {
@@ -40,6 +41,14 @@ contract Storage is Types {
 	}
 
 	function setCentroContractAddress(address _address) external isAdmin {
+		centroAddress = _address;
+	}
+
+	function getEventEmitter() public view returns (address) {
+		return centroAddress;
+	}
+
+	function setEventEmitterAddress(address _address) external isAdmin {
 		centroAddress = _address;
 	}
 
