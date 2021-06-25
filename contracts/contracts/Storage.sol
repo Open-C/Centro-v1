@@ -24,8 +24,12 @@ contract Storage is Types {
 	}
 
 	modifier isAdmin() {
-		require (admin[msg.sender] || msg.sender == centroAddress, "Not an admin");
+		require(admin[msg.sender] || msg.sender == centroAddress, "Not an admin");
 		_;
+	}
+
+	function canEmitEvents(address _contract) public returns (bool) {
+		return true;
 	}
 
 	function getAdminStatus(address _user) public view returns (bool) {

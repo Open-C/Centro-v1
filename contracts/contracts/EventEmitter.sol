@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: ISC
 
 pragma solidity ^0.8.0;
-import "./Storage.sol"
+import "./Storage.sol";
 
 contract EventEmitter {
     Storage store;
