@@ -1,5 +1,5 @@
 <script>
-	/*
+  /*
 	import { createWalletStore } from '../../data/wallet'
 	let walletStores = [createWalletStore()]
 	// $: walletStores.map(walletStore => {
@@ -7,23 +7,28 @@
 	// })
 	*/
 
+  export let isPage = true;
 
-	export let isPage = true
+  import { walletMachines } from "../../data/wallets";
 
-
-	import { walletMachines } from '../../data/wallets'
-
-
-	import { Page, Navbar, NavTitle, NavTitleLarge, List, ListItem, Block } from 'framework7-svelte'
-	import CurrentWallet from '../../components/CurrentWallet.svelte'
-	import Wallet from '../../components/Wallet.svelte'
+  import {
+    Page,
+    Navbar,
+    NavTitle,
+    NavTitleLarge,
+    List,
+    ListItem,
+    Block,
+  } from "framework7-svelte";
+  import CurrentWallet from "../../components/CurrentWallet.svelte";
+  import Wallet from "../../containers/Wallet"; //"../../components/Wallet.svelte";
 </script>
 
 <Page name="wallets">
-	{#if isPage}
-		<Navbar title="Wallets" backLink="Settings" />
-	{/if}
-	<!-- <Navbar large sliding={false} backLink="Back">
+  {#if isPage}
+    <Navbar title="Wallets" backLink="Settings" />
+  {/if}
+  <!-- <Navbar large sliding={false} backLink="Back">
 		<NavTitleLarge>Wallets</NavTitleLarge>
 
 		<svelte:fragment slot="right">
@@ -31,14 +36,13 @@
 		</svelte:fragment>
 	</Navbar> -->
 
-	<!-- {#each walletStores as walletMachine}
+  <!-- {#each walletStores as walletMachine}
 		<Wallet
 			{walletStore}
 		/>
 	{/each} -->
-	{#each walletMachines as walletMachine}
-		<Wallet
-			{walletMachine}
-		/>
-	{/each}
+  <!-- {#each walletMachines as walletMachine}
+    <Wallet {walletMachine} />
+  {/each} -->
+  <Wallet />
 </Page>

@@ -1,23 +1,30 @@
 // Import Framework7
-import Framework7 from 'framework7/lite-bundle'
+import Framework7 from "framework7/lite-bundle";
 
 // Import Framework7-Svelte Plugin
-import Framework7Svelte from 'framework7-svelte'
+import Framework7Svelte from "framework7-svelte";
 
 // Import Framework7 Styles
-import 'framework7/framework7-bundle.css'
+import "framework7/framework7-bundle.css";
 
 // Import Icons and App Custom Styles
-import './css/icons.css'
-import './css/app.css'
+import "./css/icons.css";
+import "./css/app.css";
 
 // Import App Component
-import App from './app.svelte'
+import App from "./app.svelte";
+
+// Imprt web3
+//import Web3 from "web3";
 
 // Init F7 Svelte Plugin
-Framework7.use(Framework7Svelte)
+Framework7.use(Framework7Svelte);
+
+// window["Web3"] = Web3;
+// global["Web3"] = Web3;
+// globalThis.Web3 = Web3;
 
 // Mount Svelte App
 const app = new App({
-	target: document.getElementById('app'),
-})
+  target: document.getElementById("app"),
+});
