@@ -93,6 +93,13 @@ async function fetchWallet(walletProviderName) {
     //const signer = new ValoraSigner(valora);
     //const resp = await signer.activate();
     console.log(resp);
+    return {
+      success: true,
+      walletProviderName,
+      address: resp.address,
+      valora,
+      phoneNumber: resp.phoneNumber,
+    };
   }
 
   await new Promise((r) => setTimeout(r, 1000));
