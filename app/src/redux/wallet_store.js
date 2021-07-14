@@ -116,12 +116,12 @@ export const connectWallet = async (dispatch, walletProviderName) => {
   console.log(walletDetails);
   if (!walletDetails.success) {
     dispatch({
-      type: actions.walletConnectFailed,
+      type: walletActions.walletConnectFailed,
       payload: { error: "We had trouble connecting to your wallet" },
     });
   } else {
     dispatch({
-      type: actions.walletConnectSuccess,
+      type: walletActions.walletConnectSuccess,
       payload: walletDetails,
     });
   }
