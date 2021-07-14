@@ -111,7 +111,7 @@ async function fetchWallet(walletProviderName) {
 export const walletActions = wallet.actions;
 
 export const connectWallet = async (dispatch, walletProviderName) => {
-  dispatch({ type: actions.initConnectWallet, walletProviderName });
+  dispatch({ type: walletActions.initConnectWallet, walletProviderName });
   const walletDetails = await fetchWallet(walletProviderName);
   console.log(walletDetails);
   if (!walletDetails.success) {
