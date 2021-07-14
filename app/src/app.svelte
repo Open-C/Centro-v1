@@ -5,6 +5,7 @@
 
   import capacitorApp from "./capacitor-app";
   import routes from "./routes";
+  import { parseDappKitResponseDeeplinkHashAware } from "@open-celo/valora-ethers";
 
   const device = getDevice();
   // Framework7 Parameters
@@ -107,6 +108,12 @@
   import CurrentWallet from "./components/CurrentWallet.svelte";
   import { Provider } from "svelte-redux-connect";
   import { store } from "./redux";
+  import { walletActions } from "./redux/wallet_store";
+
+  if (window.location.href.includes("?")) {
+    const params = parseDappKitResponseDeeplinkHashAware(window.location.href);
+    store.dispatch(walletActions.walletConnectSuccess, params);
+  }
 </script>
 
 <Provider {store}>

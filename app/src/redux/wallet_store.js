@@ -108,7 +108,7 @@ async function fetchWallet(walletProviderName) {
   };
 }
 
-export const actions = wallet.actions;
+export const walletActions = wallet.actions;
 
 export const connectWallet = async (dispatch, walletProviderName) => {
   dispatch({ type: actions.initConnectWallet, walletProviderName });
