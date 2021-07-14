@@ -5,7 +5,6 @@
 
   import capacitorApp from "./capacitor-app";
   import routes from "./routes";
-  import { parseDappKitResponseDeeplinkHashAware } from "@open-celo/valora-ethers";
 
   const device = getDevice();
   // Framework7 Parameters
@@ -111,8 +110,23 @@
   import { walletActions } from "./redux/wallet_store";
 
   if (window.location.href.includes("?")) {
-    const params = parseDappKitResponseDeeplinkHashAware(window.location.href);
-    store.dispatch(walletActions.walletConnectSuccess, params);
+    const params = {};
+    window.location.href
+      .split("&")
+      .filter((s) => s && s.includes("="))
+      .forEach((e) => {
+        const split = e.split("=");
+        if (split.length == 2) params[split[0]] = split[1];
+      });
+    console.log(params);
+    store.dispatch({
+      type: walletActions.walletConnectSuccess,
+      payload: {
+        address: params.account,
+        phoneNumber: params.phoneNumber,
+        walletProviderName: "Valora",
+      },
+    });
   }
 </script>
 
