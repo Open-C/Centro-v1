@@ -1,11 +1,12 @@
 import { createSlice, createAction } from "@reduxjs/toolkit";
-import { providers } from "ethers";
+import { providers, Contract } from "ethers";
 import { networks } from "../data/networks";
 import {
   ValoraProvider,
   ValoraSigner,
   valoraUtils,
 } from "@open-celo/valora-ethers";
+import contractsInfo from "../data/contracts";
 //import { ContractKit } from "@celo/contractkit";
 //const kit = newKit("https://alfajores-forno.celo-testnet.org");
 //console.log(kit);
@@ -17,11 +18,12 @@ const initialState = {
   connecting: undefined,
   error: undefined,
 
-  provider: "Test!",
+  provider: loadProvider(),
   walletProviderName: undefined, // 'Valora' | 'MetaMask' | 'WalletConnect'
   signer: undefined,
   address: undefined,
   phoneNumber: undefined,
+  contracts: {},
 };
 
 export const wallet = createSlice({
@@ -46,8 +48,33 @@ export const wallet = createSlice({
       connected: false,
       error: payload,
     }),
+    addContract: (state, { newContract }) => ({
+      ...state,
+      contracts: {
+        ...state.contracts,
+        ...newContract,
+      },
+    }),
   },
 });
+
+const loadProvider = () => {
+  const network = networks["0xaef3"];
+  const provider = new CeloProvider(network.rpcUrls[0]);
+
+  return provider;
+};
+
+export const loadContracts = (dispatch, providerOrSigner) => {
+  Object.entries(contractsInfo).forEach(([name, info]) =>
+    dispatch({
+      type: wallet.actions.addContract,
+      newContract: {
+        [name]: new Contract(info.address, info.abi, providerOrSigner),
+      },
+    })
+  );
+};
 
 async function fetchWallet(walletProviderName) {
   //const { walletProviderName = state.walletProviderName } = action.payload;

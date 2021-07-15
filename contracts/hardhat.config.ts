@@ -57,7 +57,12 @@ const accounts: HDAccountsUserConfig = {
   path: "m/44'/52752'/0'/0/",
 };
 
-//const accounts = [`0x${process.env.PRIVATE_KEY_DEV}`];
+// const accounts = [
+//   {
+//     privateKey: `0x${process.env.PRIVATE_KEY_DEV}`,
+//     balance: "0",
+//   },
+// ];
 
 /**
  * @type import('hardhat/config').HardhatUserConfig
